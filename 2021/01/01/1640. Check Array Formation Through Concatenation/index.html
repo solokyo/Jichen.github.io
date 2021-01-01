@@ -45,25 +45,21 @@
   };
 </script>
 
-  <meta name="description" content="题目题目链接Given n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.Above is a histogram where width of ea">
+  <meta name="description" content="题目原题在此You are given an array of distinct integers arr and an array of integer arrays pieces, where the integers in pieces are distinct. Your goal is to form arr by concatenating the arrays in pieces i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 84. Largest Rectangle in Histogram">
-<meta property="og:url" content="http://yoursite.com/2020/06/01/LeetCode%2084.%20Largest%20Rectangle%20in%20Histogram/index.html">
+<meta property="og:title" content="LeetCode 1640. Check Array Formation Through Concatenation">
+<meta property="og:url" content="http://yoursite.com/2021/01/01/1640.%20Check%20Array%20Formation%20Through%20Concatenation/index.html">
 <meta property="og:site_name" content="SoloQ">
-<meta property="og:description" content="题目题目链接Given n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.Above is a histogram where width of ea">
+<meta property="og:description" content="题目原题在此You are given an array of distinct integers arr and an array of integer arrays pieces, where the integers in pieces are distinct. Your goal is to form arr by concatenating the arrays in pieces i">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/10/12/histogram.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/10/12/histogram_area.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/01/LeetCode%2084.%20Largest%20Rectangle%20in%20Histogram/step.gif">
-<meta property="article:published_time" content="2020-05-31T15:00:00.000Z">
-<meta property="article:modified_time" content="2020-12-31T21:17:04.466Z">
+<meta property="article:published_time" content="2021-01-01T10:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-01T10:51:22.736Z">
 <meta property="article:author" content="Jichen Xu">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="DP">
+<meta property="article:tag" content="Map">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/10/12/histogram.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/06/01/LeetCode%2084.%20Largest%20Rectangle%20in%20Histogram/">
+<link rel="canonical" href="http://yoursite.com/2021/01/01/1640.%20Check%20Array%20Formation%20Through%20Concatenation/">
 
 
 <script id="page-configurations">
@@ -77,7 +73,7 @@
   };
 </script>
 
-  <title>LeetCode 84. Largest Rectangle in Histogram | SoloQ</title>
+  <title>LeetCode 1640. Check Array Formation Through Concatenation | SoloQ</title>
   
 
 
@@ -193,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/LeetCode%2084.%20Largest%20Rectangle%20in%20Histogram/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/01/1640.%20Check%20Array%20Formation%20Through%20Concatenation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -206,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          LeetCode 84. Largest Rectangle in Histogram
+          LeetCode 1640. Check Array Formation Through Concatenation
         </h1>
 
         <div class="post-meta">
@@ -215,16 +211,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-01T00:00:00+09:00">2020-06-01</time>
+              <time title="Created: 2021-01-01 19:00:00 / Modified: 19:51:22" itemprop="dateCreated datePublished" datetime="2021-01-01T19:00:00+09:00">2021-01-01</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-01 06:17:04" itemprop="dateModified" datetime="2021-01-01T06:17:04+09:00">2021-01-01</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -248,40 +238,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/largest-rectangle-in-histogram/">题目链接</a><br>Given n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.<br><img src="https://assets.leetcode.com/uploads/2018/10/12/histogram.png" alt=""><br>Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].<br><img src="https://assets.leetcode.com/uploads/2018/10/12/histogram_area.png" alt=""><br>The largest rectangle is shown in the shaded area, which has area = 10 unit.<br><strong>Example:</strong></p>
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/check-array-formation-through-concatenation/">原题在此</a><br>You are given an array of <strong>distinct</strong> integers <code>arr</code> and an array of integer arrays <code>pieces</code>, where the integers in <code>pieces</code> are <strong>distinct</strong>. Your goal is to form <code>arr</code> by concatenating the arrays in <code>pieces</code> <strong>in any order</strong>. However, you are <strong>not allowed</strong> to reorder the integers in each array <code>pieces[i]</code>.<br>Return <code>true</code> if it is possible to form the array <code>arr</code> from <code>pieces</code>. Otherwise, return <code>false</code>.</p>
+<p><strong>Example 1:</strong></p>
 <blockquote>
-<p>Input: [2,1,5,6,2,3]<br>Output: 10</p>
+<p>Input: arr = [85], pieces = [[85]]<br>Output: true</p>
 </blockquote>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><h2 id="暴力搜索"><a href="#暴力搜索" class="headerlink" title="暴力搜索"></a>暴力搜索</h2><p>依次取区间<code>arr(i..j)</code>,用<code>min(arr(i..j)) * j - i</code>可以遍历所有可能的长方形,从中选取最大的即可.此时时间复杂度为$O(N^2)$.<br>观察暴力解法发现:</p>
-<ol>
-<li>最大面积的长方形长度必然和数组中的某个元素的值相等.即在数组中只有<code>arr.length</code>个候选最大长方形.此时我们要设法确定每个元素高度的长方形的宽度.</li>
-<li>暴力搜索的过程没有做任何记录,每次搜索对下一次没有任何帮助,可以设法记录有效信息简化搜索过程.即空间换时间.</li>
-<li>输入数组元素均为非负整数,在数组两侧各添加一个0不改变最终结果<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sentinel_value">(哨兵,Sentinel)</a>.如此可省略处理edge case的部分,简化代码.</li>
-</ol>
-<h2 id="算法改进"><a href="#算法改进" class="headerlink" title="算法改进"></a>算法改进</h2><p>在当前元素严格小于上一个元素时,便决定了此前某些元素的宽度无法再拓展了.此时以当前下标为右界,上一个元素的下标为左界,便可确定以此元素为高的矩形的宽度.<br>我们可以用栈存下标.就拿例题来说,左侧<strong>哨兵</strong>下标<code>i=-1</code>,循环前先入栈.</p>
-<ol>
-<li><code>i = 0,a[i] = 2</code> 还有继续向右拓宽的可能,下标入栈.</li>
-<li><code>i = 1,a[i] = 1</code> 此时:<ol>
-<li>栈尾元素<code>a[s.back()]</code>,即下标为0的元素2大于当前元素.高度为2的长方形无法再拓宽,退栈处理.宽度为当前下标1减去退栈后的栈尾元素下标此时为哨兵-1再减去1,即<code>width = i - s.back() - 1; area = width * height;</code>.</li>
-<li>再次检查栈尾,发现哨兵高度为0还有拓宽可能,不做处理(这样可能更好理解一些,实际情况是栈内只剩下哨兵,不做处理.再第四步还有一次演示).</li>
-<li>当前下标元素也有拓宽可能,下标入栈.</li>
-</ol>
-</li>
-<li><code>i = 2,a[i] = 5;i = 3,a[i] = 6</code> 还有继续向右拓宽的可能,入栈.</li>
-<li><code>i = 4,a[i] = 2</code> 与第二步做相似处理,先后确定了以6和以5为高度的长方形的面积.在6,5分别退栈后访问到<code>a[1]</code>,发现当前下标元素不小于<code>a[1]</code>.即栈内所有元素均还有拓宽可能,故不作处理.当前下标也入栈.</li>
-<li><code>i = 5,a[i] = 3</code> 还有继续向右拓宽的可能,入栈. <strong>再次强调哨兵</strong></li>
-<li><code>i = 6,a[i] = 0</code> 元素访问完毕,下标来到哨兵,此时栈内除了另一个哨兵外元素全部大于哨兵.对栈内元素依次退栈计算面积,直到栈内只剩下哨兵为止.</li>
-</ol>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<p>Input: arr = [15,88], pieces = [[88],[15]]<br>Output: true<br>Explanation: Concatenate [15] then [88]</p>
+</blockquote>
+<p><strong>Example 3:</strong></p>
+<blockquote>
+<p>Input: arr = [49,18,16], pieces = [[16,18,49]]<br>Output: false<br>Explanation: Even though the numbers match, we cannot reorder pieces[0].</p>
+</blockquote>
+<p><strong>Example 4:</strong></p>
+<blockquote>
+<p>Input: arr = [91,4,64,78], pieces = [[78],[4,64],[91]]<br>Output: true<br>Explanation: Concatenate [91] then [4,64] then [78]</p>
+</blockquote>
+<p><strong>Example 5:</strong></p>
+<blockquote>
+<p>Input: arr = [1,3,5,7], pieces = [[2,4,6,8]]<br>Output: false</p>
+</blockquote>
+<p><strong>Constraints:</strong></p>
 <ul>
-<li>绿色:宽度还有可能变长,入栈. 红色:宽度无法拓展,出栈计算面积. 虚线:以此元素为高度的长方形面积已确定. (要想象首尾各有一个0)  <img src="/2020/06/01/LeetCode%2084.%20Largest%20Rectangle%20in%20Histogram/step.gif" class="">
-</li>
+<li>1 &lt;= pieces.length &lt;= arr.length &lt;= 100</li>
+<li>sum(pieces[i].length) == arr.length</li>
+<li>1 &lt;= pieces[i].length &lt;= arr.length</li>
+<li>1 &lt;= arr[i], pieces[i][j] &lt;= 100</li>
+<li>The integers in arr are distinct.</li>
+<li>The integers in pieces are distinct (i.e., If we flatten pieces in a 1D array, all the integers in this array are distinct).</li>
 </ul>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">stack</span>;</span><br><span class="line">        heights.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">stack</span>.push_back(<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; heights.size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">stack</span>.size() &gt; <span class="number">1</span> &amp;&amp; heights[<span class="built_in">stack</span>.back()] &gt;= heights[i]) &#123;</span><br><span class="line">                <span class="keyword">int</span> h = heights[<span class="built_in">stack</span>.back()];</span><br><span class="line">                <span class="built_in">stack</span>.pop_back();</span><br><span class="line">                res = max(res, h * (i - <span class="built_in">stack</span>.back() - <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">stack</span>.push_back(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><ol>
-<li>在有连续个值相同的元素时,中间会有多次错误计算,但并不影响连续元素中最后一次退栈的计算成为最大值.</li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/12524826/why-should-i-use-deque-over-stack">JAVA-为什么用Deque去实现Stack?</a></li>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><h2 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h2><p>这一版的思路很单纯,把<code>pieces</code>中的每个<code>piece</code>以<code>piece[0]</code>为key存入map中以便随机访问,再无脑按照<code>arr</code>中出现的顺序拼起来.最后看看拼起来的和<code>arr</code>是否相等.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canFormArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; pieces)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; attached;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p : pieces) mp[p[<span class="number">0</span>]] = p;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i : arr)</span><br><span class="line">            <span class="keyword">if</span> (mp.find(i) != mp.end())</span><br><span class="line">                attached.insert(attached.end(), mp[i].begin(), mp[i].end());</span><br><span class="line">        <span class="keyword">return</span> attached == arr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="改进思路"><a href="#改进思路" class="headerlink" title="改进思路"></a>改进思路</h2><ol>
+<li>Map中没必要存整个<code>piece</code>数组,存<code>piece[0]</code>就可以.</li>
+<li>根据题目<strong>Constraints</strong>部分的描述,外加数组元素是<strong>distinct</strong>的,可以用数组替代Map.</li>
+<li>在遍历<code>arr</code>的过程中,每次必须找到一个<code>piece</code>以<code>arr[i]</code>开头,且整段<code>piece</code>和<code>arr</code>的局部必须完全一致,否则即可返回<code>false</code>.</li>
 </ol>
-
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">canFormArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; pieces)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// mp&lt;&quot;first number of a piece&quot;, &quot;index of this piece in pieces&quot;&gt;</span></span><br><span class="line">		<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">mp</span><span class="params">(<span class="number">101</span>, <span class="number">-1</span>)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pieces.size(); ++i) mp[pieces[i][<span class="number">0</span>]] = i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.size();) &#123;</span><br><span class="line">            <span class="keyword">int</span> pindex = mp[arr[i]];</span><br><span class="line">			<span class="keyword">if</span>(pindex == <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// no piece start with this number;</span></span><br><span class="line">			<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>(j &lt; pieces[pindex].size())</span><br><span class="line">				<span class="keyword">if</span>(arr[i++] != pieces[pindex][j++]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -291,7 +284,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
-              <a href="/tags/DP/" rel="tag"># DP</a>
+              <a href="/tags/Map/" rel="tag"># Map</a>
           </div>
 
         
@@ -300,13 +293,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/01/%E5%B8%B8%E8%A7%81NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B/" rel="prev" title="常见NOSQL数据库类型">
-      <i class="fa fa-chevron-left"></i> 常见NOSQL数据库类型
+    <a href="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/" rel="prev" title="理科乐理">
+      <i class="fa fa-chevron-left"></i> 理科乐理
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/06/01/LeetCode%201457.%20Pseudo-Palindromic%20Paths%20in%20a%20Binary%20Tree/" rel="next" title="LeetCode 1457. Pseudo-Palindromic Paths in a Binary Tree">
-      LeetCode 1457. Pseudo-Palindromic Paths in a Binary Tree <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -344,7 +334,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E6%90%9C%E7%B4%A2"><span class="nav-number">2.1.</span> <span class="nav-text">暴力搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B"><span class="nav-number">2.2.</span> <span class="nav-text">算法改进</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">4.</span> <span class="nav-text">后续</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%B8%80"><span class="nav-number">2.1.</span> <span class="nav-text">版本一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E6%80%9D%E8%B7%AF"><span class="nav-number">2.2.</span> <span class="nav-text">改进思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
