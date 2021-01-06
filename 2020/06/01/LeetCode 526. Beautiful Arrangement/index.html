@@ -45,24 +45,21 @@
   };
 </script>
 
-  <meta name="description" content="题目原题在此According to Wikipedia’s article: “The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.” The board is made up of">
+  <meta name="description" content="题目原题在此Suppose you have n integers from 1 to n. We define a beautiful arrangement as an array that is constructed by these n numbers successfully if one of the following is true for the ith position (1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 289. Game of Life">
-<meta property="og:url" content="http://yoursite.com/2020/06/01/289.%20Game%20of%20Life/index.html">
+<meta property="og:title" content="LeetCode 526. Beautiful Arrangement">
+<meta property="og:url" content="http://yoursite.com/2020/06/01/LeetCode%20526.%20Beautiful%20Arrangement/index.html">
 <meta property="og:site_name" content="SoloQ">
-<meta property="og:description" content="题目原题在此According to Wikipedia’s article: “The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.” The board is made up of">
+<meta property="og:description" content="题目原题在此Suppose you have n integers from 1 to n. We define a beautiful arrangement as an array that is constructed by these n numbers successfully if one of the following is true for the ith position (1">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/26/grid1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/26/grid2.jpg">
 <meta property="article:published_time" content="2020-05-31T15:00:00.000Z">
-<meta property="article:modified_time" content="2020-12-30T13:26:57.739Z">
+<meta property="article:modified_time" content="2021-01-03T10:26:23.077Z">
 <meta property="article:author" content="Jichen Xu">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="数组">
+<meta property="article:tag" content="dfs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/26/grid1.jpg">
 
-<link rel="canonical" href="http://yoursite.com/2020/06/01/289.%20Game%20of%20Life/">
+<link rel="canonical" href="http://yoursite.com/2020/06/01/LeetCode%20526.%20Beautiful%20Arrangement/">
 
 
 <script id="page-configurations">
@@ -76,7 +73,7 @@
   };
 </script>
 
-  <title>LeetCode 289. Game of Life | SoloQ</title>
+  <title>LeetCode 526. Beautiful Arrangement | SoloQ</title>
   
 
 
@@ -192,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/289.%20Game%20of%20Life/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/LeetCode%20526.%20Beautiful%20Arrangement/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -205,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          LeetCode 289. Game of Life
+          LeetCode 526. Beautiful Arrangement
         </h1>
 
         <div class="post-meta">
@@ -222,7 +219,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-30 22:26:57" itemprop="dateModified" datetime="2020-12-30T22:26:57+09:00">2020-12-30</time>
+                <time title="Modified: 2021-01-03 19:26:23" itemprop="dateModified" datetime="2021-01-03T19:26:23+09:00">2021-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,32 +244,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/game-of-life/">原题在此</a><br>According to Wikipedia’s article: “The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.”</p>
-<p>The board is made up of an m x n grid of cells, where each cell has an initial state: live (represented by a 1) or dead (represented by a 0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):</p>
-<p>Any live cell with fewer than two live neighbors dies as if caused by under-population.<br>Any live cell with two or three live neighbors lives on to the next generation.<br>Any live cell with more than three live neighbors dies, as if by over-population.<br>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.<br>The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously. Given the current state of the m x n grid board, return the next state.</p>
-<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2020/12/26/grid1.jpg" alt=""></p>
-<blockquote>
-<p>Input: board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]<br>Output: [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]</p>
-</blockquote>
-<p><strong>Example 2:</strong><br><img src="https://assets.leetcode.com/uploads/2020/12/26/grid2.jpg" alt=""></p>
-<blockquote>
-<p>Input: board = [[1,1],[1,0]]<br>Output: [[1,1],[1,1]]</p>
-</blockquote>
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/beautiful-arrangement/">原题在此</a><br>Suppose you have n integers from 1 to n. We define a beautiful arrangement as an array that is constructed by these n numbers successfully if one of the following is true for the ith position (1 &lt;= i &lt;= n) in this array:</p>
+<ul>
+<li>The number at the ith position is divisible by i.</li>
+<li>i is divisible by the number at the ith position.<br>Given an integer n, return the number of the beautiful arrangements that you can construct.</li>
+</ul>
+<p><strong>Example 1:</strong><br>Input: n = 2<br>Output: 2<br>Explanation:<br>The first beautiful arrangement is [1, 2]:<br>Number at the 1st position (i=1) is 1, and 1 is divisible by i (i=1).<br>Number at the 2nd position (i=2) is 2, and 2 is divisible by i (i=2).<br>The second beautiful arrangement is [2, 1]:<br>Number at the 1st position (i=1) is 2, and 2 is divisible by i (i=1).<br>Number at the 2nd position (i=2) is 1, and i (i=2) is divisible by 1.</p>
+<p><strong>Example 2:</strong><br>Input: n = 1<br>Output: 1</p>
 <p><strong>Constraints:</strong></p>
 <ul>
-<li>m == board.length</li>
-<li>n == board[i].length</li>
-<li>1 &lt;= m, n &lt;= 25</li>
-<li>board[i][j] is 0 or 1.</li>
+<li>1 &lt;= n &lt;= 15</li>
 </ul>
-<p><strong>Follow up:</strong></p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>暴力搜索的情况,需要遍历所有可能的排列(permutation),此时复杂度为$O(N)$.<br>改进的思路也简单,在全排列的过程中,如果一个分支出现了不满足题意的情况,则该分支下的所有排列都不可能是”Beautiful Arrangement”.<br>用一个bool数组来记录每个数字的使用情况,然后从位置1开始尝试放入1-N的每个数字,此时:</p>
 <ul>
-<li>Could you solve it in-place? Remember that the board needs to be updated simultaneously: You cannot update some cells first and then use their updated values to update other cells.</li>
-<li>In this question, we represent the board using a 2D array. In principle, the board is infinite, which would cause problems when the active area encroaches upon the border of the array (i.e., live cells reach the border). How would you address these problems?<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1></li>
+<li>若该数字还没有被使用且符合题目要求,尝试下一个位置.</li>
+<li>若该数字不符合要求,继续看下一个数字是否能放在当前位置.</li>
+<li>都放完了的时候即是一个”Beautiful Arrangement”, count 加一.</li>
 </ul>
-<ol>
-<li>题目用<code>vector&lt;vector&lt;int&gt;&gt;</code>做储存,而实际上每个格子只有死或生两种状态,只占用1bit. 所以可以将下一次演化的状态暂存在高位bit,待全部计算完毕后再位移回末位bit.<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gameOfLife</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; board)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> row = board.size(), col = board[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; row; ++r) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; col; ++c) &#123;</span><br><span class="line">                <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i=max(r<span class="number">-1</span>, <span class="number">0</span>); i&lt;min(r+<span class="number">2</span>, row); ++i)</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j=max(c<span class="number">-1</span>, <span class="number">0</span>); j&lt;min(c+<span class="number">2</span>, col); ++j)</span><br><span class="line">                        count += board[i][j] &amp; <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (count == <span class="number">3</span> || count - board[r][c] == <span class="number">3</span>) board[r][c] |= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; ++i)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; ++j)</span><br><span class="line">                board[i][j] &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
+<p>此时时间复杂度为$O(k)$, k为有效排列的个数.空间复杂度为$O(N)$,使用了一个长度为$n$的数组.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> used[<span class="number">16</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countArrangement</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        dfs(<span class="number">1</span>, n);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pos &gt; n) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!used[i] &amp;&amp; (!(i % pos) || !(pos % i))) &#123;</span><br><span class="line">                used[i] = <span class="number">1</span>;</span><br><span class="line">                dfs(pos + <span class="number">1</span>, n);</span><br><span class="line">                used[i] = <span class="number">0</span>;</span><br><span class="line">            &#125;            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -283,7 +273,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
-              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
+              <a href="/tags/dfs/" rel="tag"># dfs</a>
           </div>
 
         
@@ -292,12 +282,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/01/LeetCode%201457.%20Pseudo-Palindromic%20Paths%20in%20a%20Binary%20Tree/" rel="prev" title="LeetCode 1457. Pseudo-Palindromic Paths in a Binary Tree">
-      <i class="fa fa-chevron-left"></i> LeetCode 1457. Pseudo-Palindromic Paths in a Binary Tree
+    <a href="/2020/01/01/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%A4%A7%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/" rel="prev" title="前端三大框架对比">
+      <i class="fa fa-chevron-left"></i> 前端三大框架对比
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/06/01/LeetCode%20754.%20Reach%20a%20Number/" rel="next" title="LeetCode 754. Reach a Number">
-      LeetCode 754. Reach a Number <i class="fa fa-chevron-right"></i>
+    <a href="/2020/06/01/%E5%B8%B8%E8%A7%81NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B/" rel="next" title="常见NOSQL数据库类型">
+      常见NOSQL数据库类型 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -336,7 +326,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -350,7 +340,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -363,7 +353,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
