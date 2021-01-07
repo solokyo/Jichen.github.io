@@ -186,6 +186,476 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/07/LeetCode%203.%20Longest%20Substring%20Without%20Repeating%20Characters/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/07/LeetCode%203.%20Longest%20Substring%20Without%20Repeating%20Characters/" class="post-title-link" itemprop="url">LeetCode 3. Longest Substring Without Repeating Characters</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-07 17:00:00 / Modified: 21:30:32" itemprop="dateCreated datePublished" datetime="2021-01-07T17:00:00+09:00">2021-01-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">原题在此</a><br>Given a string <code>s</code>, find the length of the <code>longest substring</code> without repeating characters.</p>
+<p><strong>Example 1:</strong><br>Input: s = “abcabcbb”<br>Output: 3<br>Explanation: The answer is “abc”, with the length of 3.</p>
+<p><strong>Example 2:</strong><br>Input: s = “bbbbb”<br>Output: 1<br>Explanation: The answer is “b”, with the length of 1.</p>
+<p><strong>Example 3:</strong><br>Input: s = “pwwkew”<br>Output: 3<br>Explanation: The answer is “wke”, with the length of 3.<br>Notice that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
+<p><strong>Example 4:</strong><br>Input: s = “”<br>Output: 0</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>0 &lt;= s.length &lt;= 5 * 104</li>
+<li>s consists of English letters, digits, symbols and spaces.</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>用<code>map&lt;char, int&gt;</code>储存每个字符最后出现的index。采用”滑动窗口”法, 指向子串尾端的指针持续扫描整个字符串,在遇到重复时将更新首指针指向重复字符的下一个。记录（更新）每个字符最后出现的index。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">m</span><span class="params">(<span class="number">256</span>, <span class="number">-1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>, idx = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(m[s[i]] &gt; idx) idx = m[s[i]];</span><br><span class="line">            m[s[i]] = i;</span><br><span class="line">            res = max(res, i - idx);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">	m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">rune</span>]<span class="keyword">int</span>)</span><br><span class="line">    <span class="keyword">var</span> res, idx = <span class="number">-1</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i,r := <span class="keyword">range</span> s&#123;</span><br><span class="line">		<span class="keyword">if</span> m[r] &gt; idx &#123;</span><br><span class="line">			idx = m[r]</span><br><span class="line">		&#125;</span><br><span class="line">        m[r] = i</span><br><span class="line">        <span class="keyword">if</span>(i - idx &gt; res) &#123;</span><br><span class="line">            res = i - idx</span><br><span class="line">		&#125;</span><br><span class="line">        m[r]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/06/DDIA%20Ch-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/DDIA%20Ch-01/" class="post-title-link" itemprop="url">DDIA Chapter 01 可靠性,可拓展性,可维护性</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 19:00:00" itemprop="dateCreated datePublished" datetime="2021-01-06T19:00:00+09:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-07 22:17:15" itemprop="dateModified" datetime="2021-01-07T22:17:15+09:00">2021-01-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="引"><a href="#引" class="headerlink" title="引"></a>引</h2><p>本章关键字：可靠、可拓展、可维护（的数据系统）。澄清它们的定义，概述考量这些目标的方法。<br>当今， <strong>数据密集型（data-intensive）</strong> 应用多于 <strong>计算密集型（compute-intensive）</strong> 应用。CPU很少成为瓶颈，问题通常来自数据量、数据复杂性、以及数据的变更速度。</p>
+<p>一些耳熟能详的组件：</p>
+<ul>
+<li>存储数据，以便自己或其他应用程序之后能再次找到 （<strong><em>数据库（database）</em></strong>）</li>
+<li>记住开销昂贵操作的结果，加快读取速度（<strong><em>缓存（cache）</em></strong>）</li>
+<li>允许用户按关键字搜索数据，或以各种方式对数据进行过滤（<strong><em>搜索索引（search indexes）</em></strong>）</li>
+<li>向其他进程发送消息，进行异步处理（<strong><em>流处理（stream processing）</em></strong>）</li>
+<li>定期处理累积的大批量数据（<strong><em>批处理（batch processing）</em></strong>）</li>
+</ul>
+<p>大型应用程序有着各种严格而广泛的要求。这些数据存储工具与数据处理工具，它们针对不同应用场景进行优化，单个工具不足以满足所有的数据处理和存储需求。总体工作被拆分成一系列能被单个工具高效完成的任务，并通过应用代码将它们缝合起来。</p>
+<p>在尝试将多个工具组合在一起提供服务时，设计者会重点讨论三个在大多数软件系统中都很重要的问题：</p>
+<p><strong><em>可靠性（Reliability）</em></strong></p>
+<p>​    系统在<strong>困境（adversity）</strong>（硬件故障、软件故障、人为错误）中仍可正常工作（正确完成功能，并能达到期望的性能水准）。</p>
+<p><strong><em>可拓展性（Scalability）</em></strong></p>
+<p>​    有合理的办法应对系统的增长（数据量、流量、复杂性）</p>
+<p><strong><em>可维护性（Maintainability）</em></strong></p>
+<p>​    许多不同的人（工程师、运维）在不同的生命周期，都能高效地在系统上工作（使系统保持现有行为，并适应新的应用场景）。</p>
+<h2 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h2><p>可以把可靠性粗略理解为“即使出现问题，也能继续正确工作”。<br>造成错误的原因叫做<strong>故障（fault）</strong>，能预料并应对故障的系统特性可称为<strong>容错（fault-tolerant）</strong><br><strong>故障（fault）</strong>不同于<strong>失效（failure）</strong>。<strong>故障</strong>通常定义为系统的一部分状态偏离其标准，而<strong>失效</strong>则是系统作为一个整体停止向用户提供服务。好的容错机制设计防止因<strong>故障</strong>而导致<strong>失效</strong>。</p>
+<h3 id="硬件故障"><a href="#硬件故障" class="headerlink" title="硬件故障"></a>硬件故障</h3><p>由众多机器组成的分布式系统中，硬件异常不再”异常”。硬件故障是随机的、相互独立的。通过增加单个硬件的冗余度来解决硬件异常可能带来的问题。<br>在硬件冗余的基础上引入软件容错，那么系统在容忍整个（单台）机器故障的道路上就更进一步了。运维上也有便利，例如：如果需要重启机器（例如应用操作系统安全补丁），单服务器系统就需要计划停机。而允许机器失效的系统则可以一次修复一个节点，无需整个系统停机。</p>
+<h3 id="软件错误"><a href="#软件错误" class="headerlink" title="软件错误"></a>软件错误</h3><p>另一类错误是内部的<strong>系统性错误（systematic error）</strong>。这类错误难以预料，而且因为是跨节点相关的，所以比起不相关的硬件故障往往可能造成更多的<strong>系统失效</strong>。<br>软件BUG通常会潜伏很长时间，况意味着软件对其环境做出了某种假设——虽然这种假设通常来说是正确的，但由于某种原因最后不再成立了。<br>对策：</p>
+<ul>
+<li>仔细考虑系统中的假设和交互；</li>
+<li>彻底的测试。</li>
+<li>进程隔离，允许进程崩溃并重启。</li>
+<li>测量、监控并分析生产环境中的系统行为。如果系统能够提供一些保证（例如在一个消息队列中，进入与发出的消息数量相等），那么系统就可以在运行时不断自检，并在出现差异（discrepancy） 时报警。</li>
+</ul>
+<h3 id="人为错误"><a href="#人为错误" class="headerlink" title="人为错误"></a>人为错误</h3><p>人类不可靠。<br>对策：</p>
+<ul>
+<li>以最小化犯错机会的方式设计系统。</li>
+<li>将人们最容易犯错的地方与可能导致失效的地方<strong>解耦（decouple）</strong>。<strong>沙箱（sandbox）</strong>。</li>
+<li>在各个层次进行彻底的测试。</li>
+<li>允许从人为错误中简单快速地恢复，以最大限度地减少失效情况带来的影响。 如快速回滚，分批发布。</li>
+<li>配置详细和明确的监控，及时发现和日后分析问题。</li>
+<li>良好的管理实践与充分的培训——一个复杂而重要的方面，但超出了本书的范围。</li>
+</ul>
+<h2 id="可拓展性"><a href="#可拓展性" class="headerlink" title="可拓展性"></a>可拓展性</h2><p><strong>可拓展性（Scalability）</strong> 是用来描述系统应对负载增长能力的术语。讨论可拓展性意味着考虑诸如“如果系统以特定方式增长，有什么选项可以应对增长？”和“如何增加计算资源来处理额外的负载？”等问题。</p>
+<h3 id="描述负载"><a href="#描述负载" class="headerlink" title="描述负载"></a>描述负载</h3><p>描述负载的参数的最佳选择取决于系统架构，它可能是每秒向Web服务器发出的请求、数据库中的读写比率、聊天室中同时活跃的用户数量、缓存命中率或其他东西。</p>
+<h3 id="描述性能"><a href="#描述性能" class="headerlink" title="描述性能"></a>描述性能</h3><p>系统负载参数定义好后，就可以研究当负载增加会发生什么。两种角度：</p>
+<ul>
+<li>增加负载参数并保持系统资源（CPU、内存、网络带宽等）不变时，系统性能将受到什么影响？</li>
+<li>增加负载参数并希望保持性能不变时，需要增加多少系统资源？</li>
+</ul>
+<p>如何描述性能(例)：</p>
+<ul>
+<li>批处理系统：重要的是<strong>吞吐量（throughput）</strong></li>
+<li>在线系统：重要的是服务的<strong>响应时间（response time）</strong><blockquote>
+<h4 id="延迟和响应时间"><a href="#延迟和响应时间" class="headerlink" title="延迟和响应时间"></a>延迟和响应时间</h4><p><strong>延迟（latency）</strong> 和 <strong>响应时间（response time）</strong> 经常用作同义词，但实际上它们并不一样。响应时间是客户所看到的，除了实际处理请求的时间（ <strong>服务时间（service time）</strong> ）之外，还包括网络延迟和排队延迟。延迟是某个请求等待处理的<strong>持续时长</strong>，在此期间它处于 <strong>休眠（latent）</strong> 状态，并等待服务。</p>
+</blockquote>
+</li>
+</ul>
+<p>单次服务的响应时间总会有差异，所以需要观测多次服务结果的<strong>分布（distribution）</strong>。<br>比起算数平均值，中位数有更好的说服力（或与中位数类似的，90%以上的请求可以在x毫秒之内响应）。<br>实践中，一个请求往往需要多个后端调用，如果其中一个响应较慢便会拖累整个请求的响应时间。</p>
+<h3 id="应对负载"><a href="#应对负载" class="headerlink" title="应对负载"></a>应对负载</h3><p><strong>垂直拓展（vertical scaling）</strong>：转向更强大的机器<br><strong>水平拓展（horizontal scaling）</strong>：将负载分布到多台小机器上<br>如果负载<strong>极难预测（highly unpredictable）</strong>，则检测到负载增加时自动增加计算资源的<strong>弹性（elastic）</strong>系统可能很有用<br>围绕<strong>假设（assumption）</strong> 建立良好的可拓展架构</p>
+<h2 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h2><p>系统更新，代码会不再符合新的需求；人员更替，知识会流失。</p>
+<p><strong><em>可操作性（Operability）</em></strong></p>
+<p>​    便于运维团队保持系统平稳运行。</p>
+<p><strong><em>简单性（Simplicity）</em></strong></p>
+<p>​    消除尽可能多的<strong>复杂度（complexity）</strong>，使新工程师易学。（和用户接口的简单性不一样。）</p>
+<p><strong><em>可演化性（evolability）</em></strong></p>
+<p>​    使工程师在未来能轻松地对系统进行更改，当需求变化时为新应用场景做适配。也称为<strong>可拓展性（extensibility）</strong>，<strong>可修改性（modifiability）</strong>或<strong>可塑性（plasticity）</strong>。<br>   （extensibility是业务逻辑，服务范围方面的拓展性；Scalability是增加算力增加储存空间等性能方面的拓展性）</p>
+<h3 id="Developer-Happiness"><a href="#Developer-Happiness" class="headerlink" title="Developer Happiness"></a>Developer Happiness</h3><p>运维职责包括但不限：</p>
+<ul>
+<li>监控系统的运行状况，并在服务状态不佳时快速恢复服务</li>
+<li>跟踪问题的原因，例如系统故障或性能下降</li>
+<li>及时更新软件和平台，比如安全补丁</li>
+<li>了解系统间的相互作用，以便在异常变更造成损失前进行规避。</li>
+<li>预测未来的问题，并在问题出现之前加以解决（例如，容量规划）</li>
+<li>建立部署，配置、管理方面的良好实践，编写相应工具</li>
+<li>执行复杂的维护任务，例如将应用程序从一个平台迁移到另一个平台</li>
+<li>当配置变更时，维持系统的安全性</li>
+<li>定义工作流程，使运维操作可预测，并保持生产环境稳定。</li>
+<li>铁打的营盘流水的兵，维持组织对系统的了解。</li>
+</ul>
+<p>实现幸福的方式：</p>
+<ul>
+<li>通过良好的监控，提供对系统内部状态和运行时行为的<strong>可见性（visibility）</strong></li>
+<li>为自动化提供良好支持，将系统与标准化工具相集成</li>
+<li>避免依赖单台机器（在整个系统继续不间断运行的情况下允许机器停机维护）</li>
+<li>提供良好的文档和易于理解的操作模型（“如果做X，会发生Y”）</li>
+<li>提供良好的默认行为，但需要时也允许管理员自由覆盖默认值</li>
+<li>有条件时进行自我修复，但需要时也允许管理员手动控制系统状态</li>
+<li>行为可预测，最大限度减少意外</li>
+</ul>
+<p><strong>用抽象消除额外复杂度</strong>，当状态空间激增、模块间紧密耦合、纠结的依赖关系、不一致的命名和术语、解决性能问题的Hack、需要绕开的特例等使复杂度激增的情况发生时。<br><strong>可演化性（evolvability）</strong>，系统不会一成不变，为添加各种奇怪的需求做好准备。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/06/LeetCode%201539.%20Kth%20Missing%20Positive%20Number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/LeetCode%201539.%20Kth%20Missing%20Positive%20Number/" class="post-title-link" itemprop="url">LeetCode 1539. Kth Missing Positive Number</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-06 17:00:00 / Modified: 18:46:14" itemprop="dateCreated datePublished" datetime="2021-01-06T17:00:00+09:00">2021-01-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/kth-missing-positive-number/">原题在此</a><br>Given an array arr of positive integers sorted in a strictly increasing order, and an integer <code>k</code>.<br>Find the kth positive integer that is missing from this array.</p>
+<p><strong>Example 1:</strong><br>Input: arr = [2,3,4,7,11], k = 5<br>Output: 9<br>Explanation: The missing positive integers are [1,5,6,8,9,10,12,13,…]. The 5th missing positive integer is 9.</p>
+<p><strong>Example 2:</strong><br>Input: arr = [1,2,3,4], k = 2<br>Output: 6<br>Explanation: The missing positive integers are [5,6,7,…]. The 2nd missing positive integer is 6.</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>1 &lt;= arr.length &lt;= 1000</li>
+<li>1 &lt;= arr[i] &lt;= 1000</li>
+<li>1 &lt;= k &lt;= 1000</li>
+<li>arr[i] &lt; arr[j] for 1 &lt;= i &lt; j &lt;= arr.length</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>如果是一个没有missing数的数组,此时<code>arr[i] == i + 1</code>.<br>也就是说在一个missing了一些数的数组中,到下标<code>i</code>为止missing的个数为<code>arr[i] - (i+1)</code>.<br>这个等式对于数组任意下标<code>i</code>都成立,所以可以用二分查找法快速检索.<br>当循环结束时 <code>l == r</code>,返回 <code>l + k</code> 即可.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findKthPositive</span><span class="params">(arr []<span class="keyword">int</span>, k <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> l, r, m <span class="keyword">int</span> = <span class="number">0</span>, <span class="built_in">len</span>(arr), <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> l &lt; r &#123;</span><br><span class="line">        m = (l + r) / <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span>(arr[m] - m - <span class="number">1</span> &lt; k) &#123;</span><br><span class="line">            l = m + <span class="number">1</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            r = m</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> l + k</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/05/Go%20Channel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/05/Go%20Channel/" class="post-title-link" itemprop="url">Untitled</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-05 21:21:23" itemprop="dateCreated datePublished" datetime="2021-01-05T21:21:23+09:00">2021-01-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/05/LeetCode%2082.%20Remove%20Duplicates%20from%20Sorted%20List%20II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/05/LeetCode%2082.%20Remove%20Duplicates%20from%20Sorted%20List%20II/" class="post-title-link" itemprop="url">LeetCode 82. Remove Duplicates from Sorted List II</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-05 17:00:00" itemprop="dateCreated datePublished" datetime="2021-01-05T17:00:00+09:00">2021-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-06 18:32:52" itemprop="dateModified" datetime="2021-01-06T18:32:52+09:00">2021-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/">原题在此</a><br>Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.</p>
+<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg" alt=""><br>Input: head = [1,2,3,3,4,4,5]<br>Output: [1,2,5]</p>
+<p><strong>Example 2:</strong><br><img src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist2.jpg" alt=""><br>Input: head = [1,1,1,2,3]<br>Output: [2,3]</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the list is in the range [0, 300].</li>
+<li>-100 &lt;= Node.val &lt;= 100</li>
+<li>The list is guaranteed to be sorted in ascending order.</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><ol>
+<li>与Remove Duplicates from Sorted List I不同之处在于,这次要将重复值一个不留完全移除.</li>
+<li>有head的值会重复的情况,所以<code>new</code>一个值与head不一样的dummy指向head;</li>
+<li>声明两个指针, p1指向dummy, p2指向head;</li>
+<li>当p2不为空时,<ol>
+<li>当p2有next且next的值和p2相等时,p2指向next;</li>
+<li>此时有两种情况,p1和p2挨着,两个指针分别指向自己的next. 否则p2指向自己的next,p1指向p2.此时便跳过了重复的值<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head) <span class="keyword">return</span> head;</span><br><span class="line">        <span class="function">ListNode <span class="title">dummy</span><span class="params">(head-&gt;val + <span class="number">1</span>, head)</span></span>;</span><br><span class="line">        ListNode* p1 = &amp;dummy, *p2 = head;</span><br><span class="line">        <span class="keyword">while</span>(p2) &#123;</span><br><span class="line">            <span class="keyword">while</span>(p2 -&gt; next &amp;&amp; p2 -&gt; val == p2 -&gt; next -&gt; val) &#123;</span><br><span class="line">                p2 = p2 -&gt; next;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">if</span>(p1 -&gt; next == p2) &#123;</span><br><span class="line">                p1 = p2;</span><br><span class="line">                p2 = p2 -&gt; next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p2 = p2 -&gt; next;</span><br><span class="line">                p1 -&gt; next = p2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/04/LeetCode%2021.%20Merge%20Two%20Sorted%20Lists/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -652,505 +1122,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/29/LeetCode%201457.%20Pseudo-Palindromic%20Paths%20in%20a%20Binary%20Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/29/LeetCode%201457.%20Pseudo-Palindromic%20Paths%20in%20a%20Binary%20Tree/" class="post-title-link" itemprop="url">LeetCode 1457. Pseudo-Palindromic Paths in a Binary Tree</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-29 17:00:00" itemprop="dateCreated datePublished" datetime="2020-12-29T17:00:00+09:00">2020-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-04 20:56:42" itemprop="dateModified" datetime="2021-01-04T20:56:42+09:00">2021-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/">原题在此</a><br>Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome.<br>Return the number of pseudo-palindromic paths going from the root node to leaf nodes.<br><strong>Example 1</strong>:</p>
-<p><img src="https://assets.leetcode.com/uploads/2020/05/06/palindromic_paths_1.png" alt=""></p>
-<p>Input: root = [2,3,1,3,1,null,1]<br>Output: 2<br>Explanation: The figure above represents the given binary tree. There are three paths going from the root node to leaf nodes: the red path [2,3,3], the green path [2,1,1], and the path [2,3,1]. Among these paths only red path and green path are pseudo-palindromic paths since the red path [2,3,3] can be rearranged in [3,2,3] (palindrome) and the green path [2,1,1] can be rearranged in [1,2,1] (palindrome).<br><strong>Example 2</strong>:</p>
-<p><img src="https://assets.leetcode.com/uploads/2020/05/07/palindromic_paths_2.png" alt=""></p>
-<p>Input: root = [2,1,1,1,3,null,null,null,null,null,1]<br>Output: 1<br>Explanation: The figure above represents the given binary tree. There are three paths going from the root node to leaf nodes: the green path [2,1,1], the path [2,1,3,1], and the path [2,1]. Among these paths only the green path is pseudo-palindromic since [2,1,1] can be rearranged in [1,2,1] (palindrome).<br>Example 3:</p>
-<p>Input: root = [9]<br>Output: 1</p>
-<p><strong>Constraints</strong>:<br>The given binary tree will have between 1 and 10^5 nodes.<br>Node values are digits from 1 to 9.</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
-<li>要判断从root到leaf的所有数字是否能组合成一个回文串,只需要判断每个数字出现的是奇数次还是偶数次.其中,如果有超过1个的奇数次则不可能组成回文串.</li>
-<li>一开始会想用<code>map&lt;int, int&gt;</code>来储存每个数字出现了奇数次还是偶数次.仔细思考发现,key的情况只有<strong>0-9</strong>的10种情况,而value我们只关心奇偶性.所以可以用一个integer来代替map,对第n位做异或操作来改变奇偶性.</li>
-<li>这时,计算integer中1出现的次数可以用<a target="_blank" rel="noopener" href="https://leetcode.com/problems/number-of-1-bits/solution/">汉明重量</a>.</li>
-</ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pseudoPalindromicPaths</span> <span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        dfs(root, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> odd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        odd ^= (<span class="number">1</span> &lt;&lt; root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span>(!root -&gt; left &amp;&amp; !root -&gt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span>(hammingWeight(odd) &lt; <span class="number">2</span>) res++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(root-&gt;left, odd);</span><br><span class="line">        dfs(root-&gt;right, odd);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">uint32_t</span> i)</span> </span>&#123;</span><br><span class="line">        i = (i  &amp; <span class="number">0x55555555</span>) + ((i &gt;&gt; <span class="number">1</span>) &amp; <span class="number">0x55555555</span>);</span><br><span class="line">        i = (i &amp; <span class="number">0x33333333</span>) + ((i &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x33333333</span>);</span><br><span class="line">        i = (i + (i &gt;&gt; <span class="number">4</span>)) &amp; <span class="number">0x0f0f0f0f</span>;</span><br><span class="line">        i = (i + (i &gt;&gt; <span class="number">8</span>)) &amp; <span class="number">0x00ff00ff</span>;</span><br><span class="line">        i = i + (i &gt;&gt;<span class="number">16</span>) &amp; <span class="number">0x0000ffff</span>;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/28/LeetCode%20754.%20Reach%20a%20Number/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/28/LeetCode%20754.%20Reach%20a%20Number/" class="post-title-link" itemprop="url">LeetCode 754. Reach a Number</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-28 17:00:00" itemprop="dateCreated datePublished" datetime="2020-12-28T17:00:00+09:00">2020-12-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-04 20:57:15" itemprop="dateModified" datetime="2021-01-04T20:57:15+09:00">2021-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/reach-a-number/">题目链接</a><br>You are standing at position 0 on an infinite number line. There is a goal at position target.<br>On each move, you can either go left or right. During the n-th move (starting from 1), you take n steps.<br>Return the minimum number of steps required to reach the destination.</p>
-<p>Example 1:</p>
-<blockquote>
-<p>Input: target = 3<br>Output: 2<br>Explanation:<br>On the first move we step from 0 to 1.<br>On the second step we step from 1 to 3.</p>
-</blockquote>
-<p>Example 2:</p>
-<blockquote>
-<p>Input: target = 2<br>Output: 3<br>Explanation:<br>On the first move we step from 0 to 1.<br>On the second move we step  from 1 to -1.<br>On the third move we step from -1 to 2.<br>Note:<br>target will be a non-zero integer in the range [-10^9, 10^9].</p>
-</blockquote>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
-<li>target的正负不影响计算结果,因为数轴是对称的<code>target = abs(target)</code>.</li>
-<li>找到整数n,使得$(\sum_{i=1}^n i) \geq target$.<ol>
-<li>$有求和公式: target = \frac{n*(n+1)}{2}$.</li>
-<li>$整形得到一元二次方程: n^2+n-2*target=0$.</li>
-<li>$公式求解: n = \frac{(-1 + \sqrt{(1 + 8*target)})}{2}$.</li>
-<li>n可能不为整,向上取整即可.</li>
-</ol>
-</li>
-<li>取$sum = \frac{n*(n+1)}{2}$, sum 与 target 的差 <code>diff = sum - target</code></li>
-<li>此时,如果 sum == target,直接返回n即可. 又或者差值diff是偶数,那么只要把$\frac{\text{diff}}{2}$取反即可得到target,所以也是n.</li>
-<li>若差值diff为奇数,则有如下两种情况:<ol>
-<li>n为奇数,则n+1为偶数,需要$\sum_{i=1}^{n+2} i$ 来改变diff的奇偶.</li>
-<li>n为偶数,则n+1为奇数,$\sum_{i=1}^{n+1} i$ 来改变diff的奇偶.</li>
-</ol>
-</li>
-</ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">reachNumber</span><span class="params">(<span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> t = <span class="built_in">abs</span>(target);</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> n = <span class="built_in">ceil</span>((<span class="number">-1</span> + <span class="built_in">sqrt</span>(<span class="number">1</span> + <span class="number">8</span>*t)) / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> sum = (n * (n + <span class="number">1</span>)) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> diff = sum - t;</span><br><span class="line">        <span class="keyword">if</span> (sum == target || !(diff % <span class="number">2</span>)) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="keyword">return</span> n + ((n % <span class="number">2</span>) ? <span class="number">2</span> : <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/" class="post-title-link" itemprop="url">理科乐理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-11-17 09:27:13 / Modified: 18:33:53" itemprop="dateCreated datePublished" datetime="2020-11-17T09:27:13+09:00">2020-11-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E6%83%B3/" itemprop="url" rel="index">
-                    <span itemprop="name">随想</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ul>
-<li><strong>音</strong>: 音是一种机械波,由声源产生震动,经介质传播.单位时间内震动重复发生的次数称为<strong>频率</strong>,采用国际单位制<strong>hz (1hz=1/s)</strong></li>
-<li><strong>音色</strong>: 某周期函数(<strong>基波</strong>)频率的整数倍的波称为<strong>谐波</strong>.不同声源所产生的基波与谐波的叠加在频率和振幅上都不尽相同,这便是音色.</li>
-<li><strong>音量</strong>:<ul>
-<li><strong>分贝(dB)</strong>: 分贝的定义为,测量值与参考量值之比计算基于10的对数乘以10. $L_{dB}=10\log_{10}{(\frac{P}{P_0})}$. <strong>dB</strong>是一个无量纲,或者说它只是一种处理数据的方式.</li>
-<li><strong>声压级(Sound Pressure Level)</strong>:</li>
-</ul>
-</li>
-<li><strong>音程</strong>: 两个音之间的频率差</li>
-<li><strong>音数</strong>: 在<strong>十二平均律</strong>中, 称任两个相邻的音之间的音数为0.5</li>
-</ul>
-<h1 id="十二平均律"><a href="#十二平均律" class="headerlink" title="十二平均律"></a>十二平均律</h1><p>频率是连续的,音的个数是不可数的.<strong>十二平均律</strong>是一种产生离散的音的算法.<br>以某频率为$F$的单音$f_0$为基准,利用公式 <script type="math/tex">f_n=f*2^{(\frac{n}{12})}</script> ,可以构造出一个等比数列.其中,$f_0$与频率为$2F$的单音$f_{12}$构成一个称为<strong>纯八度</strong>的音程.<br>在一个纯八度(既频率$[F,2F]$的区间)中,可构造出13个音,十二平均律系统规定任两个相邻的音之间的音数为0.5</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th>$f_0$</th>
-<th>$f_1$</th>
-<th>$f_2$</th>
-<th>$f_3$</th>
-<th>$f_4$</th>
-<th>$f_5$</th>
-<th>$f_6$</th>
-<th>$f_7$</th>
-<th>$f_8$</th>
-<th>$f_9$</th>
-<th>$f_{10}$</th>
-<th>$f_{11}$</th>
-<th>$f_{12}$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>音数差</td>
-<td>0</td>
-<td>0.5</td>
-<td>1</td>
-<td>1.5</td>
-<td>2</td>
-<td>2.5</td>
-<td>3</td>
-<td>3.5</td>
-<td>4</td>
-<td>4.5</td>
-<td>5</td>
-<td>5.5</td>
-<td>6</td>
-</tr>
-<tr>
-<td>音程名</td>
-<td>纯一度</td>
-<td>小二度</td>
-<td>大二度</td>
-<td>小三度</td>
-<td>大三度</td>
-<td>纯四度</td>
-<td>三全音</td>
-<td>纯五度</td>
-<td>小六度</td>
-<td>大六度</td>
-<td>小七度</td>
-<td>大七度</td>
-<td>纯八度</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/A440_%28pitch_standard%29">ISO 16</a>中规定音名为$A_4$的音其频率为<strong>440hz</strong>.音名是啥不重要,你只要知道等比数列里有一项是440就好.</p>
-<img src="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/Lindos1.svg" class="">
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/19/Go%E6%9E%81%E7%AE%80%E6%8C%87%E5%8D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/19/Go%E6%9E%81%E7%AE%80%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Untitled</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-19 02:21:46" itemprop="dateCreated datePublished" datetime="2020-10-19T02:21:46+09:00">2020-10-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/18.06-Linear%20Algebra-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/02/18.06-Linear%20Algebra-02/" class="post-title-link" itemprop="url">18.06-Linear Algebra-02</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-02T00:00:00+09:00">2020-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-30 22:55:11" itemprop="dateModified" datetime="2020-11-30T22:55:11+09:00">2020-11-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">自学笔记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="矩阵消元"><a href="#矩阵消元" class="headerlink" title="矩阵消元"></a>矩阵消元</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这节主要讲如何通过消元来系统的求解方程组.并通过消元引入了些许逆矩阵的基础知识.</p>
-<h2 id="消元法解方程"><a href="#消元法解方程" class="headerlink" title="消元法解方程"></a>消元法解方程</h2><p>和初中学过的东西一样,你可以把任意一行乘以某个数加到另一行,调换一整行等式的顺序并不改变你的方程.在矩阵中你仍然可以这样做.$A\vec{x}=\vec{b}$如下:</p>
-<script type="math/tex; mode=display">
-\left[\begin{matrix}
-    1&2&1\\
-    3&8&1\\
-    0&4&1
-\end{matrix}\right]
-\left[\begin{matrix}
-    x_1\\
-    x_2\\
-    x_3
-\end{matrix}\right]
-=\left[\begin{matrix}
-    2\\
-    12\\
-    2
-    \end{matrix}\right]</script><p>将A与b写在一个矩阵里,称作<strong>增广矩阵(Augment Matrix)</strong></p>
-<script type="math/tex; mode=display">
-\left[\begin{matrix}
-    1&2&1|&2\\
-    3&8&1|&12\\
-    0&4&1|&2
-\end{matrix}\right]</script><p>用第二行减去三倍的第一行可得</p>
-<script type="math/tex; mode=display">
-\left[\begin{matrix}
-    1&2&1 &2\\
-    0&2&-2&6\\
-    0&4&1 &2
-\end{matrix}\right]</script><p>用第三行减去两倍的第二行可得</p>
-<script type="math/tex; mode=display">
-\left[\begin{matrix}
-    1&2&1 &2\\
-    0&2&-2&6\\
-    0&0&5 &-10
-\end{matrix}\right]</script><p>从最后一行<script type="math/tex">5x_3=-10</script>回代,便可求出<script type="math/tex">x_2,x_1</script>的值</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1194,20 +1170,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
