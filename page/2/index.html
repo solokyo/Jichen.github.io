@@ -186,6 +186,237 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/06/LeetCode%201539.%20Kth%20Missing%20Positive%20Number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/LeetCode%201539.%20Kth%20Missing%20Positive%20Number/" class="post-title-link" itemprop="url">LeetCode 1539. Kth Missing Positive Number</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-06 17:00:00 / Modified: 18:46:14" itemprop="dateCreated datePublished" datetime="2021-01-06T17:00:00+09:00">2021-01-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/kth-missing-positive-number/">原题在此</a><br>Given an array arr of positive integers sorted in a strictly increasing order, and an integer <code>k</code>.<br>Find the kth positive integer that is missing from this array.</p>
+<p><strong>Example 1:</strong><br>Input: arr = [2,3,4,7,11], k = 5<br>Output: 9<br>Explanation: The missing positive integers are [1,5,6,8,9,10,12,13,…]. The 5th missing positive integer is 9.</p>
+<p><strong>Example 2:</strong><br>Input: arr = [1,2,3,4], k = 2<br>Output: 6<br>Explanation: The missing positive integers are [5,6,7,…]. The 2nd missing positive integer is 6.</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>1 &lt;= arr.length &lt;= 1000</li>
+<li>1 &lt;= arr[i] &lt;= 1000</li>
+<li>1 &lt;= k &lt;= 1000</li>
+<li>arr[i] &lt; arr[j] for 1 &lt;= i &lt; j &lt;= arr.length</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>如果是一个没有missing数的数组,此时<code>arr[i] == i + 1</code>.<br>也就是说在一个missing了一些数的数组中,到下标<code>i</code>为止missing的个数为<code>arr[i] - (i+1)</code>.<br>这个等式对于数组任意下标<code>i</code>都成立,所以可以用二分查找法快速检索.<br>当循环结束时 <code>l == r</code>,返回 <code>l + k</code> 即可.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findKthPositive</span><span class="params">(arr []<span class="keyword">int</span>, k <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> l, r, m <span class="keyword">int</span> = <span class="number">0</span>, <span class="built_in">len</span>(arr), <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> l &lt; r &#123;</span><br><span class="line">        m = (l + r) / <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span>(arr[m] - m - <span class="number">1</span> &lt; k) &#123;</span><br><span class="line">            l = m + <span class="number">1</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            r = m</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> l + k</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/05/Go%20Channel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/05/Go%20Channel/" class="post-title-link" itemprop="url">Untitled</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-05 21:21:23" itemprop="dateCreated datePublished" datetime="2021-01-05T21:21:23+09:00">2021-01-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/05/LeetCode%2082.%20Remove%20Duplicates%20from%20Sorted%20List%20II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/05/LeetCode%2082.%20Remove%20Duplicates%20from%20Sorted%20List%20II/" class="post-title-link" itemprop="url">LeetCode 82. Remove Duplicates from Sorted List II</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-05 17:00:00" itemprop="dateCreated datePublished" datetime="2021-01-05T17:00:00+09:00">2021-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-06 18:32:52" itemprop="dateModified" datetime="2021-01-06T18:32:52+09:00">2021-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/">原题在此</a><br>Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.</p>
+<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg" alt=""><br>Input: head = [1,2,3,3,4,4,5]<br>Output: [1,2,5]</p>
+<p><strong>Example 2:</strong><br><img src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist2.jpg" alt=""><br>Input: head = [1,1,1,2,3]<br>Output: [2,3]</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in the list is in the range [0, 300].</li>
+<li>-100 &lt;= Node.val &lt;= 100</li>
+<li>The list is guaranteed to be sorted in ascending order.</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><ol>
+<li>与Remove Duplicates from Sorted List I不同之处在于,这次要将重复值一个不留完全移除.</li>
+<li>有head的值会重复的情况,所以<code>new</code>一个值与head不一样的dummy指向head;</li>
+<li>声明两个指针, p1指向dummy, p2指向head;</li>
+<li>当p2不为空时,<ol>
+<li>当p2有next且next的值和p2相等时,p2指向next;</li>
+<li>此时有两种情况,p1和p2挨着,两个指针分别指向自己的next. 否则p2指向自己的next,p1指向p2.此时便跳过了重复的值<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head) <span class="keyword">return</span> head;</span><br><span class="line">        <span class="function">ListNode <span class="title">dummy</span><span class="params">(head-&gt;val + <span class="number">1</span>, head)</span></span>;</span><br><span class="line">        ListNode* p1 = &amp;dummy, *p2 = head;</span><br><span class="line">        <span class="keyword">while</span>(p2) &#123;</span><br><span class="line">            <span class="keyword">while</span>(p2 -&gt; next &amp;&amp; p2 -&gt; val == p2 -&gt; next -&gt; val) &#123;</span><br><span class="line">                p2 = p2 -&gt; next;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">if</span>(p1 -&gt; next == p2) &#123;</span><br><span class="line">                p1 = p2;</span><br><span class="line">                p2 = p2 -&gt; next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p2 = p2 -&gt; next;</span><br><span class="line">                p1 -&gt; next = p2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/04/LeetCode%2021.%20Merge%20Two%20Sorted%20Lists/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -840,317 +1071,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/" class="post-title-link" itemprop="url">理科乐理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-11-17 09:27:13 / Modified: 18:33:53" itemprop="dateCreated datePublished" datetime="2020-11-17T09:27:13+09:00">2020-11-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E6%83%B3/" itemprop="url" rel="index">
-                    <span itemprop="name">随想</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ul>
-<li><strong>音</strong>: 音是一种机械波,由声源产生震动,经介质传播.单位时间内震动重复发生的次数称为<strong>频率</strong>,采用国际单位制<strong>hz (1hz=1/s)</strong></li>
-<li><strong>音色</strong>: 某周期函数(<strong>基波</strong>)频率的整数倍的波称为<strong>谐波</strong>.不同声源所产生的基波与谐波的叠加在频率和振幅上都不尽相同,这便是音色.</li>
-<li><strong>音量</strong>:<ul>
-<li><strong>分贝(dB)</strong>: 分贝的定义为,测量值与参考量值之比计算基于10的对数乘以10. $L_{dB}=10\log_{10}{(\frac{P}{P_0})}$. <strong>dB</strong>是一个无量纲,或者说它只是一种处理数据的方式.</li>
-<li><strong>声压级(Sound Pressure Level)</strong>:</li>
-</ul>
-</li>
-<li><strong>音程</strong>: 两个音之间的频率差</li>
-<li><strong>音数</strong>: 在<strong>十二平均律</strong>中, 称任两个相邻的音之间的音数为0.5</li>
-</ul>
-<h1 id="十二平均律"><a href="#十二平均律" class="headerlink" title="十二平均律"></a>十二平均律</h1><p>频率是连续的,音的个数是不可数的.<strong>十二平均律</strong>是一种产生离散的音的算法.<br>以某频率为$F$的单音$f_0$为基准,利用公式 <script type="math/tex">f_n=f*2^{(\frac{n}{12})}</script> ,可以构造出一个等比数列.其中,$f_0$与频率为$2F$的单音$f_{12}$构成一个称为<strong>纯八度</strong>的音程.<br>在一个纯八度(既频率$[F,2F]$的区间)中,可构造出13个音,十二平均律系统规定任两个相邻的音之间的音数为0.5</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th>$f_0$</th>
-<th>$f_1$</th>
-<th>$f_2$</th>
-<th>$f_3$</th>
-<th>$f_4$</th>
-<th>$f_5$</th>
-<th>$f_6$</th>
-<th>$f_7$</th>
-<th>$f_8$</th>
-<th>$f_9$</th>
-<th>$f_{10}$</th>
-<th>$f_{11}$</th>
-<th>$f_{12}$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>音数差</td>
-<td>0</td>
-<td>0.5</td>
-<td>1</td>
-<td>1.5</td>
-<td>2</td>
-<td>2.5</td>
-<td>3</td>
-<td>3.5</td>
-<td>4</td>
-<td>4.5</td>
-<td>5</td>
-<td>5.5</td>
-<td>6</td>
-</tr>
-<tr>
-<td>音程名</td>
-<td>纯一度</td>
-<td>小二度</td>
-<td>大二度</td>
-<td>小三度</td>
-<td>大三度</td>
-<td>纯四度</td>
-<td>三全音</td>
-<td>纯五度</td>
-<td>小六度</td>
-<td>大六度</td>
-<td>小七度</td>
-<td>大七度</td>
-<td>纯八度</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/A440_%28pitch_standard%29">ISO 16</a>中规定音名为$A_4$的音其频率为<strong>440hz</strong>.音名是啥不重要,你只要知道等比数列里有一项是440就好.</p>
-<img src="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/Lindos1.svg" class="">
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/19/Go%E6%9E%81%E7%AE%80%E6%8C%87%E5%8D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/19/Go%E6%9E%81%E7%AE%80%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Untitled</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-19 02:21:46" itemprop="dateCreated datePublished" datetime="2020-10-19T02:21:46+09:00">2020-10-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/18.06-Linear%20Algebra-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/02/18.06-Linear%20Algebra-02/" class="post-title-link" itemprop="url">18.06-Linear Algebra-02</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-02T00:00:00+09:00">2020-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-30 22:55:11" itemprop="dateModified" datetime="2020-11-30T22:55:11+09:00">2020-11-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">自学笔记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="矩阵消元"><a href="#矩阵消元" class="headerlink" title="矩阵消元"></a>矩阵消元</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这节主要讲如何通过消元来系统的求解方程组.并通过消元引入了些许逆矩阵的基础知识.</p>
-<h2 id="消元法解方程"><a href="#消元法解方程" class="headerlink" title="消元法解方程"></a>消元法解方程</h2><p>和初中学过的东西一样,你可以把任意一行乘以某个数加到另一行,调换一整行等式的顺序并不改变你的方程.在矩阵中你仍然可以这样做.$A\vec{x}=\vec{b}$如下:</p>
-<script type="math/tex; mode=display">
-\left[\begin{matrix}
-    1&2&1\\
-    3&8&1\\
-    0&4&1
-\end{matrix}\right]
-\left[\begin{matrix}
-    x_1\\
-    x_2\\
-    x_3
-\end{matrix}\right]
-=\left[\begin{matrix}
-    2\\
-    12\\
-    2
-    \end{matrix}\right]</script><p>将A与b写在一个矩阵里,称作<strong>增广矩阵(Augment Matrix)</strong></p>
-<script type="math/tex; mode=display">
-\left[\begin{matrix}
-    1&2&1|&2\\
-    3&8&1|&12\\
-    0&4&1|&2
-\end{matrix}\right]</script><p>用第二行减去三倍的第一行可得</p>
-<script type="math/tex; mode=display">
-\left[\begin{matrix}
-    1&2&1 &2\\
-    0&2&-2&6\\
-    0&4&1 &2
-\end{matrix}\right]</script><p>用第三行减去两倍的第二行可得</p>
-<script type="math/tex; mode=display">
-\left[\begin{matrix}
-    1&2&1 &2\\
-    0&2&-2&6\\
-    0&0&5 &-10
-\end{matrix}\right]</script><p>从最后一行<script type="math/tex">5x_3=-10</script>回代,便可求出<script type="math/tex">x_2,x_1</script>的值</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1194,7 +1119,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1207,7 +1132,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
