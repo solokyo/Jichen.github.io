@@ -186,6 +186,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/10/LeetCode%201649.%20Create%20Sorted%20Array%20through%20Instructions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/10/LeetCode%201649.%20Create%20Sorted%20Array%20through%20Instructions/" class="post-title-link" itemprop="url">LeetCode 1649. Create Sorted Array through Instructions</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-10 17:00:00" itemprop="dateCreated datePublished" datetime="2021-01-10T17:00:00+09:00">2021-01-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-12 22:15:10" itemprop="dateModified" datetime="2021-01-12T22:15:10+09:00">2021-01-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/create-sorted-array-through-instructions/">原题在此</a><br>Given an integer array instructions, you are asked to create a sorted array from the elements in instructions. You start with an empty container nums. For each element from left to right in instructions, insert it into nums. The cost of each insertion is the minimum of the following:</p>
+<p>The number of elements currently in nums that are strictly less than <code>instructions[i]</code>.<br>The number of elements currently in nums that are strictly greater than <code>instructions[i]</code>.<br>For example, if inserting element 3 into <code>nums = [1,2,3,5]</code>, the cost of insertion is min(2, 1) (elements 1 and 2 are less than 3, element 5 is greater than 3) and nums will become <code>[1,2,3,3,5]</code>.</p>
+<p>Return the total cost to insert all elements from instructions into nums. Since the answer may be large, return it <strong>modulo 109 + 7</strong></p>
+<p><strong>Example 1:</strong><br>Input: <code>instructions = [1,5,6,2]</code><br>Output: 1<br>Explanation: Begin with <code>nums = []</code>.<br>Insert 1 with cost min(0, 0) = 0, now <code>nums = [1]</code>.<br>Insert 5 with cost min(1, 0) = 0, now <code>nums = [1,5]</code>.<br>Insert 6 with cost min(2, 0) = 0, now <code>nums = [1,5,6]</code>.<br>Insert 2 with cost min(1, 2) = 1, now <code>nums = [1,2,5,6]</code>.<br>The total cost is 0 + 0 + 0 + 1 = 1.</p>
+<p><strong>Example 2:</strong><br>Input: <code>instructions = [1,2,3,6,5,4]</code><br>Output: 3<br>Explanation: Begin with <code>nums = []</code>.<br>Insert 1 with cost min(0, 0) = 0, now <code>nums = [1]</code>.<br>Insert 2 with cost min(1, 0) = 0, now <code>nums = [1,2]</code>.<br>Insert 3 with cost min(2, 0) = 0, now <code>nums = [1,2,3]</code>.<br>Insert 6 with cost min(3, 0) = 0, now <code>nums = [1,2,3,6]</code>.<br>Insert 5 with cost min(3, 1) = 1, now <code>nums = [1,2,3,5,6]</code>.<br>Insert 4 with cost min(3, 2) = 2, now <code>nums = [1,2,3,4,5,6]</code>.<br>The total cost is 0 + 0 + 0 + 0 + 1 + 2 = 3.</p>
+<p><strong>Example 3:</strong><br>Input: <code>instructions = [1,3,3,3,2,4,2,1,2]</code><br>Output: 4<br>Explanation: Begin with <code>nums = []</code>.<br>Insert 1 with cost min(0, 0) = 0, now <code>nums = [1]</code>.<br>Insert 3 with cost min(1, 0) = 0, now <code>nums = [1,3]</code>.<br>Insert 3 with cost min(1, 0) = 0, now <code>nums = [1,3,3]</code>.<br>Insert 3 with cost min(1, 0) = 0, now <code>nums = [1,3,3,3]</code>.<br>Insert 2 with cost min(1, 3) = 1, now <code>nums = [1,2,3,3,3]</code>.<br>Insert 4 with cost min(5, 0) = 0, now <code>nums = [1,2,3,3,3,4]</code>.<br>​​​​​​​Insert 2 with cost min(1, 4) = 1, now <code>nums = [1,2,2,3,3,3,4]</code>.<br>​​​​​​​Insert 1 with cost min(0, 6) = 0, now <code>nums = [1,1,2,2,3,3,3,4]</code>.<br>​​​​​​​Insert 2 with cost min(2, 4) = 2, now <code>nums = [1,1,2,2,2,3,3,3,4]</code>.<br>The total cost is 0 + 0 + 0 + 0 + 1 + 0 + 1 + 0 + 2 = 4.</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>$1 &lt;= instructions.length &lt;= 10^5$</li>
+<li>$1 &lt;= instructions[i] &lt;= 10^5$</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>题目虽然标记为<em>hard</em>, 但其实和<a target="_blank" rel="noopener" href="https://leetcode.com/problems/range-sum-query-mutable/">这道题</a> 基本一样, 用到了<strong>树状数组</strong><br>各大网站都有讲解, 在这儿就不多说了. 放几个链接就好.<br><a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.14.8917&amp;rep=rep1&amp;type=pdf">论文原文</a><br><a target="_blank" rel="noopener" href="https://visualgo.net/en/fenwicktree">数据结构可视化</a></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> clang optimize on</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC optimize (<span class="meta-string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC target(<span class="meta-string">&quot;sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,tune=native&quot;</span>)</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __ = []() &#123;</span><br><span class="line">    <span class="built_in">std</span>::ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>.tie(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>.tie(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BIT</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BIT(<span class="keyword">int</span> _size): size(_size), tree(_size + <span class="number">1</span>)&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(; x &lt;= size; x += lowbit(x))</span><br><span class="line">            ++tree[x];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(; x &gt; <span class="number">0</span>; x -= lowbit(x))</span><br><span class="line">            sum += tree[x];</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> size;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; tree;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">createSortedArray</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; ins)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line">        <span class="function">BIT <span class="title">bit</span><span class="params">(*max_element(ins.begin(), ins.end()))</span></span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(ins.size()); ++i) &#123;</span><br><span class="line">            res += min(bit.query(ins[i] - <span class="number">1</span>), i - bit.query(ins[i]));</span><br><span class="line">            bit.update(ins[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res % M;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/09/LeetCode%20127.%20Word%20Ladder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -996,117 +1083,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/01/LeetCode%201640.%20Check%20Array%20Formation%20Through%20Concatenation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/01/LeetCode%201640.%20Check%20Array%20Formation%20Through%20Concatenation/" class="post-title-link" itemprop="url">LeetCode 1640. Check Array Formation Through Concatenation</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-01 19:00:00" itemprop="dateCreated datePublished" datetime="2021-01-01T19:00:00+09:00">2021-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-03 17:07:12" itemprop="dateModified" datetime="2021-01-03T17:07:12+09:00">2021-01-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/check-array-formation-through-concatenation/">原题在此</a><br>You are given an array of <strong>distinct</strong> integers <code>arr</code> and an array of integer arrays <code>pieces</code>, where the integers in <code>pieces</code> are <strong>distinct</strong>. Your goal is to form <code>arr</code> by concatenating the arrays in <code>pieces</code> <strong>in any order</strong>. However, you are <strong>not allowed</strong> to reorder the integers in each array <code>pieces[i]</code>.<br>Return <code>true</code> if it is possible to form the array <code>arr</code> from <code>pieces</code>. Otherwise, return <code>false</code>.</p>
-<p><strong>Example 1:</strong></p>
-<blockquote>
-<p>Input: arr = [85], pieces = [[85]]<br>Output: true</p>
-</blockquote>
-<p><strong>Example 2:</strong></p>
-<blockquote>
-<p>Input: arr = [15,88], pieces = [[88],[15]]<br>Output: true<br>Explanation: Concatenate [15] then [88]</p>
-</blockquote>
-<p><strong>Example 3:</strong></p>
-<blockquote>
-<p>Input: arr = [49,18,16], pieces = [[16,18,49]]<br>Output: false<br>Explanation: Even though the numbers match, we cannot reorder pieces[0].</p>
-</blockquote>
-<p><strong>Example 4:</strong></p>
-<blockquote>
-<p>Input: arr = [91,4,64,78], pieces = [[78],[4,64],[91]]<br>Output: true<br>Explanation: Concatenate [91] then [4,64] then [78]</p>
-</blockquote>
-<p><strong>Example 5:</strong></p>
-<blockquote>
-<p>Input: arr = [1,3,5,7], pieces = [[2,4,6,8]]<br>Output: false</p>
-</blockquote>
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>1 &lt;= pieces.length &lt;= arr.length &lt;= 100</li>
-<li>sum(pieces[i].length) == arr.length</li>
-<li>1 &lt;= pieces[i].length &lt;= arr.length</li>
-<li>1 &lt;= arr[i], pieces[i][j] &lt;= 100</li>
-<li>The integers in arr are distinct.</li>
-<li>The integers in pieces are distinct (i.e., If we flatten pieces in a 1D array, all the integers in this array are distinct).</li>
-</ul>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><h2 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h2><p>这一版的思路很单纯,把<code>pieces</code>中的每个<code>piece</code>以<code>piece[0]</code>为key存入map中以便随机访问,再无脑按照<code>arr</code>中出现的顺序拼起来.最后看看拼起来的和<code>arr</code>是否相等.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canFormArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; pieces)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; attached;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p : pieces) mp[p[<span class="number">0</span>]] = p;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i : arr)</span><br><span class="line">            <span class="keyword">if</span> (mp.find(i) != mp.end())</span><br><span class="line">                attached.insert(attached.end(), mp[i].begin(), mp[i].end());</span><br><span class="line">        <span class="keyword">return</span> attached == arr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h2 id="改进思路"><a href="#改进思路" class="headerlink" title="改进思路"></a>改进思路</h2><ol>
-<li>Map中没必要存整个<code>piece</code>数组,存<code>piece[0]</code>就可以.</li>
-<li>根据题目<strong>Constraints</strong>部分的描述,外加数组元素是<strong>distinct</strong>的,可以用数组替代Map.</li>
-<li>在遍历<code>arr</code>的过程中,每次必须找到一个<code>piece</code>以<code>arr[i]</code>开头,且整段<code>piece</code>和<code>arr</code>的局部必须完全一致,否则即可返回<code>false</code>.</li>
-</ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canFormArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; pieces)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// mp&lt;&quot;first number of a piece&quot;, &quot;index of this piece in pieces&quot;&gt;</span></span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">mp</span><span class="params">(<span class="number">101</span>, <span class="number">-1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pieces.size(); ++i) mp[pieces[i][<span class="number">0</span>]] = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.size();) &#123;</span><br><span class="line">            <span class="keyword">int</span> pindex = mp[arr[i]];</span><br><span class="line">            <span class="keyword">if</span>(pindex == <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// no piece start with this number;</span></span><br><span class="line">            <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(j &lt; pieces[pindex].size())</span><br><span class="line">                <span class="keyword">if</span>(arr[i++] != pieces[pindex][j++]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1155,7 +1131,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1168,7 +1144,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
