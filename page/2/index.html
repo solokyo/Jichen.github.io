@@ -186,6 +186,409 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/23/LeetCode%201329.%20Sort%20the%20Matrix%20Diagonally/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/23/LeetCode%201329.%20Sort%20the%20Matrix%20Diagonally/" class="post-title-link" itemprop="url">LeetCode 1329. Sort the Matrix Diagonally</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-23 17:00:00 / Modified: 18:28:30" itemprop="dateCreated datePublished" datetime="2021-01-23T17:00:00+09:00">2021-01-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/sort-the-matrix-diagonally/">原题在此</a></p>
+<p>A matrix diagonal is a diagonal line of cells starting from some cell in either the topmost row or leftmost column and going in the bottom-right direction until reaching the matrix’s end. For example, the matrix diagonal starting from <code>mat[2][0]</code>, where mat is a 6 x 3 matrix, includes cells <code>mat[2][0]</code>, <code>mat[3][1]</code>, and <code>mat[4][2]</code>.</p>
+<p>Given an m x n matrix mat of integers, sort each matrix diagonal in ascending order and return the resulting matrix.</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/01/21/1482_example_1_2.png" alt=""><br><strong>Example 1:</strong><br>Input: <code>mat = [[3,3,1,1],[2,2,1,2],[1,1,1,2]]</code><br>Output: <code>[[1,1,1,1],[1,2,2,2],[1,2,3,3]]</code></p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>m == mat.length</code></li>
+<li><code>n == mat[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 100</code></li>
+<li><code>1 &lt;= mat[i][j] &lt;= 100</code></li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>下标<code>i - j</code>相等的元素在一条斜线上, 装在一起排序再装回去就好. 用各种语言的标准库实现会很容易.</p>
+<h1 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">diagonalSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = mat.size(), n = mat[<span class="number">0</span>].size();</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="built_in">priority_queue</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt;&gt; <span class="built_in">map</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="built_in">map</span>[i - j].push(mat[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                mat[i][j] = <span class="built_in">map</span>[i - j].top(); <span class="built_in">map</span>[i - j].pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/21/LeetCode%201657.%20Determine%20if%20Two%20Strings%20Are%20Close/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/LeetCode%201657.%20Determine%20if%20Two%20Strings%20Are%20Close/" class="post-title-link" itemprop="url">LeetCode 1657. Determine if Two Strings Are Close</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-21 17:00:00" itemprop="dateCreated datePublished" datetime="2021-01-21T17:00:00+09:00">2021-01-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-22 21:13:06" itemprop="dateModified" datetime="2021-01-22T21:13:06+09:00">2021-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/determine-if-two-strings-are-close/">原题在此</a></p>
+<p>Two strings are considered <strong>close</strong> if you can attain one from the other using the following operations:</p>
+<ul>
+<li>Operation 1: Swap any two existing characters.<ul>
+<li>For example, abcde -&gt; aecdb</li>
+</ul>
+</li>
+<li>Operation 2: Transform every occurrence of one existing character into another existing character, and do the same with the other character.<ul>
+<li>For example, aacabb -&gt; bbcbaa (all a’s turn into b’s, and all b’s turn into a’s)<br>You can use the operations on either string as many times as necessary.</li>
+</ul>
+</li>
+</ul>
+<p>Given two strings, <code>word1</code> and <code>word2</code>, return <code>true</code> if <code>word1</code> and <code>word2</code> are close, and <code>false</code> otherwise.</p>
+<p><strong>Example 1:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: word1 = “abc”, word2 = “bca”<br>Output: true<br>Explanation: You can attain word2 from word1 in 2 operations.<br>Apply Operation 1: “abc” -&gt; “acb”<br>Apply Operation 1: “acb” -&gt; “bca”</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: word1 = “a”, word2 = “aa”<br>Output: false<br>Explanation: It is impossible to attain word2 from word1, or vice versa, in any number of operations.</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 3:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: word1 = “cabbba”, word2 = “abbccc”<br>Output: true<br>Explanation: You can attain word2 from word1 in 3 operations.<br>Apply Operation 1: “cabbba” -&gt; “caabbb”<br>Apply Operation 2: “caabbb” -&gt; “baaccc”<br>Apply Operation 2: “baaccc” -&gt; “abbccc”</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 4:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: word1 = “cabbba”, word2 = “aabbss”<br>Output: false<br>Explanation: It is impossible to attain word2 from word1, or vice versa, in any amount of operations.</p>
+</blockquote>
+</blockquote>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>1 &lt;= <code>word1.length, word2.length</code> &lt;= $10^5$</li>
+<li><code>word1</code> and <code>word2</code> contain only lowercase English letters.</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>根据题意, <strong>close</strong>的条件如下:</p>
+<ol>
+<li>出现过的字符组成的集合(不重复)相同. 以例三为例: <code>set&lt;char&gt; word1 = &#123;a, b, c&#125;, word2 = &#123;a, b, c&#125;</code></li>
+<li>统计每个字符出现过的次数所组成的集合(可重复)相同. 以例三为例: <code>multiset&lt;int&gt; word1 = &#123;2, 3, 1&#125;, word2 = &#123;1, 2, 3&#125;</code></li>
+<li>因为题目指出输入字符串中只含有小写字母, 可使用数组替换集合.</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="std-set使用"><a href="#std-set使用" class="headerlink" title="std::set使用"></a>std::set使用</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">closeStrings</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; char1, char2;</span><br><span class="line">        <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>&gt; count1, count2;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; m1, m2;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c : word1) m1[c - <span class="string">&#x27;a&#x27;</span>] ++;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c : word2) m2[c - <span class="string">&#x27;a&#x27;</span>] ++;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">        <span class="keyword">for</span> (it = m1.begin(); it != m1.end(); it++) &#123;</span><br><span class="line">            char1.insert(it -&gt; first);</span><br><span class="line">            count1.insert(it -&gt; second);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (it = m2.begin(); it != m2.end(); it++) &#123;</span><br><span class="line">            char2.insert(it -&gt; first);</span><br><span class="line">            count2.insert(it -&gt; second);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> char1 == char2 &amp;&amp; count1 == count2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="std-set不使用"><a href="#std-set不使用" class="headerlink" title="std::set不使用"></a>std::set不使用</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">closeStrings</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">array</span>&lt;<span class="keyword">int</span>, 26&gt; m1 &#123;&#125;;</span><br><span class="line">        <span class="built_in">array</span>&lt;<span class="keyword">int</span>, 26&gt; m2 &#123;&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c : word1) m1[c - <span class="string">&#x27;a&#x27;</span>] ++;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c : word2) m2[c - <span class="string">&#x27;a&#x27;</span>] ++;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (!equal(begin(m1), end(m1), begin(m2), end(m2), [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123; <span class="keyword">return</span> <span class="keyword">bool</span> (a) == <span class="keyword">bool</span> (b); &#125;))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// 此处sort数组长度为26和输入数据长度无关</span></span><br><span class="line">        sort(begin(m1), end(m1));</span><br><span class="line">        sort(begin(m2), end(m2));</span><br><span class="line">        <span class="keyword">return</span> m1 == m2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/21/LeetCode%201673.%20Find%20the%20Most%20Competitive%20Subsequence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/LeetCode%201673.%20Find%20the%20Most%20Competitive%20Subsequence/" class="post-title-link" itemprop="url">LeetCode 1673. Find the Most Competitive Subsequence</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-21 17:00:00 / Modified: 19:28:37" itemprop="dateCreated datePublished" datetime="2021-01-21T17:00:00+09:00">2021-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-the-most-competitive-subsequence/">原题在此</a><br>Given an integer array nums and a positive integer k, return the most competitive subsequence of nums of size k.</p>
+<p>An array’s subsequence is a resulting sequence obtained by erasing some (possibly zero) elements from the array.</p>
+<p>We define that a subsequence a is more competitive than a subsequence b (of the same length) if in the first position where a and b differ, subsequence a has a number less than the corresponding number in b. For example, [1,3,4] is more competitive than [1,3,5] because the first position they differ is at the final number, and 4 is less than 5.</p>
+<p><strong>Example 1:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: nums = [3,5,2,6], k = 2<br>Output: [2,6]<br>Explanation: Among the set of every possible subsequence: {[3,5], [3,2], [3,6], [5,2], [5,6], [2,6]}, [2,6] is the most competitive.</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: nums = [2,4,3,3,5,4,9,6], k = 4<br>Output: [2,3,3,4]</p>
+</blockquote>
+</blockquote>
+<p><strong>Constraints:</strong><br>1 &lt;= <code>nums.length</code> &lt;= $10^5$<br>0 &lt;= <code>nums[i]</code> &lt;= $10^9$<br>1 &lt;= <code>k</code> &lt;= <code>nums.length</code></p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>第一个数是从第0个到第<code>size - k</code>个中最小的那个.<br>第二个数是从上一个数的index开始到<code>size - k - 1</code>中最小的那个<br>如果已经不能再搜索,就只能按序填上所有元素</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="golang"><a href="#golang" class="headerlink" title="golang"></a>golang</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mostCompetitive</span><span class="params">(nums []<span class="keyword">int</span>, k <span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">    res := <span class="built_in">make</span>([]<span class="keyword">int</span>, k)</span><br><span class="line">    idx, size := <span class="number">0</span>, <span class="built_in">len</span>(nums)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; size; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> idx &gt; <span class="number">0</span> &amp;&amp; nums[i] &lt; res[idx - <span class="number">1</span>] &amp;&amp; size - i - <span class="number">1</span> &gt;= k - idx &#123;</span><br><span class="line">            idx--</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> idx &lt; k &#123;</span><br><span class="line">            res[idx] = nums[i]</span><br><span class="line">            idx++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">mostCompetitive</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(k)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">0</span>, n = nums.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">             <span class="keyword">while</span>(c &gt; <span class="number">0</span> &amp;&amp; res[c - <span class="number">1</span>] &gt; nums[i] &amp;&amp; n - i <span class="number">-1</span> &gt;= k - c) c--;</span><br><span class="line">             <span class="keyword">if</span>(c &lt; k) res[c++] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/20/LeetCode%2020.%20Valid%20Parentheses/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/20/LeetCode%2020.%20Valid%20Parentheses/" class="post-title-link" itemprop="url">LeetCode 20. Valid Parentheses</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-20 17:00:00 / Modified: 21:54:17" itemprop="dateCreated datePublished" datetime="2021-01-20T17:00:00+09:00">2021-01-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-parentheses/">原题在此</a></p>
+<p>Given a string s containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.<br>An input string is valid if:</p>
+<ul>
+<li>Open brackets must be closed by the same type of brackets.</li>
+<li>Open brackets must be closed in the correct order.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “()”<br>Output: true</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “()[]{}”<br>Output: true</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 3:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “(]”<br>Output: false</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 4:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “([)]”<br>Output: false</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 5:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “{[]}”<br>Output: true</p>
+</blockquote>
+</blockquote>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>1 &lt;= s.length &lt;= 104</li>
+<li>s consists of parentheses only ‘()[]{}’.</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>学过Stack这种后进先出储存结构的就知道怎么做.左括号就入栈, 右括号就看栈顶元素是否匹配. 最后看栈是否为空.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;<span class="keyword">char</span>&gt; <span class="built_in">stack</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c : s)&#123;</span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27;(&#x27;</span> || c == <span class="string">&#x27;[&#x27;</span> || c == <span class="string">&#x27;&#123;&#x27;</span>) <span class="built_in">stack</span>.push(c);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="built_in">stack</span>.empty() &amp;&amp; <span class="built_in">stack</span>.top() == <span class="string">&#x27;(&#x27;</span>) <span class="built_in">stack</span>.pop();</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27;]&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="built_in">stack</span>.empty() &amp;&amp; <span class="built_in">stack</span>.top() == <span class="string">&#x27;[&#x27;</span>) <span class="built_in">stack</span>.pop();</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27;&#125;&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="built_in">stack</span>.empty() &amp;&amp; <span class="built_in">stack</span>.top() == <span class="string">&#x27;&#123;&#x27;</span>) <span class="built_in">stack</span>.pop();</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">stack</span>.empty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/19/LeetCode%205.%20Longest%20Palindromic%20Substring/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -782,332 +1185,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/13/DDIA%20Ch-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/13/DDIA%20Ch-02/" class="post-title-link" itemprop="url">DDIA Chapter 02 数据模型与查询语言</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-13 19:00:00" itemprop="dateCreated datePublished" datetime="2021-01-13T19:00:00+09:00">2021-01-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-18 21:11:28" itemprop="dateModified" datetime="2021-01-18T21:11:28+09:00">2021-01-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="引"><a href="#引" class="headerlink" title="引"></a>引</h2><p>本章关键字:</p>
-<ul>
-<li><strong>关系数据库</strong>，<strong>文档数据库</strong>，<strong>图形数据库</strong>等<strong>数据模型</strong>，讨论各类数据模型描述一对多、多对多关系的能力以及如何通过抽象来隐藏复杂度。</li>
-<li><strong>查询语言</strong>， 讨论如何基于数据模型做各种操作(例:添加新列，添加索引，结合查询，模拟其他数据模型等)以及执行操作的效率与难易度。</li>
-</ul>
-<h2 id="SQL与RDBMS"><a href="#SQL与RDBMS" class="headerlink" title="SQL与RDBMS"></a>SQL与RDBMS</h2><p>在<strong>关系模型</strong>中，数据被组织成<strong>关系</strong>（SQL中称作<strong>表</strong>），其中每个关系是<strong>元组</strong>（SQL中称作<strong>行</strong>)的无序集合。</p>
-<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p><strong>NoSQL</strong>意味<strong>不仅是SQL（Not Only SQL）</strong>。它并非任何特定的技术，而泛指非关系型的数据模型。包括但不限：</p>
-<ul>
-<li><strong>列族数据库</strong>，按列存储数据。最大的特点是方便存储结构化和半结构化数据，方便做数据压缩等批量数据处理，对针对某一列或者某几列的查询有非常大的IO优势。如HBase， BigTable等。</li>
-<li><strong>文档数据库</strong>，将诸如JSON，XML等半结构化数据存储为文档。与传统关系数据库不同的是，每个 NoSQL 文档的架构是不同的（不限定数据模式），更加灵活地整理和存储应用程序数据并减少可选值所需的存储。如MongoDB，CouchDB等。</li>
-<li><strong>键值数据库</strong>，可以简单看作哈希表，数据仅可能通过主键访问，不能对Value进行索引和查询。适用于缓存等存在大量写入操作的场景。如Redis，Memcached等。</li>
-<li><strong>图数据库</strong>，描述节点和关系的抽象。主要应用于社交关系，知识图谱等关联分析的应用场景。如Neo4J等。</li>
-</ul>
-<p>采用NoSQL数据库的背后有几个驱动因素，其中包括：</p>
-<ul>
-<li>需要比关系数据库更好的可伸缩性，包括非常大的数据集或非常高的写入吞吐量。</li>
-<li>相比商业数据库产品，免费和开源软件更受偏爱。</li>
-<li>关系模型不能很好地支持一些特殊的查询操作。</li>
-<li>受挫于关系模型的限制性，渴望一种更具多动态性与表现力的数据模型。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/13/LeetCode%20881.%20Boats%20to%20Save%20People/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/13/LeetCode%20881.%20Boats%20to%20Save%20People/" class="post-title-link" itemprop="url">LeetCode 881. Boats to Save People</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-13 17:00:00 / Modified: 18:31:24" itemprop="dateCreated datePublished" datetime="2021-01-13T17:00:00+09:00">2021-01-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/boats-to-save-people/">原题在此</a></p>
-<p>The i-th person has weight <code>people[i]</code>, and each boat can carry a maximum weight of <code>limit</code>.<br>Each boat carries at most 2 people at the same time, provided the sum of the weight of those people is at most limit.<br>Return the minimum number of boats to carry every given person.  (It is guaranteed each person can be carried by a boat.)</p>
-<p><strong>Example 1:</strong><br>Input: <code>people = [1,2], limit = 3</code><br>Output: 1<br>Explanation: 1 boat (1, 2)</p>
-<p><strong>Example 2:</strong><br>Input: <code>people = [3,2,2,1], limit = 3</code><br>Output: 3<br>Explanation: 3 boats (1, 2), (2) and (3)</p>
-<p><strong>Example 3:</strong><br>Input: <strong>people = [3,5,3,4], limit = 5</strong><br>Output: 4<br>Explanation: 4 boats (3), (3), (4), (5)</p>
-<p><strong>Note:</strong></p>
-<ul>
-<li>1 &lt;= <code>people.length</code> &lt;= 50000</li>
-<li>1 &lt;= <code>people[i]</code> &lt;= <code>limit</code> &lt;= 30000</li>
-</ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>将<code>people</code>排序, 然后判断情况上船:</p>
-<ol>
-<li>当前最轻的和最重的不能坐一起 $\Rightarrow$ 最重的不能和任何人共坐一条船 $\Rightarrow$ 最重的人单独上船 $\Rightarrow$ <code>tailPointer--</code>;</li>
-<li>当前最轻的和最重的能坐一起 $\Rightarrow$ 都上船 $\Rightarrow$ <code>tailPointer--; headPointer++</code></li>
-</ol>
-<p>重复上述过程直至 headPointer $\geq$ tailPointer</p>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>与方法一类似, 创建一个<code>limit + 1</code>长的数组当作map, 省去排序步骤.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="方法一-c"><a href="#方法一-c" class="headerlink" title="方法一(c++)"></a>方法一(c++)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numRescueBoats</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; people, <span class="keyword">int</span> lim)</span> </span>&#123;</span><br><span class="line">        sort(people.begin(), people.end());</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = people.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt;= r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (people[l] + people[r] &lt;= lim) l++;</span><br><span class="line">            r--;</span><br><span class="line">            res++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="方法二-c"><a href="#方法二-c" class="headerlink" title="方法二(c++)"></a>方法二(c++)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numRescueBoats</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; people, <span class="keyword">int</span> limit)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">buckets</span><span class="params">(limit+<span class="number">1</span>, <span class="number">0</span>)</span></span>; <span class="keyword">int</span> n=people.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) buckets[people[i]]++;</span><br><span class="line">        <span class="keyword">int</span> l=<span class="number">0</span>, r=limit, ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l&lt;=r) &#123;</span><br><span class="line">            <span class="keyword">while</span>(l&lt;=r &amp;&amp; buckets[l]&lt;=<span class="number">0</span>) l++;</span><br><span class="line">            <span class="keyword">while</span>(l&lt;=r &amp;&amp; buckets[r]&lt;=<span class="number">0</span>) r--;</span><br><span class="line">            <span class="keyword">if</span> (buckets[l]&lt;=<span class="number">0</span> &amp;&amp; buckets[r]&lt;=<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">            ans++;</span><br><span class="line">            <span class="keyword">if</span> (l+r&lt;=limit) buckets[l]--;</span><br><span class="line">            buckets[r]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/13/B%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/13/B%E6%A0%91/" class="post-title-link" itemprop="url">Untitled</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-13 16:00:42 / Modified: 16:00:59" itemprop="dateCreated datePublished" datetime="2021-01-13T16:00:42+09:00">2021-01-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/12/LeetCode%202.%20Add%20Two%20Numbers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/12/LeetCode%202.%20Add%20Two%20Numbers/" class="post-title-link" itemprop="url">LeetCode 2. Add Two Numbers</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-12 17:00:00 / Modified: 22:52:09" itemprop="dateCreated datePublished" datetime="2021-01-12T17:00:00+09:00">2021-01-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/add-two-numbers/">原题在此</a><br>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.<br>You may assume the two numbers do not contain any leading zero, except the number 0 itself.<br><img src="https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg" alt=""></p>
-<p><strong>Example 1:</strong><br>Input: <code>l1 = [2,4,3], l2 = [5,6,4]</code><br>Output: <code>[7,0,8]</code><br>Explanation: 342 + 465 = 807.</p>
-<p><strong>Example 2:</strong><br>Input: <code>l1 = [0], l2 = [0]</code><br>Output: <code>[0]</code></p>
-<p><strong>Example 3:</strong><br>Input: <code>l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]</code><br>Output: <code>[8,9,9,9,0,0,0,1]</code></p>
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>The number of nodes in each linked list is in the range <code>[1, 100]</code>.</li>
-<li>0 $\leq$  Node.val  $\leq$ 9</li>
-<li>It is guaranteed that the list represents a number that does not have leading zeros.</li>
-</ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>没啥好讲的, 按照题意做就好. 就相加, 进位.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">        ListNode* holder = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode* onWork = holder;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(l1 || l2 || val)&#123;</span><br><span class="line">            val += (l1 ? l1-&gt;val : <span class="number">0</span>);</span><br><span class="line">            val += (l2 ? l2-&gt;val : <span class="number">0</span>);</span><br><span class="line">            l1 = (l1 ? l1-&gt;next : l1);</span><br><span class="line">            l2 = (l2 ? l2-&gt;next : l2);</span><br><span class="line">            ListNode* node = <span class="keyword">new</span> ListNode(val%<span class="number">10</span>);</span><br><span class="line">            val = val / <span class="number">10</span>;</span><br><span class="line">            onWork-&gt;next = node;</span><br><span class="line">            onWork = onWork-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> holder-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1151,7 +1233,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1164,7 +1246,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

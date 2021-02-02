@@ -186,6 +186,487 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/" class="post-title-link" itemprop="url">理科乐理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-11-17 09:27:13 / Modified: 18:33:53" itemprop="dateCreated datePublished" datetime="2020-11-17T09:27:13+09:00">2020-11-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E6%83%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">随想</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ul>
+<li><strong>音</strong>: 音是一种机械波,由声源产生震动,经介质传播.单位时间内震动重复发生的次数称为<strong>频率</strong>,采用国际单位制<strong>hz (1hz=1/s)</strong></li>
+<li><strong>音色</strong>: 某周期函数(<strong>基波</strong>)频率的整数倍的波称为<strong>谐波</strong>.不同声源所产生的基波与谐波的叠加在频率和振幅上都不尽相同,这便是音色.</li>
+<li><strong>音量</strong>:<ul>
+<li><strong>分贝(dB)</strong>: 分贝的定义为,测量值与参考量值之比计算基于10的对数乘以10. $L_{dB}=10\log_{10}{(\frac{P}{P_0})}$. <strong>dB</strong>是一个无量纲,或者说它只是一种处理数据的方式.</li>
+<li><strong>声压级(Sound Pressure Level)</strong>:</li>
+</ul>
+</li>
+<li><strong>音程</strong>: 两个音之间的频率差</li>
+<li><strong>音数</strong>: 在<strong>十二平均律</strong>中, 称任两个相邻的音之间的音数为0.5</li>
+</ul>
+<h1 id="十二平均律"><a href="#十二平均律" class="headerlink" title="十二平均律"></a>十二平均律</h1><p>频率是连续的,音的个数是不可数的.<strong>十二平均律</strong>是一种产生离散的音的算法.<br>以某频率为$F$的单音$f_0$为基准,利用公式 <script type="math/tex">f_n=f*2^{(\frac{n}{12})}</script> ,可以构造出一个等比数列.其中,$f_0$与频率为$2F$的单音$f_{12}$构成一个称为<strong>纯八度</strong>的音程.<br>在一个纯八度(既频率$[F,2F]$的区间)中,可构造出13个音,十二平均律系统规定任两个相邻的音之间的音数为0.5</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>$f_0$</th>
+<th>$f_1$</th>
+<th>$f_2$</th>
+<th>$f_3$</th>
+<th>$f_4$</th>
+<th>$f_5$</th>
+<th>$f_6$</th>
+<th>$f_7$</th>
+<th>$f_8$</th>
+<th>$f_9$</th>
+<th>$f_{10}$</th>
+<th>$f_{11}$</th>
+<th>$f_{12}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>音数差</td>
+<td>0</td>
+<td>0.5</td>
+<td>1</td>
+<td>1.5</td>
+<td>2</td>
+<td>2.5</td>
+<td>3</td>
+<td>3.5</td>
+<td>4</td>
+<td>4.5</td>
+<td>5</td>
+<td>5.5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>音程名</td>
+<td>纯一度</td>
+<td>小二度</td>
+<td>大二度</td>
+<td>小三度</td>
+<td>大三度</td>
+<td>纯四度</td>
+<td>三全音</td>
+<td>纯五度</td>
+<td>小六度</td>
+<td>大六度</td>
+<td>小七度</td>
+<td>大七度</td>
+<td>纯八度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/A440_%28pitch_standard%29">ISO 16</a>中规定音名为$A_4$的音其频率为<strong>440hz</strong>.音名是啥不重要,你只要知道等比数列里有一项是440就好.</p>
+<img src="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/Lindos1.svg" class="">
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/19/Go%E6%9E%81%E7%AE%80%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/19/Go%E6%9E%81%E7%AE%80%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Untitled</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-10-19 02:21:46" itemprop="dateCreated datePublished" datetime="2020-10-19T02:21:46+09:00">2020-10-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/18.06-Linear%20Algebra-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/02/18.06-Linear%20Algebra-02/" class="post-title-link" itemprop="url">18.06-Linear Algebra-02</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-02T00:00:00+09:00">2020-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-30 22:55:11" itemprop="dateModified" datetime="2020-11-30T22:55:11+09:00">2020-11-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">自学笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="矩阵消元"><a href="#矩阵消元" class="headerlink" title="矩阵消元"></a>矩阵消元</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这节主要讲如何通过消元来系统的求解方程组.并通过消元引入了些许逆矩阵的基础知识.</p>
+<h2 id="消元法解方程"><a href="#消元法解方程" class="headerlink" title="消元法解方程"></a>消元法解方程</h2><p>和初中学过的东西一样,你可以把任意一行乘以某个数加到另一行,调换一整行等式的顺序并不改变你的方程.在矩阵中你仍然可以这样做.$A\vec{x}=\vec{b}$如下:</p>
+<script type="math/tex; mode=display">
+\left[\begin{matrix}
+    1&2&1\\
+    3&8&1\\
+    0&4&1
+\end{matrix}\right]
+\left[\begin{matrix}
+    x_1\\
+    x_2\\
+    x_3
+\end{matrix}\right]
+=\left[\begin{matrix}
+    2\\
+    12\\
+    2
+    \end{matrix}\right]</script><p>将A与b写在一个矩阵里,称作<strong>增广矩阵(Augment Matrix)</strong></p>
+<script type="math/tex; mode=display">
+\left[\begin{matrix}
+    1&2&1|&2\\
+    3&8&1|&12\\
+    0&4&1|&2
+\end{matrix}\right]</script><p>用第二行减去三倍的第一行可得</p>
+<script type="math/tex; mode=display">
+\left[\begin{matrix}
+    1&2&1 &2\\
+    0&2&-2&6\\
+    0&4&1 &2
+\end{matrix}\right]</script><p>用第三行减去两倍的第二行可得</p>
+<script type="math/tex; mode=display">
+\left[\begin{matrix}
+    1&2&1 &2\\
+    0&2&-2&6\\
+    0&0&5 &-10
+\end{matrix}\right]</script><p>从最后一行<script type="math/tex">5x_3=-10</script>回代,便可求出<script type="math/tex">x_2,x_1</script>的值</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/18.06-Linear%20Algebra-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/01/18.06-Linear%20Algebra-01/" class="post-title-link" itemprop="url">18.06-Linear Algebra-01</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-01T00:00:00+09:00">2020-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-30 22:27:01" itemprop="dateModified" datetime="2020-11-30T22:27:01+09:00">2020-11-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">自学笔记</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script src="https://www.desmos.com/api/v1.5/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+
+<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>此系列为 <strong>18.06-Linear Algebra 2005</strong> 的学习总结<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=J7DzL2_Na80&amp;list=PLE7DDD91010BC51F8&amp;index=2">原视频地址</a> <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zx411g7gq?from=search&amp;seid=10236813594321181504">B站翻译版</a></p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>线性</strong>+<strong>代数</strong>,线性代数这门课成最直观的理解就是解线性方程.本节的核心就是从Row Picture和Column Picture 两个角度解方程.</p>
+<h1 id="线性方程组的集合解释"><a href="#线性方程组的集合解释" class="headerlink" title="线性方程组的集合解释"></a>线性方程组的集合解释</h1><p>例如现在有如下方程组,两个未知数,两个方程式. 下面将从行与列两个视角给出方程式的集合解释</p>
+<script type="math/tex; mode=display">
+\bigg\{
+\begin{aligned}
+    2x-y=0 \\
+    -x+2y=3
+\end{aligned}</script><h2 id="行图像"><a href="#行图像" class="headerlink" title="行图像"></a>行图像</h2><p>首先按行将方程式写成用矩阵形式:$<br>    \left[<br>        \begin{matrix}<br>            2&amp;-1\\<br>            -1&amp;2<br>        \end{matrix}<br>    \right]<br>    \left[<br>        \begin{matrix}<br>            x\\<br>            y<br>        \end{matrix}<br>    \right]<br>    =<br>    \left[<br>        \begin{matrix}<br>            0\\<br>            3<br>        \end{matrix}<br>    \right]<br>$<br>等式左侧,左侧矩阵对应未知数的系数称为<strong>系数矩阵</strong>, <em>x</em>, <em>y</em> 对应未知数称为<strong>未知向量</strong>,等式右侧为线性变换的结果.亦可简写作$A\vec{x}=\vec{b}$的形式.其中:</p>
+<p><strong>系数矩阵(A)</strong>:将方程组系数按行提取出来,构造完成的一个矩阵.<br><strong>未知向量($\vec{x}$)</strong>:将方程组的未知数提取出来,按列构成一个向量.<br><strong>向量($\vec{b}$)</strong>:    将等号右侧结果按列提取,构成一个向量.</p>
+<p>和中学时代学过的东西一样,两个直线方程,观察它们交点的情况.在此个例中,两条直线交于一点,意味着此方程式有唯一解.</p>
+<p><div id="rowPicture" style="width: 900px; height: 556px;"></div></p>
+<p><figcaption>Fig.1 - Row Picture.</figcaption></p>
+<script>
+  let elt = document.getElementById('rowPicture');
+  let rowPicture = Desmos.GraphingCalculator(elt);
+  rowPicture.setExpression({ id: 'graph1', latex: '2x-y=0' });
+  rowPicture.setExpression({ id: 'graph2', latex: '-x+2y=3' });
+  rowPicture.setExpression({ id: 'intersection', latex: '(1,2)', label: 'intersection'});
+</script>
+
+
+<h2 id="列图像"><a href="#列图像" class="headerlink" title="列图像"></a>列图像</h2><p>还是这个方程$<br>\bigg\{<br>\begin{aligned}<br>    2x-y=0 \\<br>    -x+2y=3<br>\end{aligned}<br>$<br>竖着观察矩阵,有如下等式.意味求使两向量的线性组合等于等式右侧向量的 <em>x</em> 和 <em>y</em> (在下图中记做了a和b).</p>
+<script type="math/tex; mode=display">
+    x\left[
+        \begin{matrix}
+            2\\
+            -1
+        \end{matrix}
+    \right]
+    +y\left[
+        \begin{matrix}
+            -1\\
+            2
+        \end{matrix}
+    \right]
+    =
+    \left[
+        \begin{matrix}
+            0\\
+            3
+        \end{matrix}
+    \right]</script><p><div id="colPicture" style="width: 900px; height: 556px;"></div></p>
+<p><figcaption>Fig.2 - Column Picture.</figcaption></p>
+<script>
+  let element = document.getElementById('colPicture');
+  let colPicture = Desmos.GraphingCalculator(element);
+  colPicture.setExpression({ id: 'a', latex: 'a=1' });
+  colPicture.setExpression({ id: 'b', latex: 'b=1' });
+  colPicture.setExpression({ id: 'p1', latex: '(x_1,y_1)',hidden:true});
+  colPicture.setExpression({ id: 'x1', latex: 'x_1=2'});
+  colPicture.setExpression({ id: 'y1', latex: 'y_1=-1'});
+  colPicture.setExpression({ id: 'l1', latex: '(tx_1,ty_1)'});
+  colPicture.setExpression({ id: 'v1', latex: '(a(tx_1),a(ty_1))', label: 'vector1'});
+  colPicture.setExpression({ id: 'p2', latex: '(x_2,y_2)',hidden:true});
+  colPicture.setExpression({ id: 'x2', latex: 'x_2=-1'});
+  colPicture.setExpression({ id: 'y2', latex: 'y_2=2'});
+  colPicture.setExpression({ id: 'l2', latex: '(tx_2,ty_2)'});
+  colPicture.setExpression({ id: 'v2', latex: '(b(tx_2),b(ty_2))', label: 'vector2'});
+  colPicture.setExpression({ id: 'v1PlusV2', latex: '(t(a(tx_1)+b(tx_2)),t(a(ty_1)+b(ty_2)))'});
+    colPicture.setExpression({ id: 't0t3', latex: '(t0,t3)', color:Desmos.Colors.RED});
+</script>
+
+<p>滑动a,b不难发现,此例中的两向量可以构成任意方向的向量,布满整个二维空间.</p>
+<h1 id="集合解释的高维推广"><a href="#集合解释的高维推广" class="headerlink" title="集合解释的高维推广"></a>集合解释的高维推广</h1><p>以三维为例,有如下方程组</p>
+<script type="math/tex; mode=display">
+\begin{align}
+    2x-\mathbin{\hphantom{0}y}\hphantom{-0z}&=\hphantom{-}0 \\
+    -\hphantom{0}x+2y-\hphantom{0}z&=-1\\
+    \hphantom{-0x}-3y+4z&=\hphantom{-}4
+\end{align}</script><p>矩阵如下</p>
+<script type="math/tex; mode=display">
+A=\left[\begin{matrix}
+    2&-1&0\\
+    -1&2&-1\\
+    0&-3&4
+\end{matrix}\right],
+b=\left[\begin{matrix}
+    0\\
+    -1\\
+    4
+    \end{matrix}\right]</script><h2 id="行图像-1"><a href="#行图像-1" class="headerlink" title="行图像"></a>行图像</h2><p>如果绘制行图像,很明显这是一个三个平面相交得到一点,想直接看出这个点的性质并不容易.<br>可行的思路是先联立其中两个平面,使其相交于一条直线,再研究这条直线与平面相交于哪个点,最后得到点坐标即为方程的解.<br>这个求解过程对于三维来说或许还算合理,那四维呢?五维甚至更高维数呢?直观上很难直接绘制更高维数的图像,这种行图像受到的限制也越来越多.</p>
+<script type="math/tex; mode=display">
+\left[\begin{matrix}
+    2&-1&0\\
+    -1&2&-1\\
+    0&-3&4
+\end{matrix}\right]\left[\begin{matrix}
+    x\\
+    y\\
+    z
+    \end{matrix}\right]=
+\left[\begin{matrix}
+    0\\
+    -1\\
+    4
+    \end{matrix}\right]</script><h2 id="列图像-1"><a href="#列图像-1" class="headerlink" title="列图像"></a>列图像</h2><p>使用列图像的思路进行计算,那矩阵形式就变为：<br>左侧是线性组合,右侧是合适的线性组合组成的结果,这样一来思路就清晰多了,”寻找线性组合”成为了解题关键.<br>不难看出,只需要取 x = 0, y = 0, z = 1 就可使线性组合成立,这在行图像之中并不明显.<br>当然,之所以推荐使用<strong>列图像</strong>求解方程, 是因为这是一种更系统的求解方法,即寻找线性组合,而不用绘制每个行方程的图像之后寻找那个很难看出来的点.</p>
+<h2 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h2><p>有矩阵<script type="math/tex">A_{m*n}</script> 和 <script type="math/tex">B_{n*l}</script>, 则矩阵乘法<script type="math/tex">AB</script>的结果为一个<script type="math/tex">C_{m*l}</script>的矩阵.<br>矩阵C中的每一个元素可以视作矩阵A的某一行和B的某一列的点积(dot product),<script type="math/tex">C_{ij}=\text{ith row of A} · \text{jth column of B}</script>.<br>还有一种视角,可以将C中的每一列视作矩阵B中每个列向量和A的线性组合的结果.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA01-DNA,NFA&%E6%AD%A3%E5%88%99%E8%AF%AD%E8%A8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -753,216 +1234,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/01/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%A4%A7%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/01/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%A4%A7%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">前端三大框架对比</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-01 16:29:33" itemprop="dateCreated datePublished" datetime="2020-01-01T16:29:33+09:00">2020-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-02 18:57:52" itemprop="dateModified" datetime="2020-01-02T18:57:52+09:00">2020-01-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">自学笔记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前端小白刚刚涉足前端开发，面对琳琅满目的框架，不知该如何挑选，不可免俗的落入了货比三家的尴尬场面。在看过<a href="https://www.youtube.com/watch?v=ANtSWq-zI0s&amp;t=895s" target="_blank" rel="noopener">尤雨溪在JSconf的演讲</a>后，对 _React_,  _Vue_,  _Angular_ 三大框架有了一些基础认识。<br>视频中，尤通过<strong>Scope</strong>和<strong>Render Mechanism</strong>两个角度对比了三大框架。</p>
-<h2 id="Scope-范围"><a href="#Scope-范围" class="headerlink" title="Scope (范围)"></a>Scope (范围)</h2><p>范围意为框架试图为用户解决多少问题。小的框架专注于原始的概念，依靠活跃的生态系统，像集市一样自下而上的发展。大的框架试图提供常见问题的全套解决方案，也因此会像教堂一样自上而下的发展。</p>
-<h3 id="Small-Scope"><a href="#Small-Scope" class="headerlink" title="Small Scope"></a>Small Scope</h3><p>_React_ 在官网中自称是JS的UI库，可见其范围之小<br><strong>Pros</strong></p>
-<ul>
-<li>更少概念 -&gt; 更快开始</li>
-<li>更多用户自由度 -&gt; 活跃的生态系统</li>
-<li>更少维护范围 -&gt; 更多力气用来创新</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>解决复杂问题时需要更多的抽象(基建)工作</li>
-<li>重复的抽象工作渐渐产生模式，模式渐渐变成了成熟的第三方解决方案，第三方解决方案变成了某种程度上的必备知识却不一定有完备的文档可供学习。</li>
-<li>生态系统的碎片化</li>
-</ul>
-<h3 id="Large-Scope"><a href="#Large-Scope" class="headerlink" title="Large Scope"></a>Large Scope</h3><p>_Angular_ 特性丰富，功能繁多，是大型框架的代表<br><strong>Pros</strong></p>
-<ul>
-<li>大多常见问题可在框架内找到解决方案，不用为选择何种第三方方案而烦恼 </li>
-<li>稳定一致的生态系统</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>需要更多的前置技能</li>
-<li>在内置解决方案不适配你的问题时体现出的不灵活</li>
-<li>由于框架开发团队要负责框架的全部维护工作，在保证整体协作性的引入新的特性会变得代价昂贵</li>
-</ul>
-<h3 id="渐进式Scope"><a href="#渐进式Scope" class="headerlink" title="渐进式Scope"></a>渐进式Scope</h3><p>视频中，尤称 _Vue_ 落在了 _React_ 和 _Angular_ 的中间， 同时享有<strong>Small Scope</strong>和<strong>Big Scope</strong>的优缺点<br><strong>Pros</strong></p>
-<ul>
-<li>引用一个 “Vue.js” 就可以开始编码，上手简单</li>
-<li>必要时可以引入官方提供的部件(e.g. Router, Vuex)，它们有完备的文档。当然你也可以实现自己的需求</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>框架开发团队需要维护更多的东西。对比有钱有人的Google和Facebook，更暴露出更新缓慢的问题</li>
-</ul>
-<h2 id="Render-Mechanism-渲染机制"><a href="#Render-Mechanism-渲染机制" class="headerlink" title="Render Mechanism (渲染机制)"></a>Render Mechanism (渲染机制)</h2><p>渲染机制意为框架下的UI构造的表达方式以及框架如何渲染这些东西。在这一节，尤以 _React_ 和 _Angular_ 为例做出了对比。</p>
-<h3 id="JSX-Virtual-Dom"><a href="#JSX-Virtual-Dom" class="headerlink" title="JSX / Virtual Dom"></a>JSX / Virtual Dom</h3><p><strong>Pros</strong></p>
-<ul>
-<li>JSX 拥有高度的表达能力与自由</li>
-<li>Virtual Dom 将试图抽象为数据，可以渲染在DOM之外的地方(e.g. _React Native_)</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>更多自由度意味着更多的不确定性，会给调优带来困难</li>
-<li>scheduling在感官上提高了性能其实有更多开销</li>
-</ul>
-<h3 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h3><p><strong>Pros</strong></p>
-<ul>
-<li>更直接的渲染方式也意味着更好的性能表现</li>
-<li>更固定的表达方式意味着更多优化的可能</li>
-<li>适当优化可带来更轻量的初次加载</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>受模板语法所限</li>
-<li>运行时或构建阶段的编译开销</li>
-<li>优化带来更冗余的template</li>
-</ul>
-<h3 id="VDom-Tepmlate"><a href="#VDom-Tepmlate" class="headerlink" title="VDom + Tepmlate"></a>VDom + Tepmlate</h3><p>Vue 同时支持VDOM和template，也同时享有两方的优点。至于缺点，尤提到了两点。</p>
-<ol>
-<li>不会比原生JS快和template</li>
-<li>render()和template该用哪个的选择问题</li>
-</ol>
-<p>感觉都没说到点子上，所以又去查了查，参考如下<br><a href="https://www.zhihu.com/question/315734889" target="_blank" rel="noopener">vue.js有哪些设计缺陷？</a></p>
-<h2 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h2><p>作为一个初学者，40分钟的视频边查各种词汇边看花了一个下午，对各个框架的底层设计并没有很好的理解。还是不要纠结孰优孰劣得好，不如抓起一个就学，充分了解各个框架的设计思路与底层实现，得出自己的结论。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/26/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-26 22:12:12" itemprop="dateCreated datePublished" datetime="2019-11-26T22:12:12+09:00">2019-11-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1006,7 +1282,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1019,7 +1295,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
