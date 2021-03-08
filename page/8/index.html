@@ -186,6 +186,598 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/LeetCode%2084.%20Largest%20Rectangle%20in%20Histogram/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/31/LeetCode%2084.%20Largest%20Rectangle%20in%20Histogram/" class="post-title-link" itemprop="url">LeetCode 84. Largest Rectangle in Histogram</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-31 17:00:00" itemprop="dateCreated datePublished" datetime="2020-12-31T17:00:00+09:00">2020-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-04 21:02:19" itemprop="dateModified" datetime="2021-01-04T21:02:19+09:00">2021-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/largest-rectangle-in-histogram/">题目链接</a><br>Given n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.<br><img src="https://assets.leetcode.com/uploads/2018/10/12/histogram.png" alt=""><br>Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].<br><img src="https://assets.leetcode.com/uploads/2018/10/12/histogram_area.png" alt=""><br>The largest rectangle is shown in the shaded area, which has area = 10 unit.<br><strong>Example:</strong></p>
+<blockquote>
+<p>Input: [2,1,5,6,2,3]<br>Output: 10</p>
+</blockquote>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><h2 id="暴力搜索"><a href="#暴力搜索" class="headerlink" title="暴力搜索"></a>暴力搜索</h2><p>依次取区间<code>arr(i..j)</code>,用<code>min(arr(i..j)) * j - i</code>可以遍历所有可能的长方形,从中选取最大的即可.此时时间复杂度为$O(N^2)$.<br>观察暴力解法发现:</p>
+<ol>
+<li>最大面积的长方形长度必然和数组中的某个元素的值相等.即在数组中只有<code>arr.length</code>个候选最大长方形.此时我们要设法确定每个元素高度的长方形的宽度.</li>
+<li>暴力搜索的过程没有做任何记录,每次搜索对下一次没有任何帮助,可以设法记录有效信息简化搜索过程.即空间换时间.</li>
+<li>输入数组元素均为非负整数,在数组两侧各添加一个0不改变最终结果<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sentinel_value">(哨兵,Sentinel)</a>.如此可省略处理edge case的部分,简化代码.</li>
+</ol>
+<h2 id="算法改进"><a href="#算法改进" class="headerlink" title="算法改进"></a>算法改进</h2><p>在当前元素严格小于上一个元素时,便决定了此前某些元素的宽度无法再拓展了.此时以当前下标为右界,上一个元素的下标为左界,便可确定以此元素为高的矩形的宽度.<br>我们可以用栈存下标.就拿例题来说,左侧<strong>哨兵</strong>下标<code>i=-1</code>,循环前先入栈.</p>
+<ol>
+<li><code>i = 0,a[i] = 2</code> 还有继续向右拓宽的可能,下标入栈.</li>
+<li><code>i = 1,a[i] = 1</code> 此时:<ol>
+<li>栈尾元素<code>a[s.back()]</code>,即下标为0的元素2大于当前元素.高度为2的长方形无法再拓宽,退栈处理.宽度为当前下标1减去退栈后的栈尾元素下标此时为哨兵-1再减去1,即<code>width = i - s.back() - 1; area = width * height;</code>.</li>
+<li>再次检查栈尾,发现哨兵高度为0还有拓宽可能,不做处理(这样可能更好理解一些,实际情况是栈内只剩下哨兵,不做处理.再第四步还有一次演示).</li>
+<li>当前下标元素也有拓宽可能,下标入栈.</li>
+</ol>
+</li>
+<li><code>i = 2,a[i] = 5;i = 3,a[i] = 6</code> 还有继续向右拓宽的可能,入栈.</li>
+<li><code>i = 4,a[i] = 2</code> 与第二步做相似处理,先后确定了以6和以5为高度的长方形的面积.在6,5分别退栈后访问到<code>a[1]</code>,发现当前下标元素不小于<code>a[1]</code>.即栈内所有元素均还有拓宽可能,故不作处理.当前下标也入栈.</li>
+<li><code>i = 5,a[i] = 3</code> 还有继续向右拓宽的可能,入栈. <strong>再次强调哨兵</strong></li>
+<li><code>i = 6,a[i] = 0</code> 元素访问完毕,下标来到哨兵,此时栈内除了另一个哨兵外元素全部大于哨兵.对栈内元素依次退栈计算面积,直到栈内只剩下哨兵为止.</li>
+</ol>
+<ul>
+<li>绿色:宽度还有可能变长,入栈. 红色:宽度无法拓展,出栈计算面积. 虚线:以此元素为高度的长方形面积已确定. (要想象首尾各有一个0)  <img src="/2020/12/31/LeetCode%2084.%20Largest%20Rectangle%20in%20Histogram/step.gif" class="">
+</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">stack</span>;</span><br><span class="line">        heights.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">stack</span>.push_back(<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; heights.size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">stack</span>.size() &gt; <span class="number">1</span> &amp;&amp; heights[<span class="built_in">stack</span>.back()] &gt;= heights[i]) &#123;</span><br><span class="line">                <span class="keyword">int</span> h = heights[<span class="built_in">stack</span>.back()];</span><br><span class="line">                <span class="built_in">stack</span>.pop_back();</span><br><span class="line">                res = max(res, h * (i - <span class="built_in">stack</span>.back() - <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">stack</span>.push_back(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><ol>
+<li>在有连续个值相同的元素时,中间会有多次错误计算,但并不影响连续元素中最后一次退栈的计算成为最大值.</li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/12524826/why-should-i-use-deque-over-stack">JAVA-为什么用Deque去实现Stack?</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/30/LeetCode%20289.%20Game%20of%20Life/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/30/LeetCode%20289.%20Game%20of%20Life/" class="post-title-link" itemprop="url">LeetCode 289. Game of Life</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-30 17:00:00" itemprop="dateCreated datePublished" datetime="2020-12-30T17:00:00+09:00">2020-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-04 20:57:03" itemprop="dateModified" datetime="2021-01-04T20:57:03+09:00">2021-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/game-of-life/">原题在此</a><br>According to Wikipedia’s article: “The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.”</p>
+<p>The board is made up of an m x n grid of cells, where each cell has an initial state: live (represented by a 1) or dead (represented by a 0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):</p>
+<p>Any live cell with fewer than two live neighbors dies as if caused by under-population.<br>Any live cell with two or three live neighbors lives on to the next generation.<br>Any live cell with more than three live neighbors dies, as if by over-population.<br>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.<br>The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously. Given the current state of the m x n grid board, return the next state.</p>
+<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2020/12/26/grid1.jpg" alt=""></p>
+<blockquote>
+<p>Input: board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]<br>Output: [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]</p>
+</blockquote>
+<p><strong>Example 2:</strong><br><img src="https://assets.leetcode.com/uploads/2020/12/26/grid2.jpg" alt=""></p>
+<blockquote>
+<p>Input: board = [[1,1],[1,0]]<br>Output: [[1,1],[1,1]]</p>
+</blockquote>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>m == board.length</li>
+<li>n == board[i].length</li>
+<li>1 &lt;= m, n &lt;= 25</li>
+<li>board[i][j] is 0 or 1.</li>
+</ul>
+<p><strong>Follow up:</strong></p>
+<ul>
+<li>Could you solve it in-place? Remember that the board needs to be updated simultaneously: You cannot update some cells first and then use their updated values to update other cells.</li>
+<li>In this question, we represent the board using a 2D array. In principle, the board is infinite, which would cause problems when the active area encroaches upon the border of the array (i.e., live cells reach the border). How would you address these problems?<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1></li>
+</ul>
+<ol>
+<li>题目用<code>vector&lt;vector&lt;int&gt;&gt;</code>做储存,而实际上每个格子只有死或生两种状态,只占用1bit. 所以可以将下一次演化的状态暂存在高位bit,待全部计算完毕后再位移回末位bit.<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">gameOfLife</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; board)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> row = board.size(), col = board[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; row; ++r) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; col; ++c) &#123;</span><br><span class="line">                <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i=max(r<span class="number">-1</span>, <span class="number">0</span>); i&lt;min(r+<span class="number">2</span>, row); ++i)</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j=max(c<span class="number">-1</span>, <span class="number">0</span>); j&lt;min(c+<span class="number">2</span>, col); ++j)</span><br><span class="line">                        count += board[i][j] &amp; <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (count == <span class="number">3</span> || count - board[r][c] == <span class="number">3</span>) board[r][c] |= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; ++i)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; ++j)</span><br><span class="line">                board[i][j] &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/29/LeetCode%201457.%20Pseudo-Palindromic%20Paths%20in%20a%20Binary%20Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/29/LeetCode%201457.%20Pseudo-Palindromic%20Paths%20in%20a%20Binary%20Tree/" class="post-title-link" itemprop="url">LeetCode 1457. Pseudo-Palindromic Paths in a Binary Tree</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-29 17:00:00" itemprop="dateCreated datePublished" datetime="2020-12-29T17:00:00+09:00">2020-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-04 20:56:42" itemprop="dateModified" datetime="2021-01-04T20:56:42+09:00">2021-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/">原题在此</a><br>Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome.<br>Return the number of pseudo-palindromic paths going from the root node to leaf nodes.<br><strong>Example 1</strong>:</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/05/06/palindromic_paths_1.png" alt=""></p>
+<p>Input: root = [2,3,1,3,1,null,1]<br>Output: 2<br>Explanation: The figure above represents the given binary tree. There are three paths going from the root node to leaf nodes: the red path [2,3,3], the green path [2,1,1], and the path [2,3,1]. Among these paths only red path and green path are pseudo-palindromic paths since the red path [2,3,3] can be rearranged in [3,2,3] (palindrome) and the green path [2,1,1] can be rearranged in [1,2,1] (palindrome).<br><strong>Example 2</strong>:</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/05/07/palindromic_paths_2.png" alt=""></p>
+<p>Input: root = [2,1,1,1,3,null,null,null,null,null,1]<br>Output: 1<br>Explanation: The figure above represents the given binary tree. There are three paths going from the root node to leaf nodes: the green path [2,1,1], the path [2,1,3,1], and the path [2,1]. Among these paths only the green path is pseudo-palindromic since [2,1,1] can be rearranged in [1,2,1] (palindrome).<br>Example 3:</p>
+<p>Input: root = [9]<br>Output: 1</p>
+<p><strong>Constraints</strong>:<br>The given binary tree will have between 1 and 10^5 nodes.<br>Node values are digits from 1 to 9.</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
+<li>要判断从root到leaf的所有数字是否能组合成一个回文串,只需要判断每个数字出现的是奇数次还是偶数次.其中,如果有超过1个的奇数次则不可能组成回文串.</li>
+<li>一开始会想用<code>map&lt;int, int&gt;</code>来储存每个数字出现了奇数次还是偶数次.仔细思考发现,key的情况只有<strong>0-9</strong>的10种情况,而value我们只关心奇偶性.所以可以用一个integer来代替map,对第n位做异或操作来改变奇偶性.</li>
+<li>这时,计算integer中1出现的次数可以用<a target="_blank" rel="noopener" href="https://leetcode.com/problems/number-of-1-bits/solution/">汉明重量</a>.</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pseudoPalindromicPaths</span> <span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        dfs(root, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> odd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        odd ^= (<span class="number">1</span> &lt;&lt; root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span>(!root -&gt; left &amp;&amp; !root -&gt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span>(hammingWeight(odd) &lt; <span class="number">2</span>) res++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(root-&gt;left, odd);</span><br><span class="line">        dfs(root-&gt;right, odd);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">uint32_t</span> i)</span> </span>&#123;</span><br><span class="line">        i = (i  &amp; <span class="number">0x55555555</span>) + ((i &gt;&gt; <span class="number">1</span>) &amp; <span class="number">0x55555555</span>);</span><br><span class="line">        i = (i &amp; <span class="number">0x33333333</span>) + ((i &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x33333333</span>);</span><br><span class="line">        i = (i + (i &gt;&gt; <span class="number">4</span>)) &amp; <span class="number">0x0f0f0f0f</span>;</span><br><span class="line">        i = (i + (i &gt;&gt; <span class="number">8</span>)) &amp; <span class="number">0x00ff00ff</span>;</span><br><span class="line">        i = i + (i &gt;&gt;<span class="number">16</span>) &amp; <span class="number">0x0000ffff</span>;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/28/LeetCode%20754.%20Reach%20a%20Number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/28/LeetCode%20754.%20Reach%20a%20Number/" class="post-title-link" itemprop="url">LeetCode 754. Reach a Number</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-28 17:00:00" itemprop="dateCreated datePublished" datetime="2020-12-28T17:00:00+09:00">2020-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-04 20:57:15" itemprop="dateModified" datetime="2021-01-04T20:57:15+09:00">2021-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/reach-a-number/">题目链接</a><br>You are standing at position 0 on an infinite number line. There is a goal at position target.<br>On each move, you can either go left or right. During the n-th move (starting from 1), you take n steps.<br>Return the minimum number of steps required to reach the destination.</p>
+<p>Example 1:</p>
+<blockquote>
+<p>Input: target = 3<br>Output: 2<br>Explanation:<br>On the first move we step from 0 to 1.<br>On the second step we step from 1 to 3.</p>
+</blockquote>
+<p>Example 2:</p>
+<blockquote>
+<p>Input: target = 2<br>Output: 3<br>Explanation:<br>On the first move we step from 0 to 1.<br>On the second move we step  from 1 to -1.<br>On the third move we step from -1 to 2.<br>Note:<br>target will be a non-zero integer in the range [-10^9, 10^9].</p>
+</blockquote>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
+<li>target的正负不影响计算结果,因为数轴是对称的<code>target = abs(target)</code>.</li>
+<li>找到整数n,使得$(\sum_{i=1}^n i) \geq target$.<ol>
+<li>$有求和公式: target = \frac{n*(n+1)}{2}$.</li>
+<li>$整形得到一元二次方程: n^2+n-2*target=0$.</li>
+<li>$公式求解: n = \frac{(-1 + \sqrt{(1 + 8*target)})}{2}$.</li>
+<li>n可能不为整,向上取整即可.</li>
+</ol>
+</li>
+<li>取$sum = \frac{n*(n+1)}{2}$, sum 与 target 的差 <code>diff = sum - target</code></li>
+<li>此时,如果 sum == target,直接返回n即可. 又或者差值diff是偶数,那么只要把$\frac{\text{diff}}{2}$取反即可得到target,所以也是n.</li>
+<li>若差值diff为奇数,则有如下两种情况:<ol>
+<li>n为奇数,则n+1为偶数,需要$\sum_{i=1}^{n+2} i$ 来改变diff的奇偶.</li>
+<li>n为偶数,则n+1为奇数,$\sum_{i=1}^{n+1} i$ 来改变diff的奇偶.</li>
+</ol>
+</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">reachNumber</span><span class="params">(<span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> t = <span class="built_in">abs</span>(target);</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> n = <span class="built_in">ceil</span>((<span class="number">-1</span> + <span class="built_in">sqrt</span>(<span class="number">1</span> + <span class="number">8</span>*t)) / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> sum = (n * (n + <span class="number">1</span>)) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> diff = sum - t;</span><br><span class="line">        <span class="keyword">if</span> (sum == target || !(diff % <span class="number">2</span>)) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="keyword">return</span> n + ((n % <span class="number">2</span>) ? <span class="number">2</span> : <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/" class="post-title-link" itemprop="url">理科乐理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-11-17 09:27:13 / Modified: 18:33:53" itemprop="dateCreated datePublished" datetime="2020-11-17T09:27:13+09:00">2020-11-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E6%83%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">随想</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ul>
+<li><strong>音</strong>: 音是一种机械波,由声源产生震动,经介质传播.单位时间内震动重复发生的次数称为<strong>频率</strong>,采用国际单位制<strong>hz (1hz=1/s)</strong></li>
+<li><strong>音色</strong>: 某周期函数(<strong>基波</strong>)频率的整数倍的波称为<strong>谐波</strong>.不同声源所产生的基波与谐波的叠加在频率和振幅上都不尽相同,这便是音色.</li>
+<li><strong>音量</strong>:<ul>
+<li><strong>分贝(dB)</strong>: 分贝的定义为,测量值与参考量值之比计算基于10的对数乘以10. $L_{dB}=10\log_{10}{(\frac{P}{P_0})}$. <strong>dB</strong>是一个无量纲,或者说它只是一种处理数据的方式.</li>
+<li><strong>声压级(Sound Pressure Level)</strong>:</li>
+</ul>
+</li>
+<li><strong>音程</strong>: 两个音之间的频率差</li>
+<li><strong>音数</strong>: 在<strong>十二平均律</strong>中, 称任两个相邻的音之间的音数为0.5</li>
+</ul>
+<h1 id="十二平均律"><a href="#十二平均律" class="headerlink" title="十二平均律"></a>十二平均律</h1><p>频率是连续的,音的个数是不可数的.<strong>十二平均律</strong>是一种产生离散的音的算法.<br>以某频率为$F$的单音$f_0$为基准,利用公式 <script type="math/tex">f_n=f*2^{(\frac{n}{12})}</script> ,可以构造出一个等比数列.其中,$f_0$与频率为$2F$的单音$f_{12}$构成一个称为<strong>纯八度</strong>的音程.<br>在一个纯八度(既频率$[F,2F]$的区间)中,可构造出13个音,十二平均律系统规定任两个相邻的音之间的音数为0.5</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>$f_0$</th>
+<th>$f_1$</th>
+<th>$f_2$</th>
+<th>$f_3$</th>
+<th>$f_4$</th>
+<th>$f_5$</th>
+<th>$f_6$</th>
+<th>$f_7$</th>
+<th>$f_8$</th>
+<th>$f_9$</th>
+<th>$f_{10}$</th>
+<th>$f_{11}$</th>
+<th>$f_{12}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>音数差</td>
+<td>0</td>
+<td>0.5</td>
+<td>1</td>
+<td>1.5</td>
+<td>2</td>
+<td>2.5</td>
+<td>3</td>
+<td>3.5</td>
+<td>4</td>
+<td>4.5</td>
+<td>5</td>
+<td>5.5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>音程名</td>
+<td>纯一度</td>
+<td>小二度</td>
+<td>大二度</td>
+<td>小三度</td>
+<td>大三度</td>
+<td>纯四度</td>
+<td>三全音</td>
+<td>纯五度</td>
+<td>小六度</td>
+<td>大六度</td>
+<td>小七度</td>
+<td>大七度</td>
+<td>纯八度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/A440_%28pitch_standard%29">ISO 16</a>中规定音名为$A_4$的音其频率为<strong>440hz</strong>.音名是啥不重要,你只要知道等比数列里有一项是440就好.</p>
+<img src="/2020/11/17/%E7%90%86%E7%A7%91%E4%B9%90%E7%90%86/Lindos1.svg" class="">
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/19/Go%E6%9E%81%E7%AE%80%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/19/Go%E6%9E%81%E7%AE%80%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Untitled</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-10-19 02:21:46" itemprop="dateCreated datePublished" datetime="2020-10-19T02:21:46+09:00">2020-10-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/18.06-Linear%20Algebra-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -640,615 +1232,11 @@ b=\left[\begin{matrix}
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/How-To-Read-A-Paper/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/01/How-To-Read-A-Paper/" class="post-title-link" itemprop="url">如何读论文</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-01T00:00:00+09:00">2020-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-07 21:13:56" itemprop="dateModified" datetime="2020-11-07T21:13:56+09:00">2020-11-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">自学笔记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/07/paper-reading.pdf">原文在此: How to Read a Paper</a></p>
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>研究者们花费大量时间阅读研究文献,但很少被教导如何阅读,浪费了很多精力.<br>本文概述了一种实用而有效的<strong>三遍法</strong>并概述如何用该方法进行文献调查</p>
-<h1 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h1><p>典型的研究人员每年可能要花费数百小时阅读论文。研究人员必须阅读论文有以下几个原因：</p>
-<ul>
-<li>评审</li>
-<li>跟上在其所在领域的步伐</li>
-<li>探索新领域</li>
-</ul>
-<p>高效阅读论文是至关重要但很少被传授的技能。因此，初学者必须在自学中反复尝试,艰苦付出却收效甚微并因此感到沮丧.</p>
-<p>多年来我一直用<strong>三遍法</strong>来使自己免于细节的桎梏并保持对整体的掌握它可以让我估计审阅一组论文所需的时间。此外，我还可以根据自己的需要和时间调整阅读的深度。本文介绍了<br>方法及其在进行文献调查中的应用。</p>
-<h1 id="三遍法"><a href="#三遍法" class="headerlink" title="三遍法"></a>三遍法</h1><p>核心思想是,你应该读三遍而非一遍从头读到尾.每一遍在前一遍的基础上达成一些特定的目的.第一遍你要领会论文的整体思想.第二遍你要掌握论文的关键内容而非细节.第三遍深度理解.</p>
-<h2 id="第一遍"><a href="#第一遍" class="headerlink" title="第一遍"></a>第一遍</h2><p>第一遍是一次掌握文章脉络的速读.掌握文章脉络后你可以决定要不要继续细读.第一遍阅读大约花5-10分钟并包含如下步骤:</p>
-<ol>
-<li>仔细阅读标题,摘要,引论</li>
-<li>阅读每个大小章节的第一段并忽略其他内容</li>
-<li>浏览一下数学内容（如果有的话）以确定底层的理论基础</li>
-<li>读结论</li>
-<li>浏览参考文献并留意你阅读过的文章</li>
-</ol>
-<p>在第一遍之后,你应该可以回答一下5个问题(<em>5Cs</em>):</p>
-<ol>
-<li><em>分类 Category</em>: 这是一遍什么类型的论文? 实验报告? 对现有系统的分析? 对研究原形(research prototype)的阐述?</li>
-<li><em>关联性 Context</em>: 它与哪些其他论文相关? 哪些基础理论应用在了这篇文章中?</li>
-<li><em>正确性 Correctness</em>: 假设看上去正确么?</li>
-<li><em>贡献 Contributions</em>: 论文的主要贡献是什么?</li>
-<li><em>整洁性 Clarity</em>: 文章水平如何?</li>
-</ol>
-<p>基于以上信息,你也许会决定不再深读(也不会把它打印出来,还省纸).原因可能是因为你不感兴趣,或者你没有足够知识储备去理解文章,亦或者文章基于的假设看上去不靠谱.对于不是你研究领域但某一天可能会是的文章,读一遍就够了.</p>
-<p>顺便一说,在你写文章时,你也会料到大多读者(或评审)只会读一遍你的文章.小心选择连贯的大小章节标题，以及编写简洁而全面的摘要。如果评审在读完一遍之后无法理解你文章的梗概,大概率你的文章会被打回.如果读者在五分钟后仍无法理解论文的要点，那你的论文很可能会永远不会被阅读。一个精心编写的”图形摘要”会是一个不错的做法,你也可以在科学期刊中越来越多这么做的文章.</p>
-<h2 id="第二遍"><a href="#第二遍" class="headerlink" title="第二遍"></a>第二遍</h2><p>在第二遍中,仔细阅读,但忽略诸如证明的细节.记下关键点或在边角处留下注解也会有帮助.奥格斯堡大学的Dominik Grusemann 建议记录下不明的或想向作者提问的点.如果您是一名评审,写下这些也有助于你写述评,并在评审会时也会帮到你.</p>
-<ol>
-<li>仔细阅读各类图表.X,Y轴有没有正确的记述?有没有误差线(error bar)使得结论具有统计意义?这些常见的错误会使得文章水平高下立判.</li>
-<li>记下还没有阅读的相关参考以便将来阅读(这是个学习更多相关背景知识的好办法).</li>
-</ol>
-<p>对于有经验的读者,第二遍会花大约一个小时.读完第二遍后,你应该已经掌握论文内容,并且可以像他人概述论文的主要推论以及支持推论的证据.对于你感兴趣但并非你专业领域的文章,这样的掌握度已经足够.</p>
-<p>有时,你读完了两遍也没有理解文章.可能是因为文章主题对你来说你全新的,里面有各种你不熟悉的术语和缩写.又或者作者在证明或实验中使用了你不知道的技巧,以至于文章通篇都难以理解.文章也可能水平不佳,使用了没有根据的断言,大量的使用了参考文献.又又又或者仅仅是因为夜深了你累了.这时候你可以:<strong>(a)</strong> 把文章丢到一遍并祈祷它不会成为你成功路上的阻碍. <strong>(b)</strong> 读些参考文献及背景知识. <strong>(c)</strong> 坚持不懈地开始第三遍.</p>
-<h2 id="第三遍"><a href="#第三遍" class="headerlink" title="第三遍"></a>第三遍</h2><p>想要完全理解文章,尤其是对于评审来说,第三遍是必要的.第三遍的核心就是<strong>再写一遍本文</strong>:基于和作者相同的假设,再做一遍作者做过的工作.通过对比你的重做与文章,你可以清楚地发现文章的创新之处,并找到潜在的失败与假设.</p>
-<p>这一遍尤其关注细节.你要认出并挑战每句话中的假设.此外,你还应该考虑自己如何能提出特定的想法.这种对比会为你提供敏锐的洞察力,有助于你理解证明以及论述过程.你应该将它加入自己的方法库中.这一遍中,你还应该记下你产生的各种想法以便后续的工作.</p>
-<p>这一遍对于初学者会花费大量时间,即使是经验者也会花一到两个小时.在这边之后,你将有能力从记忆中重构整篇文章的框架并指出它的优缺点.尤其是,你可以指出其中隐含的假设,缺省的相关引文,以及在实验和分析中的潜在问题.</p>
-<h1 id="文献查阅"><a href="#文献查阅" class="headerlink" title="文献查阅"></a>文献查阅</h1><p>读论文是需要练习的技巧,它需要你读大量论文,甚至是在不熟悉的领域.三遍法可以帮助你找到需要读的论文.</p>
-<p>首先,在某一领域,使用 Google Scholar 或 CiteSeer 之类的学术搜索引擎找到三至五篇近期高引用的文章.每篇文章都粗读一遍并理解大意,然后阅读其相关章节内容.您会发一些最近的研究内容的简略摘要,运气好的话你会找到关于近期调查文章(译注:recent survey paper,应该是对某一领域的整体调查报告之类的概述性文章).找的话就祝自己好运吧,读它就完了.</p>
-<p>否则,在第二步中,在参考中找到相同的引用文献和重复的作者.这些是该领域的关键论文和研究人员.下载重要论文放在一边.然后去搜索关键研究人员,看看他们最近在哪里发表.这将帮助您确定该领域的顶级学会,因为最好的研究人员通常会在顶级学会上发表论文.</p>
-<p>第三步,访问这些顶级学会的网站,并浏览它们最近的会议记录.快速浏览通常会确定近期的高质量相关工作.这些论文以及你先前保留的论文构成了调查的第一版.读两遍这些文章.如果他们都引用了一篇你之前没发现的关键文献,获取并阅读它,必要时多读几遍.</p>
-<h1 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h1><p>如果你正在进行论文评审,则还应阅读<em>Timothy Roscoe</em> 的文章<em>Writing reviews for systems conferences[3]</em> .如果你打算撰写技术论文,你应参考 <em>Henning Schulzrinne</em> 的综合网站 <em>[4]</em> 和<em>George Whitesides</em> 的 <em>excellent overview of the process[5]</em>.最后,<em> Simon Peyton Jones</em> 有一个涵盖整个研究技能的网站 <em>[2]</em>.</p>
-<p>来自 <em>McLean of Psychology, Inc.</em> 的 <em>Iain H</em> 整理了一个可下载的 “评审矩阵”, 它使用三遍法简化了实验心理学论文评审的工作 <em>[1]</em>. 经过一些细小的修改,它也许可以应用于其他领域的文章.</p>
-<h1 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h1><p>该文档的第一版由我的学生们起草:<em>Hossein Falaki, Earl Oliver, and Sumair Ur Rahman.</em> 在此向他们致谢. <em>Christophe Diot</em> 的知性评论与 <em>Nicole Keshav</em> 的 <em>eagle-eyed copyediting</em> 也使我受益良多.</p>
-<p>我希望此文档长期有效,当我收到评论时会对其进行更新.请花一点时间给我发邮件提出任何改进意见或建议.感谢长期以来来自多方的反馈与鼓励.</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><em><a target="_blank" rel="noopener" href="http://psychologyinc.blogspot.com/">I.H. McLean, “Literature Review Matrix,”</a></em></li>
-<li><em><a target="_blank" rel="noopener" href="http://research.microsoft.com/enus/um/people/simonpj/papers/giving-a-talk/giving-atalk.htm">S. Peyton Jones, “Research Skills,”</a></em></li>
-<li><em><a target="_blank" rel="noopener" href="http://people.inf.ethz.ch/troscoe/pubs/review-writing.pdf">T. Roscoe, “Writing Reviews for Systems Conferences,”</a></em></li>
-<li><em><a target="_blank" rel="noopener" href="http://www.cs.columbia.edu/~hgs/etc/writing-style.html">H. Schulzrinne, “Writing Technical Articles,”</a></em></li>
-<li><em><a target="_blank" rel="noopener" href="http://www.ee.ucr.edu/~rlake/Whitesides_writing_res_paper.pdf">G.M. Whitesides, “Whitesides’ Group: Writing a Paper,”</a></em></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/Liner%20Algebra%20Key%20Ideas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/01/Liner%20Algebra%20Key%20Ideas/" class="post-title-link" itemprop="url">线性代数知识点</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-01T00:00:00+09:00">2020-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-30 21:44:37" itemprop="dateModified" datetime="2020-11-30T21:44:37+09:00">2020-11-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">自学笔记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Chapter-1-Introduction-to-Vectors"><a href="#Chapter-1-Introduction-to-Vectors" class="headerlink" title="Chapter 1 Introduction to Vectors"></a>Chapter 1 Introduction to Vectors</h1><h2 id="Vectors-and-Linear-Combinations"><a href="#Vectors-and-Linear-Combinations" class="headerlink" title="Vectors and Linear Combinations"></a>Vectors and Linear Combinations</h2><ol>
-<li>A <strong>vector</strong> $v$ in two-dimensional space has two components $v_1$ and $v_2$.</li>
-<li>$v + w = ( v_1 + w_1, v_2 + w_2)$ and $cv = ( cv_1, cv_2)$ are found a component at a time.</li>
-<li>A <strong>linear combination</strong> of three vectors $u$ and $v$ and $w$ is $cu+ dv + ew$.</li>
-<li>Take all linear combinations of $u$, or $u$ and $v$, or $u$, $v$, $w$. In three dimensions,<br>those combinations typically fill a line, then a plane, then the whole space $R^3$.</li>
-</ol>
-<h2 id="Lengths-and-Dot-Products"><a href="#Lengths-and-Dot-Products" class="headerlink" title="Lengths and Dot Products"></a>Lengths and Dot Products</h2><ol>
-<li>The <strong>dot product</strong> $v • w$ multiplies each component $v_i$ by $w_i$ and adds all $v_i w_i$.</li>
-<li>The <strong>length</strong> $||v||$ is the square root of $v · v$. Then $u = \frac{v}{||v||}$ is a <strong>unit vector</strong> : length 1.</li>
-<li>The dot product is v · w = 0 when vectors v and w are <strong>perpendicular</strong>.</li>
-<li>The cosine of $\theta$ ( the angle between any nonzero v and w) never exceeds 1:<br><strong>Cosine</strong>  $cos\theta=\frac{v · w}{||v||||w||}$, <strong>Schwarz inequality</strong> $|v · w|\leqq||v||||w||$.</li>
-</ol>
-<h2 id="Matrices"><a href="#Matrices" class="headerlink" title="Matrices"></a>Matrices</h2><ol>
-<li>Matrix times vector: $Ax$ = combination of the columns of $A$.</li>
-<li>The solution to $Ax = b$ is $x = A - lb$, when $A$ is an invertible matrix.</li>
-<li>The <strong>cyclic matrix</strong> $C$ has no inverse. Its three columns lie in the same plane.<br>Those dependent columns add to the zero vector. $Cx = 0$ has many solutions.</li>
-<li>This section is looking ahead to key ideas, not fully explained yet.</li>
-</ol>
-<h1 id="Chapter-2-Solving-Linear-Equations"><a href="#Chapter-2-Solving-Linear-Equations" class="headerlink" title="Chapter 2 Solving Linear Equations"></a>Chapter 2 Solving Linear Equations</h1><h2 id="Vectors-and-Linear-Equations"><a href="#Vectors-and-Linear-Equations" class="headerlink" title="Vectors and Linear Equations"></a>Vectors and Linear Equations</h2><ol>
-<li>The basic operations on vectors are multiplication cv and vector addition v + w.</li>
-<li>Together those operations give linear combinations cv + dw.</li>
-<li>Matrix-vector multiplication Ax can be computed by dot products, a row at a time.<br>But Ax must be understood as a combination of the columns of A.</li>
-<li>Column picture: Ax = b asks for a combination of columns to produce b.</li>
-<li>Row picture: Each equation in Ax = b gives a line (n = 2) or a plane (n = 3)<br>or a “hyperplane” (n &gt; 3). They intersect at the solution or solutions, if any. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/%E5%B8%B8%E8%A7%81NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/01/%E5%B8%B8%E8%A7%81NOSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">常见NOSQL数据库类型</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-01T00:00:00+09:00">2020-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-30 22:08:51" itemprop="dateModified" datetime="2020-12-30T22:08:51+09:00">2020-12-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">自学笔记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什么是NoSQL"><a href="#什么是NoSQL" class="headerlink" title="什么是NoSQL"></a>什么是NoSQL</h1><p>NoSQL，是指Not Only SQL而非“没有SQL”。SQL指代传统关系型数据库（RDBMS），NoSQL泛指非关系型数据库。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/LeetCode%20526.%20Beautiful%20Arrangement/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/01/LeetCode%20526.%20Beautiful%20Arrangement/" class="post-title-link" itemprop="url">LeetCode 526. Beautiful Arrangement</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-06-01T00:00:00+09:00">2020-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-03 19:26:23" itemprop="dateModified" datetime="2021-01-03T19:26:23+09:00">2021-01-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/beautiful-arrangement/">原题在此</a><br>Suppose you have n integers from 1 to n. We define a beautiful arrangement as an array that is constructed by these n numbers successfully if one of the following is true for the ith position (1 &lt;= i &lt;= n) in this array:</p>
-<ul>
-<li>The number at the ith position is divisible by i.</li>
-<li>i is divisible by the number at the ith position.<br>Given an integer n, return the number of the beautiful arrangements that you can construct.</li>
-</ul>
-<p><strong>Example 1:</strong><br>Input: n = 2<br>Output: 2<br>Explanation:<br>The first beautiful arrangement is [1, 2]:<br>Number at the 1st position (i=1) is 1, and 1 is divisible by i (i=1).<br>Number at the 2nd position (i=2) is 2, and 2 is divisible by i (i=2).<br>The second beautiful arrangement is [2, 1]:<br>Number at the 1st position (i=1) is 2, and 2 is divisible by i (i=1).<br>Number at the 2nd position (i=2) is 1, and i (i=2) is divisible by 1.</p>
-<p><strong>Example 2:</strong><br>Input: n = 1<br>Output: 1</p>
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>1 &lt;= n &lt;= 15</li>
-</ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>暴力搜索的情况,需要遍历所有可能的排列(permutation),此时复杂度为$O(N)$.<br>改进的思路也简单,在全排列的过程中,如果一个分支出现了不满足题意的情况,则该分支下的所有排列都不可能是”Beautiful Arrangement”.<br>用一个bool数组来记录每个数字的使用情况,然后从位置1开始尝试放入1-N的每个数字,此时:</p>
-<ul>
-<li>若该数字还没有被使用且符合题目要求,尝试下一个位置.</li>
-<li>若该数字不符合要求,继续看下一个数字是否能放在当前位置.</li>
-<li>都放完了的时候即是一个”Beautiful Arrangement”, count 加一.</li>
-</ul>
-<p>此时时间复杂度为$O(k)$, k为有效排列的个数.空间复杂度为$O(N)$,使用了一个长度为$n$的数组.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> used[<span class="number">16</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countArrangement</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        dfs(<span class="number">1</span>, n);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pos &gt; n) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!used[i] &amp;&amp; (!(i % pos) || !(pos % i))) &#123;</span><br><span class="line">                used[i] = <span class="number">1</span>;</span><br><span class="line">                dfs(pos + <span class="number">1</span>, n);</span><br><span class="line">                used[i] = <span class="number">0</span>;</span><br><span class="line">            &#125;            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/01/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%A4%A7%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/01/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%A4%A7%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">前端三大框架对比</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-01 16:29:33" itemprop="dateCreated datePublished" datetime="2020-01-01T16:29:33+09:00">2020-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-02 18:57:52" itemprop="dateModified" datetime="2020-01-02T18:57:52+09:00">2020-01-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%AD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">自学笔记</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前端小白刚刚涉足前端开发，面对琳琅满目的框架，不知该如何挑选，不可免俗的落入了货比三家的尴尬场面。在看过<a href="https://www.youtube.com/watch?v=ANtSWq-zI0s&amp;t=895s" target="_blank" rel="noopener">尤雨溪在JSconf的演讲</a>后，对 _React_,  _Vue_,  _Angular_ 三大框架有了一些基础认识。<br>视频中，尤通过<strong>Scope</strong>和<strong>Render Mechanism</strong>两个角度对比了三大框架。</p>
-<h2 id="Scope-范围"><a href="#Scope-范围" class="headerlink" title="Scope (范围)"></a>Scope (范围)</h2><p>范围意为框架试图为用户解决多少问题。小的框架专注于原始的概念，依靠活跃的生态系统，像集市一样自下而上的发展。大的框架试图提供常见问题的全套解决方案，也因此会像教堂一样自上而下的发展。</p>
-<h3 id="Small-Scope"><a href="#Small-Scope" class="headerlink" title="Small Scope"></a>Small Scope</h3><p>_React_ 在官网中自称是JS的UI库，可见其范围之小<br><strong>Pros</strong></p>
-<ul>
-<li>更少概念 -&gt; 更快开始</li>
-<li>更多用户自由度 -&gt; 活跃的生态系统</li>
-<li>更少维护范围 -&gt; 更多力气用来创新</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>解决复杂问题时需要更多的抽象(基建)工作</li>
-<li>重复的抽象工作渐渐产生模式，模式渐渐变成了成熟的第三方解决方案，第三方解决方案变成了某种程度上的必备知识却不一定有完备的文档可供学习。</li>
-<li>生态系统的碎片化</li>
-</ul>
-<h3 id="Large-Scope"><a href="#Large-Scope" class="headerlink" title="Large Scope"></a>Large Scope</h3><p>_Angular_ 特性丰富，功能繁多，是大型框架的代表<br><strong>Pros</strong></p>
-<ul>
-<li>大多常见问题可在框架内找到解决方案，不用为选择何种第三方方案而烦恼 </li>
-<li>稳定一致的生态系统</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>需要更多的前置技能</li>
-<li>在内置解决方案不适配你的问题时体现出的不灵活</li>
-<li>由于框架开发团队要负责框架的全部维护工作，在保证整体协作性的引入新的特性会变得代价昂贵</li>
-</ul>
-<h3 id="渐进式Scope"><a href="#渐进式Scope" class="headerlink" title="渐进式Scope"></a>渐进式Scope</h3><p>视频中，尤称 _Vue_ 落在了 _React_ 和 _Angular_ 的中间， 同时享有<strong>Small Scope</strong>和<strong>Big Scope</strong>的优缺点<br><strong>Pros</strong></p>
-<ul>
-<li>引用一个 “Vue.js” 就可以开始编码，上手简单</li>
-<li>必要时可以引入官方提供的部件(e.g. Router, Vuex)，它们有完备的文档。当然你也可以实现自己的需求</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>框架开发团队需要维护更多的东西。对比有钱有人的Google和Facebook，更暴露出更新缓慢的问题</li>
-</ul>
-<h2 id="Render-Mechanism-渲染机制"><a href="#Render-Mechanism-渲染机制" class="headerlink" title="Render Mechanism (渲染机制)"></a>Render Mechanism (渲染机制)</h2><p>渲染机制意为框架下的UI构造的表达方式以及框架如何渲染这些东西。在这一节，尤以 _React_ 和 _Angular_ 为例做出了对比。</p>
-<h3 id="JSX-Virtual-Dom"><a href="#JSX-Virtual-Dom" class="headerlink" title="JSX / Virtual Dom"></a>JSX / Virtual Dom</h3><p><strong>Pros</strong></p>
-<ul>
-<li>JSX 拥有高度的表达能力与自由</li>
-<li>Virtual Dom 将试图抽象为数据，可以渲染在DOM之外的地方(e.g. _React Native_)</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>更多自由度意味着更多的不确定性，会给调优带来困难</li>
-<li>scheduling在感官上提高了性能其实有更多开销</li>
-</ul>
-<h3 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h3><p><strong>Pros</strong></p>
-<ul>
-<li>更直接的渲染方式也意味着更好的性能表现</li>
-<li>更固定的表达方式意味着更多优化的可能</li>
-<li>适当优化可带来更轻量的初次加载</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-<li>受模板语法所限</li>
-<li>运行时或构建阶段的编译开销</li>
-<li>优化带来更冗余的template</li>
-</ul>
-<h3 id="VDom-Tepmlate"><a href="#VDom-Tepmlate" class="headerlink" title="VDom + Tepmlate"></a>VDom + Tepmlate</h3><p>Vue 同时支持VDOM和template，也同时享有两方的优点。至于缺点，尤提到了两点。</p>
-<ol>
-<li>不会比原生JS快和template</li>
-<li>render()和template该用哪个的选择问题</li>
-</ol>
-<p>感觉都没说到点子上，所以又去查了查，参考如下<br><a href="https://www.zhihu.com/question/315734889" target="_blank" rel="noopener">vue.js有哪些设计缺陷？</a></p>
-<h2 id="个人思考"><a href="#个人思考" class="headerlink" title="个人思考"></a>个人思考</h2><p>作为一个初学者，40分钟的视频边查各种词汇边看花了一个下午，对各个框架的底层设计并没有很好的理解。还是不要纠结孰优孰劣得好，不如抓起一个就学，充分了解各个框架的设计思路与底层实现，得出自己的结论。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/26/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-26 22:12:12" itemprop="dateCreated datePublished" datetime="2019-11-26T22:12:12+09:00">2019-11-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1292,7 +1280,7 @@ b=\left[\begin{matrix}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1305,7 +1293,7 @@ b=\left[\begin{matrix}
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-count">65</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
