@@ -186,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/16/LeetCode%20784.%20Letter%20Case%20Permutation/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/27/LeetCode%2029.%20Divide%20Two%20Integers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -200,7 +200,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/16/LeetCode%20784.%20Letter%20Case%20Permutation/" class="post-title-link" itemprop="url">LeetCode 784. Letter Case Permutation</a>
+            <a href="/2021/02/27/LeetCode%2029.%20Divide%20Two%20Integers/" class="post-title-link" itemprop="url">LeetCode 29. Divide Two Integers</a>
         </h1>
 
         <div class="post-meta">
@@ -210,14 +210,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-02-16 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-16T17:00:00+09:00">2021-02-16</time>
+              <time title="Created: 2021-02-27 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-27T17:00:00+09:00">2021-02-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-03 00:39:21" itemprop="dateModified" datetime="2021-03-03T00:39:21+09:00">2021-03-03</time>
+                <time title="Modified: 2021-03-02 23:11:18" itemprop="dateModified" datetime="2021-03-02T23:11:18+09:00">2021-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,259 +242,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/letter-case-permutation/">原题在此</a></p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><ol>
-<li>letter ^= 32可以切换大小写.</li>
-<li>递归的回溯法可以遍历所以组合.</li>
-</ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">letterCasePermutation</span><span class="params">(<span class="built_in">string</span> S)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; wjl;</span><br><span class="line">        permutation(wjl, S, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> wjl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">permutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; wjl, <span class="built_in">string</span> s, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        wjl.push_back(s);</span><br><span class="line">        <span class="keyword">if</span>(index &gt;= s.size()) <span class="keyword">return</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index; i &lt; s.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isalpha</span>(s[i])) &#123;</span><br><span class="line">                s[i] ^= <span class="number">32</span>;</span><br><span class="line">                permutation(wjl, s, i + <span class="number">1</span>);</span><br><span class="line">                s[i] ^= <span class="number">32</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/15/LeetCode%201337.%20The%20K%20Weakest%20Rows%20in%20a%20Matrix/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/15/LeetCode%201337.%20The%20K%20Weakest%20Rows%20in%20a%20Matrix/" class="post-title-link" itemprop="url">LeetCode 1337. The K Weakest Rows in a Matrix</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-15 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-15T17:00:00+09:00">2021-02-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-03 00:51:31" itemprop="dateModified" datetime="2021-03-03T00:51:31+09:00">2021-03-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/letter-case-permutation/">原题在此</a></p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>将power 和 index 组成 pair 放入set(set会自己排好序), 然后返回k个index就好.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">kWeakestRows</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; st;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mat.size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> o = lower_bound(mat[i].begin(), mat[i].end(), <span class="number">0</span>, greater&lt;<span class="keyword">int</span>&gt;()) - mat[i].begin();</span><br><span class="line">            st.insert(&#123;o, i&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = st.begin(); k &gt; <span class="number">0</span>; --k) &#123;</span><br><span class="line">            res.push_back(it -&gt; second);</span><br><span class="line">            ++it;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/14/LeetCode%20785.%20Is%20Graph%20Bipartite/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/14/LeetCode%20785.%20Is%20Graph%20Bipartite/" class="post-title-link" itemprop="url">LeetCode 785. Is Graph Bipartite</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-14 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-14T17:00:00+09:00">2021-02-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-03 01:06:15" itemprop="dateModified" datetime="2021-03-03T01:06:15+09:00">2021-03-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/is-graph-bipartite/">原题在此</a></p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>用dfs解题TLE了, 查了一下并查集的解法, 通过了. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93647900">链接在此</a></p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c-dfs"><a href="#c-dfs" class="headerlink" title="c++/dfs"></a>c++/dfs</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isBipartite</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = graph.size();</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">colors</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            <span class="keyword">if</span>(!colors[i] &amp;&amp; !dfs(colors, graph, i, <span class="number">1</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; colors, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph, <span class="keyword">int</span> node, <span class="keyword">int</span> color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(colors[node]) <span class="keyword">return</span> colors[node] == color;</span><br><span class="line">        colors[node] = color;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> nei : graph[node])</span><br><span class="line">            <span class="keyword">if</span> (!dfs(colors, graph, nei, -color)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="c-disjointSet"><a href="#c-disjointSet" class="headerlink" title="c++/disjointSet"></a>c++/disjointSet</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DisjointSet</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rank;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    DisjointSet(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        parent = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) parent[i] = i;</span><br><span class="line">        rank = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> t = p;</span><br><span class="line">        <span class="keyword">while</span>(t != parent[t]) t = parent[t];</span><br><span class="line">        parent[p] = t;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unionSet</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sa = find(a), sb = find(b);</span><br><span class="line">        <span class="keyword">if</span>(sa == sb) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(rank[sa] &lt; rank[sb]) swap(sa, sb);</span><br><span class="line">        rank[sa] += rank[sb];</span><br><span class="line">        parent[sb] = sa;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isBipartite</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = graph.size();</span><br><span class="line">        <span class="keyword">if</span>(!n) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="function">DisjointSet <span class="title">ds</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; graph[i].size(); ++j) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ds.find(i) == ds.find(graph[i][j])) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">if</span> (j) ds.unionSet(graph[i][j], graph[i][j - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/13/LeetCode%201091.%20Shortest%20Path%20in%20Binary%20Matrix/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/13/LeetCode%201091.%20Shortest%20Path%20in%20Binary%20Matrix/" class="post-title-link" itemprop="url">1091. Shortest Path in Binary Matrix</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-13 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-13T17:00:00+09:00">2021-02-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-02 22:37:16" itemprop="dateModified" datetime="2021-03-02T22:37:16+09:00">2021-03-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-path-in-binary-matrix/">原题在此</a></p>
-<p>In an N by N square grid, each cell is either <strong>empty (0) or blocked (1).</strong></p>
-<p>A clear path from top-left to bottom-right has length k if and only if it is composed of cells <code>C_1, C_2, ..., C_k</code> such that:</p>
-<ul>
-<li>Adjacent cells <code>C_i</code> and <code>C_&#123;i+1&#125;</code> are connected 8-directionally (ie., they are different and share an edge or corner)</li>
-<li><code>C_1</code> is at location <code>(0, 0)</code> (ie. has value <code>grid[0][0]</code>)</li>
-<li><code>C_k</code> is at location <code>(N-1, N-1)</code> (ie. has value <code>grid[N-1][N-1]</code>)</li>
-<li>If <code>C_i</code> is located at <code>(r, c)</code>, then <code>grid[r][c]</code> is empty (ie. <code>grid[r][c] == 0</code>).<br>Return the length of the shortest such clear path from top-left to bottom-right.  If such a path does not exist, return -1.</li>
-</ul>
-<p><strong>Example 1:</strong><br>Input: <code>[[0,1],[1,0]]</code><br>Output: 2<br><img src="https://assets.leetcode.com/uploads/2019/08/04/example1_1.png" alt=""><br><img src="https://assets.leetcode.com/uploads/2019/08/04/example1_2.png" alt=""></p>
-<p><strong>Example 2:</strong><br>Input: <code>[[0,0,0],[1,1,0],[1,1,0]]</code><br>Output: 4<br><img src="https://assets.leetcode.com/uploads/2019/08/04/example1_3.png" alt=""><br><img src="https://assets.leetcode.com/uploads/2019/08/04/example1_4.png" alt=""></p>
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/divide-two-integers/">原题在此</a></p>
+<p>Given two integers <code>dividend</code> and <code>divisor</code>, divide two integers without using multiplication, division, and mod operator.</p>
+<p>Return the quotient after dividing <code>dividend</code> by <code>divisor</code>.</p>
+<p>The integer division should truncate toward zero, which means losing its fractional part. For example, <code>truncate(8.345) = 8</code> and <code>truncate(-2.7335) = -2</code>.</p>
 <p><strong>Note:</strong></p>
 <ul>
-<li><code>1 &lt;= grid.length == grid[0].length &lt;= 100</code></li>
-<li><code>grid[r][c]</code> is <code>0</code> or <code>1</code></li>
+<li>Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [$−23^1$,  $23^1$]. For this problem, assume that your function <strong>returns  $23^1$ − 1 when the division result overflows</strong>.</li>
 </ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>典型的BFS算法, 用<code>queue</code>维护待搜索节点, 搜索过的节点要标注以避免死循环.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">shortestPathBinaryMatrix</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(grid.empty() || grid[<span class="number">0</span>][<span class="number">0</span>]) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line">        q.push(&#123;<span class="number">0</span>,<span class="number">0</span>&#125;);</span><br><span class="line">        grid[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">1</span>, n = grid.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dir&#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> size = q.size();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">                <span class="keyword">auto</span> [x, y] = q.front();</span><br><span class="line">                q.pop();</span><br><span class="line">                <span class="keyword">if</span>(x == n - <span class="number">1</span> &amp;&amp; y == n - <span class="number">1</span>) <span class="keyword">return</span> len;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; ) &#123;</span><br><span class="line">                    <span class="keyword">int</span> row = x + dir[j];</span><br><span class="line">                    <span class="keyword">int</span> col = y + dir[++j];</span><br><span class="line">                    <span class="keyword">if</span>(row &gt;= <span class="number">0</span> &amp;&amp; row &lt; n &amp;&amp; col &gt;= <span class="number">0</span> &amp;&amp; col &lt; n &amp;&amp; !grid[row][col]) &#123;</span><br><span class="line">                        q.push(&#123;row, col&#125;);</span><br><span class="line">                        grid[row][col] = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            len++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>Example 1:</strong><br>Input: dividend = 10, divisor = 3<br>Output: 3<br>Explanation: 10/3 = truncate(3.33333..) = 3.</p>
+<p><strong>Example 2:</strong><br>Input: dividend = 7, divisor = -3<br>Output: -2<br>Explanation: 7/-3 = truncate(-2.33333..) = -2.</p>
+<p><strong>Example 3:</strong><br>Input: dividend = 0, divisor = 1<br>Output: 0</p>
+<p><strong>Example 4:</strong><br>Input: dividend = 1, divisor = 1<br>Output: 1</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>$−23^1$ &lt;= <code>dividend, divisor</code> &lt;= $23^1$ - 1</li>
+<li><code>divisor != 0</code></li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>题目假设机器只能存32位的整数, 所以不能用<code>long</code>, edge case只好用if处理掉.<br>直观思路就是在<em>N(numerator, dividend)</em>的绝对值大于0时, 减去尽可能多个的D(denominator, divisor)的绝对值. 并记录减了多少个. 此方法在N非常大或(且)D非常小时会很慢.<br>虽然不让用乘除操作但是可以用左右位移替代, 每次尝试减去尽可能多个的D. </p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// f(N, D) -&gt; (Q, R)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> D)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(N == INT_MIN &amp;&amp; D == <span class="number">-1</span>) <span class="keyword">return</span> INT_MAX;</span><br><span class="line">        <span class="keyword">if</span>(N == INT_MIN &amp;&amp; D ==  <span class="number">1</span>) <span class="keyword">return</span> INT_MIN;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> n = <span class="built_in">abs</span>(N), d = <span class="built_in">abs</span>(D), q = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="comment">// subtract (d &lt;&lt; i) from n if n still &gt;= 0, add the quotient to q.</span></span><br><span class="line">            <span class="keyword">if</span>((n &gt;&gt; i) &gt;= d) &#123;</span><br><span class="line">                n -= (d &lt;&lt; i);</span><br><span class="line">                q += (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (N &gt; <span class="number">0</span>) == (D &gt; <span class="number">0</span>) ? q : -q;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -513,7 +279,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/12/LeetCode%201342.%20Number%20of%20Steps%20to%20Reduce%20a%20Number%20to%20Zero/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/26/LeetCode%20946.%20Validate%20Stack%20Sequences/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -527,7 +293,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/12/LeetCode%201342.%20Number%20of%20Steps%20to%20Reduce%20a%20Number%20to%20Zero/" class="post-title-link" itemprop="url">1342. Number of Steps to Reduce a Number to Zero</a>
+            <a href="/2021/02/26/LeetCode%20946.%20Validate%20Stack%20Sequences/" class="post-title-link" itemprop="url">LeetCode 946. Validate Stack Sequences</a>
         </h1>
 
         <div class="post-meta">
@@ -537,14 +303,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-02-12 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-12T17:00:00+09:00">2021-02-12</time>
+              <time title="Created: 2021-02-26 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-26T17:00:00+09:00">2021-02-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-13 21:47:00" itemprop="dateModified" datetime="2021-02-13T21:47:00+09:00">2021-02-13</time>
+                <time title="Modified: 2021-03-02 00:44:34" itemprop="dateModified" datetime="2021-03-02T00:44:34+09:00">2021-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -569,204 +335,299 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/">原题在此</a></p>
-<p>Given a non-negative integer num, return the number of steps to reduce it to zero. If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.</p>
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/validate-stack-sequences/">原题在此</a><br>Given two sequences pushed and popped <strong>with distinct values</strong>, return true if and only if this could have been the result of a sequence of push and pop operations on an initially empty stack.</p>
+<p><strong>Example 1:</strong><br>Input: <code>pushed = [1,2,3,4,5], popped = [4,5,3,2,1]</code><br>Output: true<br><strong>Explanation:</strong> We might do the following sequence:<br>push(1), push(2), push(3), push(4), pop() -&gt; 4,<br>push(5), pop() -&gt; 5, pop() -&gt; 3, pop() -&gt; 2, pop() -&gt; 1</p>
+<p><strong>Example 2:</strong><br>Input: <code>pushed = [1,2,3,4,5], popped = [4,3,5,1,2]</code><br>Output: false<br><strong>Explanation:</strong> 1 cannot be popped before 2.</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>0 &lt;= <code>pushed.length</code> == <code>popped.length</code> &lt;= 1000</li>
+<li>0 &lt;= <code>pushed[i], popped[i]</code> &lt; 1000</li>
+<li>pushed is a permutation of popped.</li>
+<li>pushed and popped have distinct values.</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>模拟栈的操作, 将<code>pushed</code>依次入栈, 并在每次入栈后尝试<code>pop</code>尽可能多的元素. 最后若popped完全遍历则是合法的.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">validateStackSequences</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; pushed, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; popped)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">        <span class="keyword">auto</span> it = popped.begin();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i : pushed) &#123;</span><br><span class="line">            s.push(i);</span><br><span class="line">            <span class="keyword">while</span>(!s.empty() &amp;&amp; *it == s.top()) &#123;</span><br><span class="line">                it++;</span><br><span class="line">                s.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> it == popped.end();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/25/LeetCode%20581.%20Shortest%20Unsorted%20Continuous%20Subarray/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/25/LeetCode%20581.%20Shortest%20Unsorted%20Continuous%20Subarray/" class="post-title-link" itemprop="url">LeetCode 581. Shortest Unsorted Continuous Subarray</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-25 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-25T17:00:00+09:00">2021-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-02 01:24:27" itemprop="dateModified" datetime="2021-03-02T01:24:27+09:00">2021-03-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-unsorted-continuous-subarray/">原题在此</a><br>Given an integer array <code>nums</code>, you need to find one <strong>continuous subarray</strong> that if you only sort this subarray in ascending order, then the whole array will be sorted in ascending order.<br>Return the shortest such subarray and output its length.</p>
+<p><strong>Example 1:</strong><br>Input: <code>nums = [2,6,4,8,10,9,15]</code><br>Output: 5<br>Explanation: You need to sort <code>[6, 4, 8, 10, 9]</code> in ascending order to make the whole array sorted in ascending order.</p>
+<p><strong>Example 2:</strong><br>Input: <code>nums = [1,2,3,4]</code><br>Output: 0</p>
+<p><strong>Example 3:</strong><br>Input: <code>nums = [1]</code><br>Output: 0</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>1 &lt;= <code>nums.length</code> &lt;= $10^4$</li>
+<li>$-10^5$ &lt;= <code>nums[i]</code> &lt;= $10^5$</li>
+</ul>
+<p><strong>Follow up:</strong> Can you solve it in <code>O(n)</code> time complexity?</p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><ol>
+<li>从左侧开始向右找到第一次值变小的点, 记做<code>left</code>;</li>
+<li>从右侧开始想做找到第一次值变大的点, 记做<code>right</code>;</li>
+<li>在[left:right]区间内找到最大值和最小值, 记做<code>min,max</code>; (中间的这一坨里面可能会有比[begin:left]区间里的值小的或比[right:end]区间里大的.)</li>
+<li>在[:left]区间内找到min的上界, 既从begin起至left内第一个比min大的位置;</li>
+<li>在[right:]区间内找到max的下界, 既从right起至end内第一个大于等于max的位置;</li>
+<li>比较上下界的距离.<br>这些std函数都是$O(N)$的所以整体复杂度也是$O(N)$.</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findUnsortedSubarray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left] &lt;= nums[left + <span class="number">1</span>]) left++;</span><br><span class="line">        <span class="keyword">while</span>(right &gt; left &amp;&amp; nums[right - <span class="number">1</span>] &lt;= nums[right]) right--;</span><br><span class="line">        <span class="keyword">auto</span> [min_it, max_it] = minmax_element(nums.begin() + left, nums.begin() + right + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">auto</span> left_cut = upper_bound(nums.begin(), nums.begin() + left, *min_it);</span><br><span class="line">        <span class="keyword">auto</span> right_cut = lower_bound(nums.begin() + right, nums.end(), *max_it);</span><br><span class="line">        <span class="keyword">return</span> distance(left_cut, right_cut);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/24/LeetCode%20856.%20Score%20of%20Parentheses/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/24/LeetCode%20856.%20Score%20of%20Parentheses/" class="post-title-link" itemprop="url">LeetCode 856. Score of Parentheses</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-24 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-24T17:00:00+09:00">2021-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-02 23:10:33" itemprop="dateModified" datetime="2021-03-02T23:10:33+09:00">2021-03-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/score-of-parentheses/">原题在此</a></p>
+<p>Given a balanced parentheses string S, compute the score of the string based on the following rule:</p>
+<ul>
+<li>() has score 1</li>
+<li>AB has score A + B, where A and B are balanced parentheses strings.</li>
+<li>(A) has score 2 * A, where A is a balanced parentheses string.</li>
+</ul>
+<p><strong>Example 1:</strong><br>Input: <code>&quot;()&quot;</code><br>Output: 1</p>
+<p><strong>Example 2:</strong><br>Input: <code>&quot;(())&quot;</code><br>Output: 2</p>
+<p><strong>Example 3:</strong><br>Input: <code>&quot;()()&quot;</code><br>Output: 2</p>
+<p><strong>Example 4:</strong><br>Input: <code>&quot;(()(()))&quot;</code><br>Output: 6</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>S is a balanced parentheses string, containing only ( and ).</li>
+<li>2 &lt;= <code>S.length</code> &lt;= 50</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>用<code>stack</code>记录字符串,是<code>&#39;(&#39;</code>就入栈一个0; 是<code>&#39;)&#39;</code>时, 若栈顶为0, 则说明此时括号内还没有数字, 将栈顶元素修改为1; 若不是0,则说明括号内以有元素, 此时应乘二. 累加求和.<br>当然也可以直接用解释型语言, 替换字符串, 调用表达式.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">scoreOfParentheses</span><span class="params">(<span class="built_in">string</span> S)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        stk.push(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> tmp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c : S) &#123;</span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">                stk.push(<span class="number">0</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                tmp = stk.top();</span><br><span class="line">                stk.pop();</span><br><span class="line">                stk.top() += tmp ? (tmp * <span class="number">2</span>) : <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stk.top();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="py"><a href="#py" class="headerlink" title="py"></a>py</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scoreOfParentheses</span>(<span class="params">self, S</span>):</span></span><br><span class="line">    <span class="keyword">return</span> eval(S.replace(<span class="string">&#x27;)(&#x27;</span>, <span class="string">&#x27;)+(&#x27;</span>).replace(<span class="string">&#x27;()&#x27;</span>, <span class="string">&#x27;1&#x27;</span>).replace(<span class="string">&#x27;)&#x27;</span>, <span class="string">&#x27;)*2&#x27;</span>))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/23/LeetCode%20240.%20Search%20a%202D%20Matrix%20II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/23/LeetCode%20240.%20Search%20a%202D%20Matrix%20II/" class="post-title-link" itemprop="url">LeetCode 240. Search a 2D Matrix II</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-23 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-23T17:00:00+09:00">2021-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-02 23:07:52" itemprop="dateModified" datetime="2021-03-02T23:07:52+09:00">2021-03-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/search-a-2d-matrix-ii/">原题在此</a></p>
+<p>Write an efficient algorithm that searches for a <code>target</code> value in an <code>m x n</code> integer matrix. The matrix has the following properties:</p>
+<ul>
+<li>Integers in each row are sorted in ascending from left to right.</li>
+<li>Integers in each column are sorted in ascending from top to bottom.</li>
+</ul>
 <p><strong>Example 1:</strong></p>
-<p>Input: <code>num = 14</code><br>Output: <code>6</code></p>
-<blockquote>
-<blockquote>
-<p>Explanation:<br>Step 1) 14 is even; divide by 2 and obtain 7.<br>Step 2) 7 is odd; subtract 1 and obtain 6.<br>Step 3) 6 is even; divide by 2 and obtain 3.<br>Step 4) 3 is odd; subtract 1 and obtain 2.<br>Step 5) 2 is even; divide by 2 and obtain 1.<br>Step 6) 1 is odd; subtract 1 and obtain 0.</p>
-</blockquote>
-</blockquote>
-<p><strong>Example 2:</strong><br>Input: <code>num = 8</code><br>Output: <code>4</code></p>
-<blockquote>
-<blockquote>
-<p>Explanation:<br>Step 1) 8 is even; divide by 2 and obtain 4.<br>Step 2) 4 is even; divide by 2 and obtain 2.<br>Step 3) 2 is even; divide by 2 and obtain 1.<br>Step 4) 1 is odd; subtract 1 and obtain 0.</p>
-</blockquote>
-</blockquote>
-<p><strong>Example 3:</strong><br>Input: <code>num = 123</code><br>Output: <code>12</code></p>
-<p><strong>Constraints:</strong><br>0 &lt;= <code>num</code> &lt;= $10^6$</p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>遍历bits, leading zeros 不算, 其余位是1就加2, 是0就加1.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/11/LeetCode%20242.%20Valid%20Anagram/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/11/LeetCode%20242.%20Valid%20Anagram/" class="post-title-link" itemprop="url">242. Valid Anagram</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-11 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-11T17:00:00+09:00">2021-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-12 18:51:08" itemprop="dateModified" datetime="2021-02-12T18:51:08+09:00">2021-02-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-anagram/">原题在此</a></p>
-<p>Given two strings <code>s</code> and <code>t</code> , write a function to determine if <code>t</code> is an anagram of <code>s</code>.</p>
-<p><strong>Example 1:</strong><br>Input: <code>s = &quot;anagram&quot;, t = &quot;nagaram&quot;</code><br>Output: <code>true</code></p>
-<p><strong>Example 2:</strong><br>Input: <code>s = &quot;rat&quot;, t = &quot;car&quot;</code><br>Output: <code>false</code></p>
-<p><strong>Note:</strong><br>You may assume the string contains only lowercase alphabets.</p>
-<p><strong>Follow up:</strong><br>What if the inputs contain unicode characters? How would you adapt your solution to such case?</p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>统计每个字符的出现次数加入<code>set</code>, 然后比较两<code>set</code>是否相等. 因为输入只包含小写字母, 可用<code>int[26]</code>代替.<br>py可以直接调用Counter.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="py"><a href="#py" class="headerlink" title="py"></a>py</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isAnagram</span>(<span class="params">self, s, t</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type t: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> Counter(s) == Counter(t)</span><br></pre></td></tr></table></figure>
-<h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isAnagram</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.length() != t.length()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">int</span> n = s.length();</span><br><span class="line">        <span class="keyword">int</span> counts[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123; </span><br><span class="line">            counts[s[i] - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">            counts[t[i] - <span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">            <span class="keyword">if</span> (counts[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/10/LeetCode%20138.%20Copy%20List%20with%20Random%20Pointer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/10/LeetCode%20138.%20Copy%20List%20with%20Random%20Pointer/" class="post-title-link" itemprop="url">138. Copy List with Random Pointer</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-10 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-10T17:00:00+09:00">2021-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-12 18:44:15" itemprop="dateModified" datetime="2021-02-12T18:44:15+09:00">2021-02-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/copy-list-with-random-pointer/">原题在此</a></p>
-<p>A linked list of length <code>n</code> is given such that each node contains an additional random pointer, which could point to any node in the list, or <code>null</code>.</p>
-<p>Construct a <strong>deep copy</strong> of the list. The deep copy should consist of exactly n <strong>brand new</strong> nodes, where each new node has its value set to the value of its corresponding original node. Both the <code>next</code> and <code>random</code> pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. <strong>None of the pointers in the new list should point to nodes in the original list.</strong></p>
-<p>For example, if there are two nodes <code>X</code> and <code>Y</code> in the original list, where <code>X.random --&gt; Y</code>, then for the corresponding two nodes <code>x</code> and <code>y</code> in the copied list, <code>x.random --&gt; y</code>.</p>
-<p>Return <em>the head of the copied linked list</em>.</p>
-<p>The linked list is represented in the input/output as a list of <code>n</code> nodes. Each node is represented as a pair of <code>[val, random_index]</code> where:</p>
-<ul>
-<li><code>val</code>: an integer representing <code>Node.val</code></li>
-<li><code>random_index</code>: the index of the node (range from <code>0</code> to <code>n-1</code>) that the <code>random</code> pointer points to, or <code>null</code> if it does not point to any node.</li>
-</ul>
-<p>Your code will <strong>only</strong> be given the head of the original linked list.</p>
-<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2019/12/18/e1.png" alt=""><br>Input: <code>head = [[7,null],[13,0],[11,4],[10,2],[1,0]]</code><br>Output: <code>[[7,null],[13,0],[11,4],[10,2],[1,0]]</code></p>
-<p><strong>Example 2:</strong><br><img src="https://assets.leetcode.com/uploads/2019/12/18/e2.png" alt=""><br>Input: <code>head = [[1,1],[2,1]]</code><br>Output: <code>[[1,1],[2,1]]</code></p>
-<p><strong>Example 3:</strong><br><img src="https://assets.leetcode.com/uploads/2019/12/18/e3.png" alt=""><br>Input: <code>head = [[3,null],[3,0],[3,null]]</code><br>Output: <code>[[3,null],[3,0],[3,null]]</code></p>
-<p><strong>Example 4:</strong><br>Input: <code>head = []</code><br>Output: <code>[]</code><br>Explanation: The given linked list is empty (null pointer), so return null.</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/24/searchgrid2.jpg" alt=""><br>Input: <code>matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5</code><br>Output: true</p>
+<p><strong>Example 2:</strong><br><img src="https://assets.leetcode.com/uploads/2020/11/24/searchgrid.jpg" alt=""><br>Input: <code>matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 20</code><br>Output: false</p>
 <p><strong>Constraints:</strong></p>
 <ul>
-<li><code>0 &lt;= n &lt;= 1000</code></li>
-<li><code>-10000 &lt;= Node.val &lt;= 10000</code></li>
-<li><code>Node.random</code> is <code>null</code> or is pointing to some node in the linked list.</li>
+<li>m == <code>matrix.length</code></li>
+<li>n == <code>matrix[i].length</code></li>
+<li>1 &lt;= <code>n, m</code>&lt;= 300</li>
+<li>-109 &lt;= <code>matix[i][j]</code> &lt;= 109</li>
+<li>All the integers in each row are sorted in ascending order.</li>
+<li>All the integers in each column are sorted in ascending order.</li>
+<li>$-10^9$ &lt;= target &lt;= $10^9$</li>
 </ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>利用题中提到的矩阵每行每列都递增的特性, 从左下或右上开始,一次排除一行或一列即可.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">searchMatrix</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">int</span> j = matrix[<span class="number">0</span>].size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">while</span>(i &lt; matrix.size() &amp;&amp; j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="keyword">if</span>(matrix[i][j] == target) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">             <span class="keyword">if</span>(matrix[i][j] &lt; target)  i++;</span><br><span class="line">             <span class="keyword">else</span>                       j--;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -785,7 +646,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/09/LeetCode%20538.%20Convert%20BST%20to%20Greater%20Tree/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/22/LeetCode%20524.%20Longest%20Word%20in%20Dictionary%20through%20Deleting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -799,7 +660,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/09/LeetCode%20538.%20Convert%20BST%20to%20Greater%20Tree/" class="post-title-link" itemprop="url">LeetCode 538. Convert BST to Greater Tree</a>
+            <a href="/2021/02/22/LeetCode%20524.%20Longest%20Word%20in%20Dictionary%20through%20Deleting/" class="post-title-link" itemprop="url">LeetCode 524. Longest Word in Dictionary through Deleting</a>
         </h1>
 
         <div class="post-meta">
@@ -809,14 +670,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-02-09 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-09T17:00:00+09:00">2021-02-09</time>
+              <time title="Created: 2021-02-22 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-22T17:00:00+09:00">2021-02-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-12 16:51:52" itemprop="dateModified" datetime="2021-02-12T16:51:52+09:00">2021-02-12</time>
+                <time title="Modified: 2021-03-02 23:20:09" itemprop="dateModified" datetime="2021-03-02T23:20:09+09:00">2021-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -841,29 +702,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/convert-bst-to-greater-tree/">原题在此</a></p>
-<p>Given the <code>root</code> of a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.</p>
-<p>As a reminder, a binary search tree is a tree that satisfies these constraints:</p>
-<ul>
-<li>The left subtree of a node contains only nodes with keys less than the node’s key.</li>
-<li>The right subtree of a node contains only nodes with keys greater than the node’s key.</li>
-<li>Both the left and right subtrees must also be binary search trees.<br><code>Note:</code> This question is the same as 1038: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/">https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/</a></li>
-</ul>
-<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2019/05/02/tree.png" alt=""></p>
-<p>Input: <code>root = [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]</code><br>Output: <code>[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]</code></p>
-<p><strong>Example 2:</strong><br>Input: <code>root = [0,null,1]</code><br>Output: <code>[1,null,1]</code></p>
-<p><strong>Example 3:</strong><br>Input: <code>root = [1,0,2]</code><br>Output: <code>[3,3,2]</code></p>
-<p><strong>Example 4:</strong><br>Input: <code>root = [3,2,4,1]</code><br>Output: <code>[7,9,4,10]</code></p>
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/">原题在此</a></p>
+<p>Given a string <code>s</code> and a string array <code>dictionary</code>, return the <strong>longest</strong> string in the dictionary that can be formed by deleting some of the given string characters. If there is more than one possible result, return the longest word with the smallest lexicographical order. If there is no possible result, return the empty string.</p>
+<p><strong>Example 1:</strong><br>Input: <code>s = &quot;abpcplea&quot;, dictionary = [&quot;ale&quot;,&quot;apple&quot;,&quot;monkey&quot;,&quot;plea&quot;]</code><br>Output: <code>&quot;apple&quot;</code></p>
+<p><strong>Example 2:</strong></p>
+<p>Input: <code>s = &quot;abpcplea&quot;, dictionary = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</code><br>Output: <code>&quot;a&quot;</code></p>
 <p><strong>Constraints:</strong></p>
 <ul>
-<li>The number of nodes in the tree is in the range [0, $10^4$].</li>
-<li>$-10^4$ &lt;= <code>Node.val</code> &lt;= $10^4$</li>
-<li>All the values in the tree are <strong>unique</strong>.</li>
-<li><code>root</code> is guaranteed to be a valid binary search tree.</li>
+<li>1 &lt;= <code>s.length</code>&lt;= 1000</li>
+<li>1 &lt;= <code>dictionary.length</code> &lt;= 1000</li>
+<li>1 &lt;= <code>dictionary[i].length</code> &lt;= 1000</li>
+<li>s and <code>dictionary[i]</code> consist of lowercase English letters.</li>
 </ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>以右中左的顺序遍历BST, 将节点的值累加写入. 右中左的遍历就是把<a target="_blank" rel="noopener" href="https://leetcode.com/problems/binary-tree-inorder-traversal/">Inorder</a>反过来.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="recursive"><a href="#recursive" class="headerlink" title="recursive"></a>recursive</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        sum(root, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> large)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> large;</span><br><span class="line">        root-&gt;val += sum(root-&gt;right, large);</span><br><span class="line">        <span class="keyword">return</span> sum(root-&gt;left, root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="iterative"><a href="#iterative" class="headerlink" title="iterative"></a>iterative</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        TreeNode* tmp = root;</span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(tmp || !s.empty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(tmp)&#123;</span><br><span class="line">                s.push(tmp);</span><br><span class="line">                tmp = tmp -&gt; right;</span><br><span class="line">            &#125;</span><br><span class="line">            tmp = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            sum += tmp -&gt; val;</span><br><span class="line">            tmp -&gt; val = sum;</span><br><span class="line">            tmp = tmp -&gt; left;                                </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>根据题意, 将字典按照先长度后字典序的规则排序, 然后逐一比对s中是否包含字典元素的子序列即可.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC optimize(<span class="meta-string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">auto</span> speedup = []()&#123;</span><br><span class="line">    <span class="built_in">std</span>::ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>.tie(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>.tie(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;();</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:    </span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">findLongestWord</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; d)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> cmp = [](<span class="built_in">string</span> &amp;a, <span class="built_in">string</span> &amp;b) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a.length() != b.length())</span><br><span class="line">                <span class="keyword">return</span> a.length() &gt; b.length();</span><br><span class="line">            <span class="keyword">return</span> a &lt; b;</span><br><span class="line">        &#125;;</span><br><span class="line">        sort(d.begin(), d.end(), cmp);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> word : d) &#123;</span><br><span class="line">            <span class="keyword">if</span>(contains(s, word))</span><br><span class="line">                <span class="keyword">return</span> word;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">contains</span><span class="params">(<span class="built_in">string</span> &amp;s, <span class="built_in">string</span> &amp;t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.length(), m = t.length();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span> , j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; n <span class="keyword">and</span> j &lt; m)</span><br><span class="line">            <span class="keyword">if</span>(s[i] == t[j]) i++ , j++;</span><br><span class="line">            <span class="keyword">else</span> i++;</span><br><span class="line">        <span class="keyword">return</span> j == m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -882,7 +734,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/LeetCode%20284.%20Peeking%20Iterator/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/21/LeetCode%20991.%20Broken%20Calculator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -896,7 +748,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/08/LeetCode%20284.%20Peeking%20Iterator/" class="post-title-link" itemprop="url">LeetCode 284. Peeking Iterator</a>
+            <a href="/2021/02/21/LeetCode%20991.%20Broken%20Calculator/" class="post-title-link" itemprop="url">LeetCode 991. Broken Calculator</a>
         </h1>
 
         <div class="post-meta">
@@ -906,14 +758,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-02-08 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-08T17:00:00+09:00">2021-02-08</time>
+              <time title="Created: 2021-02-21 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-21T17:00:00+09:00">2021-02-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-12 16:51:55" itemprop="dateModified" datetime="2021-02-12T16:51:55+09:00">2021-02-12</time>
+                <time title="Modified: 2021-03-02 23:42:56" itemprop="dateModified" datetime="2021-03-02T23:42:56+09:00">2021-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -938,17 +790,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/peeking-iterator/">原题在此</a></p>
-<p>Given an Iterator class interface with methods: <code>next()</code> and <code>hasNext()</code>, design and implement a PeekingIterator that support the <code>peek()</code> operation — it essentially <code>peek()</code> at the element that will be returned by the next call to <code>next()</code>.</p>
-<p><strong>Example:</strong></p>
-<blockquote>
-<blockquote>
-<p>Assume that the iterator is initialized to the beginning of the list: [1,2,3].</p>
-</blockquote>
-</blockquote>
-<p>Call next() gets you 1, the first element in the list.<br>Now you call peek() and it returns 2, the next element. Calling next() after that still return 2.<br>You call next() the final time and it returns 3, the last element.<br>Calling hasNext() after that should return false.<br>Follow up: How would you extend your design to be generic and work with all types, not just integer?</p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p><code>next()</code>和<code>hasNext()</code>直接调用<code>Iterator</code>的就好, <code>peek()</code>可以copy一个再调用<code>next()</code>.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Below is the interface for Iterator, which is already defined for you.</span></span><br><span class="line"><span class="comment"> * **DO NOT** modify the interface for Iterator.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  class Iterator &#123;</span></span><br><span class="line"><span class="comment"> *		struct Data;</span></span><br><span class="line"><span class="comment"> * 		Data* data;</span></span><br><span class="line"><span class="comment"> *		Iterator(const vector&lt;int&gt;&amp; nums);</span></span><br><span class="line"><span class="comment"> * 		Iterator(const Iterator&amp; iter);</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 		// Returns the next element in the iteration.</span></span><br><span class="line"><span class="comment"> *		int next();</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *		// Returns true if the iteration has more elements.</span></span><br><span class="line"><span class="comment"> *		bool hasNext() const;</span></span><br><span class="line"><span class="comment"> *	&#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PeekingIterator</span> :</span> <span class="keyword">public</span> Iterator &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	PeekingIterator(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) : Iterator(nums) &#123;</span><br><span class="line">	    <span class="comment">// Initialize any member here.</span></span><br><span class="line">	    <span class="comment">// **DO NOT** save a copy of nums and manipulate it directly.</span></span><br><span class="line">	    <span class="comment">// You should only use the Iterator interface methods.</span></span><br><span class="line">	    </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// Returns the next element in the iteration without advancing the iterator.</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Iterator(*<span class="keyword">this</span>).next();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// hasNext() and next() should behave the same as in the Iterator interface.</span></span><br><span class="line">	<span class="comment">// Override them if needed.</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    <span class="keyword">return</span> Iterator::next();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">	    <span class="keyword">return</span> Iterator::hasNext();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/broken-calculator/">原题在此</a></p>
+<p>On a broken calculator that has a number showing on its display, we can perform two operations:</p>
+<ul>
+<li>Double: Multiply the number on the display by 2, or;</li>
+<li>Decrement: Subtract 1 from the number on the display.<br>Initially, the calculator is displaying the number X.</li>
+</ul>
+<p>Return the <strong>minimum</strong> number of operations needed to display the number Y.</p>
+<p><strong>Example 1:</strong><br>Input: X = 2, Y = 3<br>Output: 2<br>Explanation: Use double operation and then decrement operation {2 -&gt; 4 -&gt; 3}.</p>
+<p><strong>Example 2:</strong><br>Input: X = 5, Y = 8<br>Output: 2<br>Explanation: Use decrement and then double {5 -&gt; 4 -&gt; 8}.</p>
+<p><strong>Example 3:</strong><br>Input: X = 3, Y = 10<br>Output: 3<br>Explanation:  Use double, decrement and double {3 -&gt; 6 -&gt; 5 -&gt; 10}.</p>
+<p><strong>Example 4:</strong><br>Input: X = 1024, Y = 1<br>Output: 1023<br>Explanation: Use decrement operations 1023 times.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>1 &lt;= X &lt;= $10^9$</li>
+<li>1 &lt;= Y &lt;= $10^9$</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>X变Y等价于通过加法和除法使Y变X. 贪心地执行除法操作, 能整除2就除, 不能就加一, 直到Y比X小的时候, 此时在补上 X - Y个加一操作即可.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">brokenCalc</span><span class="params">(<span class="keyword">int</span> X, <span class="keyword">int</span> Y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (Y &gt; X) &#123;</span><br><span class="line">            res++;</span><br><span class="line">            Y = Y &amp; <span class="number">1</span> ? Y + <span class="number">1</span> : Y &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res + X - Y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -967,7 +826,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/07/LeetCode%20821.%20Shortest%20Distance%20to%20a%20Character/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/20/LeetCode%2013.%20Roman%20to%20Integer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -981,7 +840,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/07/LeetCode%20821.%20Shortest%20Distance%20to%20a%20Character/" class="post-title-link" itemprop="url">LeetCode 821. Shortest Distance to a Character</a>
+            <a href="/2021/02/20/LeetCode%2013.%20Roman%20to%20Integer/" class="post-title-link" itemprop="url">LeetCode 13. Roman to Integer</a>
         </h1>
 
         <div class="post-meta">
@@ -990,10 +849,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-02-07 17:00:00 / Modified: 18:34:50" itemprop="dateCreated datePublished" datetime="2021-02-07T17:00:00+09:00">2021-02-07</time>
+              <time title="Created: 2021-02-20 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-20T17:00:00+09:00">2021-02-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-02 23:53:35" itemprop="dateModified" datetime="2021-03-02T23:53:35+09:00">2021-03-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -1017,13 +882,185 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-distance-to-a-character/">原题在此</a></p>
-<p>Given a string <code>s</code> and a character <code>c</code> that occurs in <code>s</code>, return an array of integers <em>answer</em> where <code>answer.length == s.length</code> and <code>answer[i]</code> is the <em>shortest distance</em> from <code>s[i]</code> to the character <code>c</code> in <code>s</code>.</p>
-<p><strong>Example 1:</strong><br>Input: <code>s = &quot;loveleetcode&quot;, c = &quot;e&quot;</code><br>Output: <code>[3,2,1,0,1,0,0,1,2,2,1,0]</code></p>
-<p><strong>Example 2:</strong><br>Input: <code>s = &quot;aaab&quot;, c = &quot;b&quot;</code><br>Output: <code>[3,2,1,0]</code></p>
-<p><strong>Constraints:</strong><br>1 &lt;= <code>s.length</code> &lt;= $10^4$<br><code>s[i]</code> and <code>c</code> are lowercase English letters.<br><code>c</code> occurs at least once in <code>s</code>.</p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>找到第一个和最后一个<code>c</code>, 第一遍从第一个c到<code>s.end()</code>按规则填写, 第二遍从最后一个c到<code>s.begin()</code>按规则填写或如果已填写的值较小则跳过.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">shortestToChar</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(s.size(), INT_MAX)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> first = s.find(c), last = s.find_last_of(c);</span><br><span class="line">        <span class="keyword">int</span> n = s.size(), tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = first; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == c) tmp = <span class="number">0</span>;</span><br><span class="line">            res[i] = tmp++;</span><br><span class="line">        &#125;</span><br><span class="line">        tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = last; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!res[i]) tmp = <span class="number">0</span>;</span><br><span class="line">            res[i] = min(res[i], tmp++);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/roman-to-integer/">原题在此</a><br>Roman numerals are represented by seven different symbols: <code>&quot;I, V, X, L, C, D, M&quot;</code>.</p>
+<blockquote>
+<blockquote>
+<p>Symbol       Value<br>I             1<br>V             5<br>X             10<br>L             50<br>C             100<br>D             500<br>M             1000</p>
+</blockquote>
+</blockquote>
+<p>For example, 2 is written as II in Roman numeral, just two one’s added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.</p>
+<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:</p>
+<ul>
+<li>I can be placed before V (5) and X (10) to make 4 and 9. </li>
+<li>X can be placed before L (50) and C (100) to make 40 and 90. </li>
+<li>C can be placed before D (500) and M (1000) to make 400 and 900.<br>Given a roman numeral, convert it to an integer.</li>
+</ul>
+<p><strong>Example 1:</strong><br>Input: s = “III”<br>Output: 3<br><strong>Example 2:</strong><br>Input: s = “IV”<br>Output: 4<br><strong>Example 3:</strong><br>Input: s = “IX”<br>Output: 9<br><strong>Example 4:</strong><br>Input: s = “LVIII”<br>Output: 58<br>Explanation: L = 50, V= 5, III = 3.<br><strong>Example 5:</strong><br>Input: s = “MCMXCIV”<br>Output: 1994<br>Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>1 &lt;= s.length &lt;= 15</li>
+<li>s contains only the characters <code>(&#39;I&#39;, &#39;V&#39;, &#39;X&#39;, &#39;L&#39;, &#39;C&#39;, &#39;D&#39;, &#39;M&#39;)</code>.</li>
+<li>It is <strong>guaranteed</strong> that s is a valid roman numeral in the range <code>[1, 3999]</code>.</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>根据题意, 当一个值小的字母出现在值大的字母左侧时, 应该减去它的值; 否则就是累加.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; mp = &#123; &#123; <span class="string">&#x27;I&#x27;</span> , <span class="number">1</span> &#125;, &#123; <span class="string">&#x27;V&#x27;</span> , <span class="number">5</span> &#125;, &#123; <span class="string">&#x27;X&#x27;</span> , <span class="number">10</span> &#125;, &#123; <span class="string">&#x27;L&#x27;</span> , <span class="number">50</span> &#125;, &#123; <span class="string">&#x27;C&#x27;</span> , <span class="number">100</span> &#125;, &#123; <span class="string">&#x27;D&#x27;</span> , <span class="number">500</span> &#125;, &#123; <span class="string">&#x27;M&#x27;</span> , <span class="number">1000</span> &#125; &#125;;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">int</span> sum = mp[s.back()];</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = s.length() - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">           <span class="keyword">if</span> (mp[s[i]] &lt; mp[s[i + <span class="number">1</span>]]) sum -= mp[s[i]];</span><br><span class="line">           <span class="keyword">else</span> sum += mp[s[i]];</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/19/LeetCode%201249.%20Minimum%20Remove%20to%20Make%20Valid%20Parentheses/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/19/LeetCode%201249.%20Minimum%20Remove%20to%20Make%20Valid%20Parentheses/" class="post-title-link" itemprop="url">LeetCode 1249. Minimum Remove to Make Valid Parentheses</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-19 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-19T17:00:00+09:00">2021-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-03 00:07:23" itemprop="dateModified" datetime="2021-03-03T00:07:23+09:00">2021-03-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/">原题在此</a></p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>用<code>stack</code>记录出现过的括号, 遇到左括号就入栈括号的位置; 遇到右括号时, 若栈不为空则可构成合法括号, 出栈一个元素; 否则将当前位值标注为待删除. 最后将栈内剩余元素(没有右括号可以匹配的左括号)全部标记待删除. 最后调用<code>string::erase()</code>方法或其他语言的类似方法一次全部删除.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minRemoveToMakeValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        <span class="keyword">int</span> n = s.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">&#x27;(&#x27;</span>) stk.push(i);</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(stk.empty()) s[i] = <span class="string">&#x27;!&#x27;</span>;</span><br><span class="line">                <span class="keyword">else</span> stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!stk.empty()) &#123;</span><br><span class="line">            s[stk.top()] = <span class="string">&#x27;!&#x27;</span>;</span><br><span class="line">            stk.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        s.erase(<span class="built_in">std</span>::remove(s.begin(), s.end(), <span class="string">&#x27;!&#x27;</span>), s.end());</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/18/LeetCode%20413.%20Arithmetic%20Slices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/18/LeetCode%20413.%20Arithmetic%20Slices/" class="post-title-link" itemprop="url">LeetCode 413. Arithmetic Slices</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-18 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-18T17:00:00+09:00">2021-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-03 00:18:40" itemprop="dateModified" datetime="2021-03-03T00:18:40+09:00">2021-03-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/arithmetic-slices/">原题在此</a></p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><ol>
+<li>3个能构成1个Slices, 4个能构成1+2个, 5个能构成1+2+3个</li>
+<li>每次比较三个就行, count每次比较成功就+1, 失败就归零.</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = A.size(), cnt = <span class="number">0</span>, res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; ++i)&#123;</span><br><span class="line">			<span class="keyword">if</span>(A[i] - A[i - <span class="number">1</span>] == A[i - <span class="number">1</span>] - A[i - <span class="number">2</span>]) res += ++cnt;</span><br><span class="line">			<span class="keyword">else</span> cnt = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1042,7 +1079,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1086,7 +1123,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1099,7 +1136,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">68</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
