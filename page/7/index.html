@@ -186,6 +186,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/19/LeetCode%205.%20Longest%20Palindromic%20Substring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/19/LeetCode%205.%20Longest%20Palindromic%20Substring/" class="post-title-link" itemprop="url">LeetCode 5. Longest Palindromic Substring</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-19 17:00:00" itemprop="dateCreated datePublished" datetime="2021-01-19T17:00:00+09:00">2021-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-21 18:12:06" itemprop="dateModified" datetime="2021-01-21T18:12:06+09:00">2021-01-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/longest-palindromic-substring/">原题在此</a><br>Given a string s, return the longest palindromic substring in s.</p>
+<p><strong>Example 1:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “babad”<br>Output: “bab”<br>Note: “aba” is also a valid answer.</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 2:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “cbbd”<br>Output: “bb”</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 3:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “a”<br>Output: “a”</p>
+</blockquote>
+</blockquote>
+<p><strong>Example 4:</strong></p>
+<blockquote>
+<blockquote>
+<p>Input: s = “ac”<br>Output: “a”</p>
+</blockquote>
+</blockquote>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>1 &lt;= s.length &lt;= 1000</li>
+<li>s consist of only digits and English letters (lower-case and/or upper-case).</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h2 id="暴力解法"><a href="#暴力解法" class="headerlink" title="暴力解法"></a>暴力解法</h2><p>遍历所有可能的字符串,判断是否是回文串并记录长度.可能的优化有:</p>
+<ul>
+<li>在子串长度大于已找到的最长字串时再判断是否是回文</li>
+<li>长度为1的字串必为回文串无需访问</li>
+</ul>
+<p><strong>复杂度分析:</strong>对于长度为n的字符串,有$n^2$个字符串待检查(严格来说是$\frac{n(n+1)}{2}$), 每次检查是否为回文的消耗为O(n), 整体<strong>时间复杂度</strong>为$O(n^3)$. 原地检查不使用额外空间, <strong>空间复杂度</strong>为$O(1)$.</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>DP算法根据暴力解法优化而来. 回文串有如下属性: 一个回文串剪去首尾两个字符还是一个回文串.<br>用<code>bool dp[i][j]</code>记录字串<code>s[i..j] // 闭区间, 包括i和j</code>是否为回文串<br>根据回文串属性, 有<strong>状态转移方程</strong><code>dp[i][j] = (s[i] == s[j]) &amp;&amp; dp[i + 1][j - 1]</code><br><strong>边界条件</strong>既是长度为1的字串是回文串 -&gt; <code>dp[][]</code>数组对角线全为<code>true</code>.</p>
+<p><strong>复杂度分析:</strong>对于长度为n的字符串,有$n^2$个dp状态,每次状态转移的时间为$O(1)$, 整体<strong>时间复杂度</strong>为$O(n^2)$. <strong>空间复杂度</strong>即为存储dp状态所需的大小, $O(n^2)$.</p>
+<h2 id="中心扩散"><a href="#中心扩散" class="headerlink" title="中心扩散"></a>中心扩散</h2><p>中心扩散的思想和DP检查回文串的思路相反, 是以每一或两个字符为对称轴(回文串的奇偶,”aba”,”abba”)检查两侧最多有几个字符相同.<br><strong>复杂度分析:</strong>对于长度为n的字符串, 有n个奇数回文中心和n-1个偶数回文中心, 每次检查消耗为$O(n)$, 整体<strong>时间复杂度</strong>为$O(n^2)$. <strong>空间复杂度</strong>为$O(1).</p>
+<h2 id="Manacher"><a href="#Manacher" class="headerlink" title="Manacher"></a>Manacher</h2><p>这个是个线性时间复杂度的算法, 光靠文字和公式理解起来比较抽象, 建议看<a target="_blank" rel="noopener" href="https://youtu.be/5Rqomc7na7A?t=728">视频讲解</a>.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="暴力-java"><a href="#暴力-java" class="headerlink" title="暴力(java)"></a>暴力(java)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> begin = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">char</span>[] charArr = s.toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; len; ++j) &#123;</span><br><span class="line">                <span class="keyword">if</span>(j - i + <span class="number">1</span> &gt; maxLen &amp;&amp; isPalindrome(charArr, i, j)) &#123;</span><br><span class="line">                    maxLen = j - i + <span class="number">1</span>;</span><br><span class="line">                    begin = i;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(begin, begin + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">char</span>[] charArr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (charArr[i] != charArr[j]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            i++;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="DP-golang"><a href="#DP-golang" class="headerlink" title="DP(golang)"></a>DP(golang)</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">longestPalindrome</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    size, maxLen, begin := <span class="built_in">len</span>(s), <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    dp := <span class="built_in">make</span>([][]<span class="keyword">bool</span>, size)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; size; i++ &#123;</span><br><span class="line">        dp[i] = <span class="built_in">make</span>([]<span class="keyword">bool</span>, size)</span><br><span class="line">        dp[i][i] = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> j := <span class="number">1</span>; j &lt; size; j++ &#123;</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; j; i++ &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] != s[j]) &#123;</span><br><span class="line">                dp[i][j] = <span class="literal">false</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (j - i &lt; <span class="number">3</span>) &#123;</span><br><span class="line">                    dp[i][j] = <span class="literal">true</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dp[i][j] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(dp[i][j] &amp;&amp; j - i + <span class="number">1</span> &gt; maxLen) &#123;</span><br><span class="line">                maxLen = j - i + <span class="number">1</span></span><br><span class="line">                begin = i</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s[begin: begin + maxLen]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="中心扩散-golang"><a href="#中心扩散-golang" class="headerlink" title="中心扩散(golang)"></a>中心扩散(golang)</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Using global variables will cause inconsistent result between &quot;Run&quot; and &quot;Submit&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">longestPalindrome</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> size, maxLen, begin <span class="keyword">int</span> = <span class="built_in">len</span>(s), <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; size - <span class="number">1</span>; i++ &#123;</span><br><span class="line">        begin, maxLen = isPalindrome(s, i, i, begin, maxLen)</span><br><span class="line">        begin, maxLen = isPalindrome(s, i, i + <span class="number">1</span>, begin, maxLen)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s[begin: begin + maxLen]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isPalindrome</span><span class="params">(s <span class="keyword">string</span>, i, j, begin, maxLen <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    size := <span class="built_in">len</span>(s)</span><br><span class="line">    <span class="keyword">for</span> i &gt;= <span class="number">0</span> &amp;&amp; j &lt; size &amp;&amp; s[i] == s[j] &#123;</span><br><span class="line">        i--</span><br><span class="line">        j++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> j - i - <span class="number">1</span> &gt; maxLen &#123;</span><br><span class="line">        begin = i + <span class="number">1</span></span><br><span class="line">        maxLen = j - i - <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> begin, maxLen</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Manacher-golang"><a href="#Manacher-golang" class="headerlink" title="Manacher(golang)"></a>Manacher(golang)</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">longestPalindrome</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> maxLen, begin, maxRight, center <span class="keyword">int</span> = <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    tmp := <span class="built_in">make</span>([]<span class="keyword">rune</span>, <span class="number">0</span>)</span><br><span class="line">	tmp = <span class="built_in">append</span>(tmp, <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">	<span class="keyword">for</span> _, c := <span class="keyword">range</span> s &#123;</span><br><span class="line">		tmp = <span class="built_in">append</span>(tmp, c)</span><br><span class="line">		tmp = <span class="built_in">append</span>(tmp, <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">    tsize := <span class="built_in">len</span>(tmp)</span><br><span class="line">    dp := <span class="built_in">make</span>([]<span class="keyword">int</span>, tsize)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; tsize; i++ &#123;</span><br><span class="line">        <span class="keyword">if</span> i &lt; maxRight &#123;</span><br><span class="line">            mirror := <span class="number">2</span> * center - i;</span><br><span class="line">            dp[i] = min(maxRight - i, dp[mirror])</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        left, right := i - (dp[i] + <span class="number">1</span>), i + (dp[i] + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> left &gt;= <span class="number">0</span> &amp;&amp; right &lt; tsize &amp;&amp; tmp[left] == tmp[right] &#123;</span><br><span class="line">            dp[i]++</span><br><span class="line">            left--</span><br><span class="line">            right++</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> i + dp[i] &gt; maxRight &#123;</span><br><span class="line">            center, maxRight = i, dp[i] + i</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> dp[i] &gt; maxLen &#123;</span><br><span class="line">            maxLen = dp[i]</span><br><span class="line">            begin = (i - maxLen) / <span class="number">2</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s[begin: begin + maxLen]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">min</span><span class="params">(x, y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> x &lt; y &#123;</span><br><span class="line">		<span class="keyword">return</span> x</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/18/LeetCode%201679.%20Max%20Number%20of%20K-Sum%20Pairs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -985,95 +1103,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/11/LeetCode%2088.%20Merge%20Sorted%20Array/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/11/LeetCode%2088.%20Merge%20Sorted%20Array/" class="post-title-link" itemprop="url">LeetCode 88. Merge Sorted Array</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-11 17:00:00" itemprop="dateCreated datePublished" datetime="2021-01-11T17:00:00+09:00">2021-01-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-12 22:25:20" itemprop="dateModified" datetime="2021-01-12T22:25:20+09:00">2021-01-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/merge-sorted-array/">原题在此</a><br>Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.</p>
-<p>The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is equal to m + n) to hold additional elements from nums2.</p>
-<p><strong>Example 1:</strong><br>Input: <code>nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3</code><br>Output: <code>[1,2,2,3,5,6]</code></p>
-<p><strong>Example 2:</strong><br>Input: <code>nums1 = [1], m = 1, nums2 = [], n = 0</code><br>Output: <code>[1]</code></p>
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>$0 &lt;= n, m &lt;= 200$</li>
-<li>$1 &lt;= n + m &lt;= 200$</li>
-<li>$nums_1.length == m + n$</li>
-<li>$nums_2.length == n$</li>
-<li>$-10^9 &lt;= nums_1[i], nums_2[i] &lt;= 10^9$</li>
-</ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>根据题意, <code>arr1</code>足够大, 所以从<code>arr1[m+n]</code>开始倒着依次写入较大的数既可.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">int</span> m, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; b, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(n) a[m + n] = (m &gt; <span class="number">0</span> &amp;&amp; a[m - <span class="number">1</span>] &gt; b[n - <span class="number">1</span>])? a[--m] : b[--n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">merge</span><span class="params">(nums1 []<span class="keyword">int</span>, m <span class="keyword">int</span>, nums2 []<span class="keyword">int</span>, n <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> n &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> m == <span class="number">0</span> || nums2[n<span class="number">-1</span>] &gt; nums1[m<span class="number">-1</span>] &#123;</span><br><span class="line">			nums1[m+n<span class="number">-1</span>] = nums2[n<span class="number">-1</span>]</span><br><span class="line">			n--</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			nums1[m+n<span class="number">-1</span>] = nums1[m<span class="number">-1</span>]</span><br><span class="line">			m--</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1122,20 +1151,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

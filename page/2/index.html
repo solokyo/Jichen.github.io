@@ -186,6 +186,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/10/LeetCode%2012.%20Integer%20to%20Roman/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/LeetCode%2012.%20Integer%20to%20Roman/" class="post-title-link" itemprop="url">LeetCode 12. Integer to Roman</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-10 17:00:00" itemprop="dateCreated datePublished" datetime="2021-03-10T17:00:00+09:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-11 23:35:36" itemprop="dateModified" datetime="2021-03-11T23:35:36+09:00">2021-03-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/integer-to-roman/">原题在此</a></p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>将字母与数字的映射从大到小排列, 然后贪心的减去最大的值并拼接字符串.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="go"><a href="#go" class="headerlink" title="go"></a>go</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">intToRoman</span><span class="params">(num <span class="keyword">int</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    s := []<span class="keyword">string</span>&#123;<span class="string">&quot;M&quot;</span>, <span class="string">&quot;CM&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;CD&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;XC&quot;</span>, <span class="string">&quot;L&quot;</span>, <span class="string">&quot;XL&quot;</span>, <span class="string">&quot;X&quot;</span>, <span class="string">&quot;IX&quot;</span>, <span class="string">&quot;V&quot;</span>, <span class="string">&quot;IV&quot;</span>, <span class="string">&quot;I&quot;</span>&#125;</span><br><span class="line">    arr := []<span class="keyword">int</span>&#123;<span class="number">1000</span>, <span class="number">900</span>, <span class="number">500</span>, <span class="number">400</span>, <span class="number">100</span>, <span class="number">90</span>, <span class="number">50</span>, <span class="number">40</span>, <span class="number">10</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">1</span>&#125;</span><br><span class="line">    res := <span class="string">&quot;&quot;</span></span><br><span class="line">    idx := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> num != <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> arr[idx] &lt;= num &#123;</span><br><span class="line">            res += s[idx]</span><br><span class="line">            num -= arr[idx]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            idx++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/09/LeetCode%20623.%20Add%20One%20Row%20to%20Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -911,106 +988,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/28/LeetCode%20895.%20Maximum%20Frequency%20Stack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/28/LeetCode%20895.%20Maximum%20Frequency%20Stack/" class="post-title-link" itemprop="url">LeetCode 895. Maximum Frequency Stack</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-28 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-28T17:00:00+09:00">2021-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-02 00:06:38" itemprop="dateModified" datetime="2021-03-02T00:06:38+09:00">2021-03-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/maximum-frequency-stack/">原题在此</a></p>
-<p>Implement <code>FreqStack</code>, a class which simulates the operation of a stack-like data structure.</p>
-<p><code>FreqStack</code> has two functions:</p>
-<ul>
-<li><code>push(int x)</code>, which pushes an integer x onto the stack.</li>
-<li><code>pop()</code>, which <strong>removes</strong> and returns the most frequent element in the stack.<ul>
-<li>If there is a tie for most frequent element, the element closest to the top of the stack is removed and returned.</li>
-</ul>
-</li>
-</ul>
-<p><strong>Example 1:</strong><br><strong>Input: </strong><br><code>[&quot;FreqStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;],
-[[],[5],[7],[5],[7],[4],[5],[],[],[],[]]</code><br>Output: <code>[null,null,null,null,null,null,null,5,7,5,4]</code><br><strong>Explanation:</strong><br>After making six .push operations, the stack is <code>[5,7,5,7,4,5]</code> from bottom to top.  Then:</p>
-<p><code>pop()</code> -&gt; returns 5, as 5 is the most frequent.<br>The stack becomes <code>[5,7,5,7,4]</code>.</p>
-<p><code>pop()</code> -&gt; returns 7, as 5 and 7 is the most frequent, but 7 is closest to the top.<br>The stack becomes <code>[5,7,5,4]</code>.</p>
-<p><code>pop()</code> -&gt; returns 5.<br>The stack becomes <code>[5,7,4]</code>.</p>
-<p><code>pop()</code> -&gt; returns 4.<br>The stack becomes <code>[5,7]</code>.</p>
-<p><strong>Note:</strong></p>
-<ul>
-<li>Calls to <code>FreqStack.push(int x)</code> will be such that 0 &lt;= x &lt;= 10^9.</li>
-<li>It is guaranteed that <code>FreqStack.pop()</code> won’t be called if the stack has zero elements.</li>
-<li>The total number of <code>FreqStack.push</code> calls will not exceed 10000 in a single test case.</li>
-<li>The total number of <code>FreqStack.pop</code> calls will not exceed 10000 in a single test case.</li>
-<li>The total number of <code>FreqStack.push</code> and <code>FreqStack.pop</code> calls will not exceed 150000 across all test cases.</li>
-</ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>设计数据结构的题, 选对基本数据结构是关键. 要<code>pop</code>频率最高的元素, 就要统计每个元素出现频率. 用<code>map&lt;element, freq&gt;</code>是个思路; 其次在元素频率相同时, <code>pop</code>最近一次<code>push</code>的元素, 将相同<code>freq</code>的元素放入同一个<code>stack</code>即可 =&gt; <code>map&lt;freq, stack&lt;element&gt;&gt;</code>. 类成员变量里定义一个<code>maxFreq</code>, 在出退栈时更新.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FreqStack</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; freq;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;&gt; m;</span><br><span class="line">    <span class="keyword">int</span> maxfreq = <span class="number">0</span>;</span><br><span class="line">    FreqStack() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ++i will increment the value of i, and then return the incremented value.</span></span><br><span class="line">    <span class="comment">// i++ will increment the value of i, but return the original value that i held before being incremented.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        maxfreq = max(maxfreq, ++freq[x]);</span><br><span class="line">        m[freq[x]].push(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = m[maxfreq].top();</span><br><span class="line">        m[maxfreq].pop();</span><br><span class="line">        <span class="keyword">if</span> (!m[freq[x]--].size()) maxfreq--;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1059,20 +1036,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

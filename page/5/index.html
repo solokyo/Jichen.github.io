@@ -186,6 +186,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/LeetCode%20284.%20Peeking%20Iterator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/08/LeetCode%20284.%20Peeking%20Iterator/" class="post-title-link" itemprop="url">LeetCode 284. Peeking Iterator</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-08 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-08T17:00:00+09:00">2021-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-12 16:51:55" itemprop="dateModified" datetime="2021-02-12T16:51:55+09:00">2021-02-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/peeking-iterator/">原题在此</a></p>
+<p>Given an Iterator class interface with methods: <code>next()</code> and <code>hasNext()</code>, design and implement a PeekingIterator that support the <code>peek()</code> operation — it essentially <code>peek()</code> at the element that will be returned by the next call to <code>next()</code>.</p>
+<p><strong>Example:</strong></p>
+<blockquote>
+<blockquote>
+<p>Assume that the iterator is initialized to the beginning of the list: [1,2,3].</p>
+</blockquote>
+</blockquote>
+<p>Call next() gets you 1, the first element in the list.<br>Now you call peek() and it returns 2, the next element. Calling next() after that still return 2.<br>You call next() the final time and it returns 3, the last element.<br>Calling hasNext() after that should return false.<br>Follow up: How would you extend your design to be generic and work with all types, not just integer?</p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p><code>next()</code>和<code>hasNext()</code>直接调用<code>Iterator</code>的就好, <code>peek()</code>可以copy一个再调用<code>next()</code>.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Below is the interface for Iterator, which is already defined for you.</span></span><br><span class="line"><span class="comment"> * **DO NOT** modify the interface for Iterator.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  class Iterator &#123;</span></span><br><span class="line"><span class="comment"> *		struct Data;</span></span><br><span class="line"><span class="comment"> * 		Data* data;</span></span><br><span class="line"><span class="comment"> *		Iterator(const vector&lt;int&gt;&amp; nums);</span></span><br><span class="line"><span class="comment"> * 		Iterator(const Iterator&amp; iter);</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 		// Returns the next element in the iteration.</span></span><br><span class="line"><span class="comment"> *		int next();</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *		// Returns true if the iteration has more elements.</span></span><br><span class="line"><span class="comment"> *		bool hasNext() const;</span></span><br><span class="line"><span class="comment"> *	&#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PeekingIterator</span> :</span> <span class="keyword">public</span> Iterator &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	PeekingIterator(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) : Iterator(nums) &#123;</span><br><span class="line">	    <span class="comment">// Initialize any member here.</span></span><br><span class="line">	    <span class="comment">// **DO NOT** save a copy of nums and manipulate it directly.</span></span><br><span class="line">	    <span class="comment">// You should only use the Iterator interface methods.</span></span><br><span class="line">	    </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// Returns the next element in the iteration without advancing the iterator.</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Iterator(*<span class="keyword">this</span>).next();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// hasNext() and next() should behave the same as in the Iterator interface.</span></span><br><span class="line">	<span class="comment">// Override them if needed.</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    <span class="keyword">return</span> Iterator::next();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">	    <span class="keyword">return</span> Iterator::hasNext();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/07/LeetCode%20821.%20Shortest%20Distance%20to%20a%20Character/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -981,103 +1066,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/29/LeetCode%20987.%20Vertical%20Order%20Traversal%20of%20a%20Binary%20Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/29/LeetCode%20987.%20Vertical%20Order%20Traversal%20of%20a%20Binary%20Tree/" class="post-title-link" itemprop="url">LeetCode 987. Vertical Order Traversal of a Binary Tree</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-29 17:00:00" itemprop="dateCreated datePublished" datetime="2021-01-29T17:00:00+09:00">2021-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 00:47:51" itemprop="dateModified" datetime="2021-01-30T00:47:51+09:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/">原题在此</a></p>
-<p>Given the root of a binary tree, calculate the <strong>vertical order traversal</strong> of the binary tree.</p>
-<p>For each node at position <code>(x, y)</code>, its left and right children will be at positions <code>(x - 1, y - 1)</code> and <code>(x + 1, y - 1)</code> respectively.</p>
-<p>The <strong>vertical order traversal</strong> of a binary tree is a list of non-empty <strong>reports</strong> for each unique x-coordinate from left to right. Each <strong>report</strong> is a list of all nodes at a given x-coordinate. The <strong>report</strong> should be primarily sorted by y-coordinate from highest y-coordinate to lowest. If any two nodes have the same y-coordinate in the <strong>report</strong>, the node with the smaller value should appear earlier.</p>
-<p>Return <em>the <strong>vertical order traversal</strong> of the binary tree</em>.</p>
-<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2019/01/31/1236_example_1.PNG" alt=""><br>Input: <code>root = [3,9,20,null,null,15,7]</code><br>Output: <code>[[9],[3,15],[20],[7]]</code></p>
-<blockquote>
-<blockquote>
-<p>Explanation: Without loss of generality, we can assume the root node is at position (0, 0):<br>The node with value 9 occurs at position (-1, -1).<br>The nodes with values 3 and 15 occur at positions (0, 0) and (0, -2).<br>The node with value 20 occurs at position (1, -1).<br>The node with value 7 occurs at position (2, -2).</p>
-</blockquote>
-</blockquote>
-<p><strong>Example 2:</strong><br><img src="https://assets.leetcode.com/uploads/2019/01/31/1236_example_2.PNG" alt=""><br>Input: <code>root = [1,2,3,4,5,6,7]</code><br>Output: <code>[[4],[2],[1,5,6],[3],[7]]</code></p>
-<blockquote>
-<blockquote>
-<p>Explanation: The node with value 5 and the node with value 6 have the same position according to the given scheme.<br>However, in the report [1,5,6], the node with value 5 comes first since 5 is smaller than 6.</p>
-</blockquote>
-</blockquote>
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>The number of nodes in the tree is in the range <code>[1, 1000]</code>.</li>
-<li>0 &lt;= <code>Node.val</code> &lt;= 1000</li>
-</ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Foo</span> &#123;</span></span><br><span class="line">        TreeNode* node;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        <span class="keyword">int</span> y;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">verticalTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>&gt;&gt;&gt; mp;</span><br><span class="line">        <span class="built_in">queue</span>&lt;Foo&gt; q;</span><br><span class="line">        q.push(&#123;root, <span class="number">0</span>, <span class="number">0</span>&#125;);</span><br><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            Foo tmp = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            <span class="keyword">if</span>(tmp.node -&gt; left ) &#123;q.push(&#123;tmp.node -&gt; left , tmp.x - <span class="number">1</span>, tmp.y - <span class="number">1</span>&#125;);&#125;</span><br><span class="line">            <span class="keyword">if</span>(tmp.node -&gt; right) &#123;q.push(&#123;tmp.node -&gt; right, tmp.x + <span class="number">1</span>, tmp.y - <span class="number">1</span>&#125;);&#125;</span><br><span class="line">            mp[tmp.x][tmp.y].insert(tmp.node -&gt; val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp; [key, val] : mp) &#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> &amp; [nonUsed, <span class="built_in">set</span>] : val) &#123;</span><br><span class="line">                tmp.insert(tmp.begin(), <span class="built_in">set</span>.begin(), <span class="built_in">set</span>.end());</span><br><span class="line">            &#125;</span><br><span class="line">            res.push_back(tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1126,20 +1114,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
