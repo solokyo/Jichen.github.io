@@ -186,6 +186,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/19/LeetCode%201249.%20Minimum%20Remove%20to%20Make%20Valid%20Parentheses/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/19/LeetCode%201249.%20Minimum%20Remove%20to%20Make%20Valid%20Parentheses/" class="post-title-link" itemprop="url">LeetCode 1249. Minimum Remove to Make Valid Parentheses</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-19 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-19T17:00:00+09:00">2021-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-03 00:07:23" itemprop="dateModified" datetime="2021-03-03T00:07:23+09:00">2021-03-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/">原题在此</a></p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>用<code>stack</code>记录出现过的括号, 遇到左括号就入栈括号的位置; 遇到右括号时, 若栈不为空则可构成合法括号, 出栈一个元素; 否则将当前位值标注为待删除. 最后将栈内剩余元素(没有右括号可以匹配的左括号)全部标记待删除. 最后调用<code>string::erase()</code>方法或其他语言的类似方法一次全部删除.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minRemoveToMakeValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">        <span class="keyword">int</span> n = s.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">&#x27;(&#x27;</span>) stk.push(i);</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(stk.empty()) s[i] = <span class="string">&#x27;!&#x27;</span>;</span><br><span class="line">                <span class="keyword">else</span> stk.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(!stk.empty()) &#123;</span><br><span class="line">            s[stk.top()] = <span class="string">&#x27;!&#x27;</span>;</span><br><span class="line">            stk.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        s.erase(<span class="built_in">std</span>::remove(s.begin(), s.end(), <span class="string">&#x27;!&#x27;</span>), s.end());</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/18/LeetCode%20413.%20Arithmetic%20Slices/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -938,103 +1015,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/09/LeetCode%20538.%20Convert%20BST%20to%20Greater%20Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/09/LeetCode%20538.%20Convert%20BST%20to%20Greater%20Tree/" class="post-title-link" itemprop="url">LeetCode 538. Convert BST to Greater Tree</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-09 17:00:00" itemprop="dateCreated datePublished" datetime="2021-02-09T17:00:00+09:00">2021-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-12 16:51:52" itemprop="dateModified" datetime="2021-02-12T16:51:52+09:00">2021-02-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/convert-bst-to-greater-tree/">原题在此</a></p>
-<p>Given the <code>root</code> of a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.</p>
-<p>As a reminder, a binary search tree is a tree that satisfies these constraints:</p>
-<ul>
-<li>The left subtree of a node contains only nodes with keys less than the node’s key.</li>
-<li>The right subtree of a node contains only nodes with keys greater than the node’s key.</li>
-<li>Both the left and right subtrees must also be binary search trees.<br><code>Note:</code> This question is the same as 1038: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/">https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/</a></li>
-</ul>
-<p><strong>Example 1:</strong><br><img src="https://assets.leetcode.com/uploads/2019/05/02/tree.png" alt=""></p>
-<p>Input: <code>root = [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]</code><br>Output: <code>[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]</code></p>
-<p><strong>Example 2:</strong><br>Input: <code>root = [0,null,1]</code><br>Output: <code>[1,null,1]</code></p>
-<p><strong>Example 3:</strong><br>Input: <code>root = [1,0,2]</code><br>Output: <code>[3,3,2]</code></p>
-<p><strong>Example 4:</strong><br>Input: <code>root = [3,2,4,1]</code><br>Output: <code>[7,9,4,10]</code></p>
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>The number of nodes in the tree is in the range [0, $10^4$].</li>
-<li>$-10^4$ &lt;= <code>Node.val</code> &lt;= $10^4$</li>
-<li>All the values in the tree are <strong>unique</strong>.</li>
-<li><code>root</code> is guaranteed to be a valid binary search tree.</li>
-</ul>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>以右中左的顺序遍历BST, 将节点的值累加写入. 右中左的遍历就是把<a target="_blank" rel="noopener" href="https://leetcode.com/problems/binary-tree-inorder-traversal/">Inorder</a>反过来.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="recursive"><a href="#recursive" class="headerlink" title="recursive"></a>recursive</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        sum(root, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> large)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> large;</span><br><span class="line">        root-&gt;val += sum(root-&gt;right, large);</span><br><span class="line">        <span class="keyword">return</span> sum(root-&gt;left, root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="iterative"><a href="#iterative" class="headerlink" title="iterative"></a>iterative</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">convertBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        TreeNode* tmp = root;</span><br><span class="line">        <span class="built_in">stack</span>&lt;TreeNode*&gt; s;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(tmp || !s.empty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(tmp)&#123;</span><br><span class="line">                s.push(tmp);</span><br><span class="line">                tmp = tmp -&gt; right;</span><br><span class="line">            &#125;</span><br><span class="line">            tmp = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            sum += tmp -&gt; val;</span><br><span class="line">            tmp -&gt; val = sum;</span><br><span class="line">            tmp = tmp -&gt; left;                                </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1083,7 +1063,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

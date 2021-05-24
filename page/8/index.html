@@ -186,6 +186,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/12/LeetCode%202.%20Add%20Two%20Numbers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jichen Xu">
+      <meta itemprop="description" content="一个程序员的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SoloQ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/12/LeetCode%202.%20Add%20Two%20Numbers/" class="post-title-link" itemprop="url">LeetCode 2. Add Two Numbers</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-12 17:00:00 / Modified: 22:52:09" itemprop="dateCreated datePublished" datetime="2021-01-12T17:00:00+09:00">2021-01-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode Notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/add-two-numbers/">原题在此</a><br>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.<br>You may assume the two numbers do not contain any leading zero, except the number 0 itself.<br><img src="https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg" alt=""></p>
+<p><strong>Example 1:</strong><br>Input: <code>l1 = [2,4,3], l2 = [5,6,4]</code><br>Output: <code>[7,0,8]</code><br>Explanation: 342 + 465 = 807.</p>
+<p><strong>Example 2:</strong><br>Input: <code>l1 = [0], l2 = [0]</code><br>Output: <code>[0]</code></p>
+<p><strong>Example 3:</strong><br>Input: <code>l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]</code><br>Output: <code>[8,9,9,9,0,0,0,1]</code></p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The number of nodes in each linked list is in the range <code>[1, 100]</code>.</li>
+<li>0 $\leq$  Node.val  $\leq$ 9</li>
+<li>It is guaranteed that the list represents a number that does not have leading zeros.</li>
+</ul>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>没啥好讲的, 按照题意做就好. 就相加, 进位.</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">        ListNode* holder = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode* onWork = holder;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(l1 || l2 || val)&#123;</span><br><span class="line">            val += (l1 ? l1-&gt;val : <span class="number">0</span>);</span><br><span class="line">            val += (l2 ? l2-&gt;val : <span class="number">0</span>);</span><br><span class="line">            l1 = (l1 ? l1-&gt;next : l1);</span><br><span class="line">            l2 = (l2 ? l2-&gt;next : l2);</span><br><span class="line">            ListNode* node = <span class="keyword">new</span> ListNode(val%<span class="number">10</span>);</span><br><span class="line">            val = val / <span class="number">10</span>;</span><br><span class="line">            onWork-&gt;next = node;</span><br><span class="line">            onWork = onWork-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> holder-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/11/LeetCode%2088.%20Merge%20Sorted%20Array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1022,85 +1103,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/04/LeetCode%2021.%20Merge%20Two%20Sorted%20Lists/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jichen Xu">
-      <meta itemprop="description" content="一个程序员的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SoloQ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/04/LeetCode%2021.%20Merge%20Two%20Sorted%20Lists/" class="post-title-link" itemprop="url">LeetCode 21. Merge Two Sorted Lists</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-04 17:00:00 / Modified: 20:55:55" itemprop="dateCreated datePublished" datetime="2021-01-04T17:00:00+09:00">2021-01-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode Notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/merge-two-sorted-lists/">原题在此</a><br>Merge two sorted linked lists and return it as a sorted list. The list should be made by splicing together the nodes of the first two lists.<br><strong>Example 1:</strong><br>Input: l1 = [1,2,4], l2 = [1,3,4]<br>Output: [1,1,2,3,4,4]</p>
-<p><strong>Example 2:</strong><br>Input: l1 = [], l2 = []<br>Output: []</p>
-<p><strong>Example 3:</strong><br>Input: l1 = [], l2 = [0]<br>Output: [0]</p>
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>The number of nodes in both lists is in the range [0, 50].</li>
-<li>-100 &lt;= Node.val &lt;= 100</li>
-<li>Both l1 and l2 are sorted in non-decreasing order.</li>
-</ul>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>当l1, l2均未遍历完时,依次链接值较小的node.之后将剩余的list全部接上.<br>非常简单的一道题,适合拿来练手一门不熟悉的语言.</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="function">ListNode <span class="title">head</span><span class="params">(INT_MIN)</span></span>;</span><br><span class="line">        ListNode* foo = &amp;head;</span><br><span class="line">        <span class="keyword">while</span>(l1 &amp;&amp; l2) &#123;</span><br><span class="line">            <span class="keyword">if</span>(l1 -&gt; val &lt; l2 -&gt; val) &#123;</span><br><span class="line">                foo -&gt; next = l1;</span><br><span class="line">                foo = foo -&gt; next;</span><br><span class="line">                l1 = l1 -&gt; next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                foo -&gt; next = l2;</span><br><span class="line">                foo = foo -&gt; next;</span><br><span class="line">                l2 = l2 -&gt; next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(l1) &#123;</span><br><span class="line">            foo -&gt; next = l1;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            foo -&gt; next = l2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head.next;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1149,7 +1151,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
