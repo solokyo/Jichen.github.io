@@ -186,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/06/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA01/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/10/GSoC-2022-Final-Submission/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -200,7 +200,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/06/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA01/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2022/09/10/GSoC-2022-Final-Submission/" class="post-title-link" itemprop="url">GSoC 2022: pgmoneta On Disk Encryption</a>
         </h1>
 
         <div class="post-meta">
@@ -211,7 +211,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-05-06 13:41:00 / Modified: 13:45:24" itemprop="dateCreated datePublished" datetime="2021-05-06T13:41:00+09:00">2021-05-06</time>
+              <time title="Created: 2022-09-10 14:02:40 / Modified: 16:59:18" itemprop="dateCreated datePublished" datetime="2022-09-10T14:02:40+09:00">2022-09-10</time>
             </span>
 
           
@@ -225,11 +225,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C1-基本概念"><a href="#C1-基本概念" class="headerlink" title="C1 基本概念"></a>C1 基本概念</h1><ol>
-<li><strong>字母表</strong>: 符号(字符)的非空有穷集合. $\Sigma_1 = {0,1}$</li>
-<li><strong>字符串</strong>: 由字母表中符号组成的有穷序列.</li>
-<li><strong>空串</strong>: 记为$\epsilon$, 有0个字符的串. 字母表 $\Sigma$可以是任意的, 但都有 $\epsilon\notin\Sigma$.</li>
-</ol>
+          <h1 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL, DR"></a>TL, DR</h1><p><a target="_blank" rel="noopener" href="https://github.com/pgmoneta/pgmoneta/issues/91">Issue page</a>.<br><a target="_blank" rel="noopener" href="https://github.com/pgmoneta/pgmoneta/pull/79">Code refactoring pull request</a><br><a target="_blank" rel="noopener" href="https://github.com/pgmoneta/pgmoneta/pull/89">All in one squashed pull request</a></p>
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p><a target="_blank" rel="noopener" href="https://github.com/pgmoneta/pgmoneta">pgmoneta</a> is a backup / restore solution for <a target="_blank" rel="noopener" href="https://www.postgresql.org/">PostgreSQL</a>. The existing codebase already contains some encryption code used to encrypt passwords. I enhanced the encryption API, created new encryption workflow, and added cli options so that the encryption can be applied to wal and other data (e.g. config file). The documentation and benchmarking test are also provided for users to reference.</p>
+<h1 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h1><h2 id="Early-Stage-Investigation-and-Code-Refactoring"><a href="#Early-Stage-Investigation-and-Code-Refactoring" class="headerlink" title="Early Stage Investigation and Code Refactoring"></a>Early Stage Investigation and Code Refactoring</h2><p>At early stage, we <a target="_blank" rel="noopener" href="https://github.com/pgmoneta/pgmoneta/discussions/56">discussed</a> what encryption algorithms should be supported. As result, <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_%28CBC%29">AES CBC mode</a> and <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_%28CTR%29">AES CTR mode</a> are choosed for following reasons:</p>
+<ul>
+<li>Advanced Encryption Standard Instruction Set (<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/AES_instruction_set">AES-NI</a>) is now integrated into many processors. Hardware acceleration made AES outperform other algorithms.</li>
+<li>CBC is supported because it is the most commonly used and considered save mode. Its main drawbacks are that encryption is sequential (decryption can be parallelized).</li>
+<li>CTR is supported because both encryption and decryption are parallelizable. We offer user a faster encrtypt option.</li>
+</ul>
+<p>After determining what algorithms to support, I moved existing aes code from <code>security.h(c)</code> to <code>aes.h(c)</code> before implement the feature.</p>
+<h2 id="Feature-Implemention"><a href="#Feature-Implemention" class="headerlink" title="Feature Implemention"></a>Feature Implemention</h2><p>Commits are squashed into one single pull request and you can check it <a target="_blank" rel="noopener" href="https://github.com/pgmoneta/pgmoneta/pull/89">here</a>.</p>
+<p>This is the most challenging part of the GSoC event. I spent lots of time understanding how the current event loop and workflow work. Debugging a multi-process program is a painful but fun experience and I learned a lot about gdb and addresssanitizer. Another challenge is handling complicated git workflow. I was always afraid to accidentally lose my changes when dealing with git. Participating GSoC and interacting with other people made me have a better understanding of git workflow.</p>
+<h2 id="Documentation-and-Benchmarking"><a href="#Documentation-and-Benchmarking" class="headerlink" title="Documentation and Benchmarking"></a>Documentation and Benchmarking</h2><p>The encryption feature is well documented. The configuration file parameter and its available options are listed in <code>doc/CONFIGURATION.md</code>. The comparison and choose of AES modes are described <code>ENCRYPTION.md</code>. The tutorial of perform a benchmarking test and test result also documented in <code>ENCRYPTION.md</code>.</p>
+<h1 id="Further-Work"><a href="#Further-Work" class="headerlink" title="Further Work"></a>Further Work</h1><p>Track the <a target="_blank" rel="noopener" href="https://github.com/pgmoneta/pgmoneta/issues/91">issue page</a> for details.</p>
+<h1 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h1><p>I am grateful to my mentor <a target="_blank" rel="noopener" href="https://github.com/jesperpedersen">Jesper Pedersen</a>, for his invaluable patience and feedback. I could not have undertaken this journey without his help.</p>
 
       
     </div>
@@ -1131,7 +1140,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
